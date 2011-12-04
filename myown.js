@@ -1,3 +1,3 @@
   $(document).ready(function() {
-    $("h1").css("color", "#f00");
+    //$("h1").css("color", "#f00");
   });
