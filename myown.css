@@ -10,7 +10,24 @@ margin: 3em 15%;
 }
 
 
-p, h1, h2, label, ul, ol, dl, li, fieldset, address { margin: 1em 0; }
+aside {
+	width: 300px;
+	background-color: #cccccc;
+	border: 1px solid #999999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 15px 15px 15px 15px;
+  float:right;
+  vertical-align:center;
+  //box-shadow: 3px 3px 3px #aaaaaa;
+}
+
+p, h1, h2, label, ul, ol, dl, li, fieldset, address, header { 
+padding: 15px;
+margin: 1em 0; 
+}
+
 .box {
 	margin: auto;
 	border-left: 5px solid #668040;
@@ -21,13 +38,14 @@ p, h1, h2, label, ul, ol, dl, li, fieldset, address { margin: 1em 0; }
 
 .box, h1, h2 {
 	padding: 1px 0 1px 5px;
+  clear: both;
 }
 
 h1 {
 	border-left: 8px solid #B61C15;  // cardinal
 	margin-left: -23px;
 	padding-left: 10px;
-    font-size: 4em;
+    font-size: 3em;
     font-weight: normal;
     margin-bottom: 0.4em;
 }
