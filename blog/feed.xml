@@ -65,9 +65,19 @@
       </div>
       <hr>
     <div class="centered">
-      Welcome here, this is a repository of things of interests to me
+      
+  <div class='post'>
+    <h1></h1>
+    <aside>Posted at: </aside>
+    <article>
+      <p>&lt;%= atom_feed :title =&gt; ‘xQuant strange blog’, :author_name =&gt; ‘Nicolas’, 
+              :author_uri =&gt; ‘http://xquant.net/’, :limit =&gt; 10 %&gt;</p>
+
+    </article>
+  </div>
 
     </div>
     </div>
   </body>
 </html>
+
