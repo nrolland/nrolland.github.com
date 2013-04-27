@@ -101,7 +101,7 @@ brd = JXG.JSXGraph.initBoard('jxgbox', {boundingbox:[-5,20,5,-5], axis:true, sho
 k = brd.create('slider',[[-4,-2],[3,-2],[-5,1,5]],{name:'n', snapWidth:1});
 brd.create('functiongraph', [function(t) {return JXG.Math.pow(Math.E,t*k.Value());}],{strokeColor:'#ff0000'});
 brd.create('text',[-4,7,
-  function() { 
+  function() {
     return '\\[f(x) = e^{' + k.Value() + 'x}\\]';
   }], {fontSize:24});
 </script>
