@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-04-26T23:00:00Z</updated>
+  <updated>2013-04-28T23:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
@@ -10,11 +10,35 @@
     <uri>http://xquant.net/</uri>
   </author>
   <entry>
-    <id>tag:xquant.net,2013-04-27:/posts/2013/04/Weekly-links/</id>
+    <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
+    <title type="html">Weekly links for 2013-04-29</title>
+    <published>2013-04-28T23:00:00Z</published>
+    <updated>2013-04-28T23:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Scala is one of the main application programming languages used at Twitter. Much of our infrastructure is written in Scala and we have several large libraries supporting our use. While highly effective, Scala is also a large language, and our experiences have taught us to practice great care in its application.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.submodularity.org/&gt; submodularity.org: Tutorials, References, Activities and Tools for Submodular Optimization  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Similarly to convexity, submodularity allows one to efficiently find provably (near-)optimal solutions&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.rpi.edu/~cutler/classes/advancedgraphics/F05/lectures/&gt; CSCI-6962 Advanced Computer Graphics  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;CSCI-6962 Advanced Computer Graphics&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.yale.edu/homes/el327/datamining2012a.html&gt; Edo Liberty's homepage  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;It turns out the a rather small set of tools gives us many and wonderful abilities. Most of these are randomized in nature&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/~rs/AlgsDS07/&gt; Algorithms and Data Structures  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Robert Sedgewick and Kevin Wayne&lt;/dd&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:xquant.net,2013-04-27:/posts/2013/04/27/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-27</title>
     <published>2013-04-26T23:00:00Z</published>
     <updated>2013-04-26T23:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/04/Weekly-links/"/>
+    <link rel="alternate" href="http://xquant.net/posts/2013/04/27/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://lepture.com/work/vundle-vs-pathogen/&gt; Vundle vs Pathogen - Just lepture  &lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;Most people just want an answer. Yes, vundle is better&lt;/dd&gt;
