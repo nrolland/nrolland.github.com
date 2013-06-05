@@ -1,48 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<is_a?>Array</is_a?>
-<empty?/>
-<class/>
-<class/>
-<respond_to?:object_id/>
-<object_id/>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-04-26T23:00:00Z</updated>
+  <updated>2013-06-04T23:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
-  <is_a?>Array</is_a?>
-  <empty?/>
-  <class/>
-  <class/>
-  <respond_to?:object_id/>
-  <object_id/>
   <entry>
-    <to_s/>
-    <is_a?>Array</is_a?>
-    <empty?/>
-    <class/>
-    <class/>
-    <respond_to?:object_id/>
-    <object_id/>
-    <id>tag:xquant.net,2013-04-27:/posts/2013/04/Weekly-links/</id>
+    <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
+    <title type="html">Weekly links for 2013-06-05</title>
+    <published>2013-06-04T23:00:00Z</published>
+    <updated>2013-06-04T23:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/06/05/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&amp;feature=player_embedded&gt; Hamming, "You and Your Research" (June 6, 1995) - YouTube  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;The Art of Doing Science and Engineering: Learning to Learn&amp;quot; was the capstone course by Dr. Richard W. Hamming (1915-1998) for graduate students at the Naval Postgraduate School (NPS) in Monterey California.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://faculty.ycp.edu/~dbabcock/PastCourses/cs360/lecture/index.html&gt; Lecture Notes  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Following &amp;quot;introduction to Algorithm&amp;quot; of Cormen in a detailed way&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.seas.harvard.edu/courses/cs281/&gt; CS281: Advanced Machine Learning  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Harvard University, Fall 2011&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://danroy.org/papers/Roy-PHD-2011.pdf&gt; Computability, inference and modeling in probabilistic programming  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Phd thesis by Daniel M. Roy. The basic measure part is an excellent revision !&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://staff.aist.go.jp/reynald.affeldt/documents/affeldt-itp2012-preprint.pdf&gt; Formalization of Shannon's Theorems in SSReflect-Coq  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Our first contribution is to provide a library of formal de finitions and lemmas for information theory...&lt;/dd&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:xquant.net,2013-05-05:/posts/2013/05/05/Weekly-links/</id>
+    <title type="html">Weekly links for 2013-05-05</title>
+    <published>2013-05-04T23:00:00Z</published>
+    <updated>2013-05-04T23:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/05/05/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://www.cis.upenn.edu/~plclub/popl08-tutorial/code/coqdoc/CoqIntro.html&gt; Coq for POPL Folk  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;A streamlined interactive tutorial on fundamentals of Coq, focusing on a minimal set of features needed for developing programming language metatheory.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/gmarik/vundle&gt; gmarik/vundle  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;About Vundle is short for Vimb**undle** and is a Vim plugin manager.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.jpaulmorrison.com/fbp/concepts.shtml&gt; Basic Concepts of Flow-Based programming (FBP)  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;business applications are usually designed starting with data and viewing process as secondary - processes are just the way data is created, manipulated and destroyed&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://requestb.in/&gt; RequestBin â€” Collect and inspect HTTP requests, debug webhooks  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;RequestBin lets you create a URL that will collect requests made to it, then let you inspect them in a human-friendly way. Use RequestBin to see what your HTTP client is sending or to look at webhook requests.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.sketchometry.com/&gt; Sketchometry  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;geometry by sketches : intuitive mathematics software for tablets, desktop computers, and whiteboards.&lt;/dd&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
+    <title type="html">Weekly links for 2013-04-29</title>
+    <published>2013-04-28T23:00:00Z</published>
+    <updated>2013-04-28T23:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Scala is one of the main application programming languages used at Twitter. Much of our infrastructure is written in Scala and we have several large libraries supporting our use. While highly effective, Scala is also a large language, and our experiences have taught us to practice great care in its application.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.submodularity.org/&gt; submodularity.org: Tutorials, References, Activities and Tools for Submodular Optimization  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Similarly to convexity, submodularity allows one to efficiently find provably (near-)optimal solutions&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.rpi.edu/~cutler/classes/advancedgraphics/F05/lectures/&gt; CSCI-6962 Advanced Computer Graphics  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;CSCI-6962 Advanced Computer Graphics&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.yale.edu/homes/el327/datamining2012a.html&gt; Edo Liberty's homepage  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;It turns out the a rather small set of tools gives us many and wonderful abilities. Most of these are randomized in nature&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/~rs/AlgsDS07/&gt; Algorithms and Data Structures  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Robert Sedgewick and Kevin Wayne&lt;/dd&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:xquant.net,2013-04-27:/posts/2013/04/27/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-27</title>
     <published>2013-04-26T23:00:00Z</published>
     <updated>2013-04-26T23:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/04/Weekly-links/"/>
-    <content type="html">&lt;p&gt;{“Created_at”=&amp;gt;”2013-04-27”, “Title”=&amp;gt;”Weekly links for 2013-04-27”, “Bookmarks”=&amp;gt;[{“Title”=&amp;gt;”Effective Scala”, “Url”=&amp;gt;”http://twitter.github.com/effectivescala/”, “Description”=&amp;gt;”Scala is one of the main application programming languages used at Twitter. Much of our infrastructure is written in Scala and we have several large libraries supporting our use. While highly effective, Scala is also a large language, and our experiences have taught us to practice great care in its application.”}, {“Title”=&amp;gt;”Vundle vs Pathogen - Just lepture”, “Url”=&amp;gt;”http://lepture.com/work/vundle-vs-pathogen/”, “Description”=&amp;gt;”Most people just want an answer. Yes, vundle is better”}, {“Title”=&amp;gt;”zaiste/vimified”, “Url”=&amp;gt;”https://github.com/zaiste/vimified”, “Description”=&amp;gt;”"Kick-ass Vim configuration framework, built on top of awesome Vundle"”}, {“Title”=&amp;gt;”Nanex - Ongoing Research - Market Events and Phenomena.”, “Url”=&amp;gt;”http://www.nanex.net/FlashCrash/OngoingResearch.html”, “Description”=&amp;gt;”Ongoing Research - Market Events and Phenomena   Our business is supplying a real-time data service comprising trade and quote data for all US equity, option, and futures exchanges. We have archived this data since 2004 and have created and used numerous tools to help us sift through the enormous dataset: approximately 4 trillion quotes and trades as of July 2011. May 6th, had approximately 7.6 billion trade, quote, and depth records.”}, {“Title”=&amp;gt;”GeekDesk® Adjustable Height Desks - Why GeekDesk”, “Url”=&amp;gt;”http://www.geekdesk.com/default.asp?contentID=628”, “Description”=&amp;gt;”Give your back a rest, and your body some variety, with our GeekDesk® electric quick-adjustable desk”}]}&lt;/p&gt;
+    <link rel="alternate" href="http://xquant.net/posts/2013/04/27/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://lepture.com/work/vundle-vs-pathogen/&gt; Vundle vs Pathogen - Just lepture  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Most people just want an answer. Yes, vundle is better&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/zaiste/vimified&gt; zaiste/vimified  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;"Kick-ass Vim configuration framework, built on top of awesome Vundle"&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.nanex.net/FlashCrash/OngoingResearch.html&gt; Nanex - Ongoing Research - Market Events and Phenomena.  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Ongoing Research - Market Events and Phenomena   Our business is supplying a real-time data service comprising trade and quote data for all US equity, option, and futures exchanges. We have archived this data since 2004 and have created and used numerous tools to help us sift through the enormous dataset: approximately 4 trillion quotes and trades as of July 2011. May 6th, had approximately 7.6 billion trade, quote, and depth records.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.geekdesk.com/default.asp?contentID=628&gt; GeekDeskÂ® Adjustable Height Desks - Why GeekDesk  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Give your back a rest, and your body some variety, with our GeekDeskÂ® electric quick-adjustable desk&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://seekingalpha.com/article/207638-etfs-what-does-your-swap-cost&gt; ETFs: What Does Your Swap Cost? - Seeking Alpha  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;ETFs: What Does Your Swap Cost? Insightful comments on the inner workings of synth etfs&lt;/dd&gt;
+
 </content>
   </entry>
-  <is_a?>Array</is_a?>
-  <empty?/>
-  <class/>
-  <class/>
-  <respond_to?:object_id/>
-  <object_id/>
   <entry>
     <id>tag:xquant.net,2012-02-12:/posts/2012/02/help-have-you-seen-my-cats/</id>
     <title type="html">Help! Have you seen my cats?</title>
