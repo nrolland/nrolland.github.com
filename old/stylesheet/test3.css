@@ -1,0 +1,58 @@
+@import url(http://fonts.googleapis.com/css?family=Ovo);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+.centered {
+  max-width: 950px;
+  min-width: 700px;
+  padding: 0px 30px 0px 30px;
+  margin-left: auto;
+  margin-right: auto; }
+
+ul.nav {
+  margin-top: 100px;
+  min-width: 700px;
+  padding: 0px 30px 0px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: white(0.8) 0 1px 0, inset black(0.05) 0 1px 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  *zoom: 1; }
+  ul.nav li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+    white-space: nowrap;
+    display: inline;
+    float: left;
+    padding-left: 4px;
+    padding-right: 4px; }
+    ul.nav li:first-child, ul.nav li.first {
+      padding-left: 0; }
+    ul.nav li:last-child {
+      padding-opposite-position(left): 0; }
+    ul.nav li.last {
+      padding-opposite-position(left): 0; }
+
+ul.nav li a {
+  text-shadow: white(0.15) 0 1px 0; }
+
+body {
+  background: #f5ff;
+  font-family: serif;
+  padding-top: 0px;
+  padding-bottom: 40px; }
+
+a {
+  text-decoration: none; }
+
+a:link,
+a:visited {
+  color: #f30; }
+
+a:hover {
+  color: #f90; }
+
+article {
+  font-size: 12pt; }

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-06-04T22:00:00Z</updated>
+  <updated>2013-05-05T07:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
@@ -10,34 +10,10 @@
     <uri>http://xquant.net/</uri>
   </author>
   <entry>
-    <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
-    <title type="html">Weekly links for 2013-06-05</title>
-    <published>2013-06-04T22:00:00Z</published>
-    <updated>2013-06-04T22:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/06/05/Weekly-links/"/>
-    <content type="html">
-&lt;dt&gt;&lt;a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&amp;feature=player_embedded&gt; Hamming, "You and Your Research" (June 6, 1995) - YouTube  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;The Art of Doing Science and Engineering: Learning to Learn&amp;quot; was the capstone course by Dr. Richard W. Hamming (1915-1998) for graduate students at the Naval Postgraduate School (NPS) in Monterey California.&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://faculty.ycp.edu/~dbabcock/PastCourses/cs360/lecture/index.html&gt; Lecture Notes  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Following &amp;quot;introduction to Algorithm&amp;quot; of Cormen in a detailed way&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.seas.harvard.edu/courses/cs281/&gt; CS281: Advanced Machine Learning  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Harvard University, Fall 2011&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://danroy.org/papers/Roy-PHD-2011.pdf&gt; Computability, inference and modeling in probabilistic programming  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Phd thesis by Daniel M. Roy. The basic measure part is an excellent revision !&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://staff.aist.go.jp/reynald.affeldt/documents/affeldt-itp2012-preprint.pdf&gt; Formalization of Shannon's Theorems in SSReflect-Coq  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Our first contribution is to provide a library of formal de finitions and lemmas for information theory...&lt;/dd&gt;
-
-</content>
-  </entry>
-  <entry>
     <id>tag:xquant.net,2013-05-05:/posts/2013/05/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-05-05</title>
-    <published>2013-05-04T22:00:00Z</published>
-    <updated>2013-05-04T22:00:00Z</updated>
+    <published>2013-05-05T07:00:00Z</published>
+    <updated>2013-05-05T07:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/05/05/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.cis.upenn.edu/~plclub/popl08-tutorial/code/coqdoc/CoqIntro.html&gt; Coq for POPL Folk  &lt;/a&gt;&lt;/dt&gt;
@@ -60,8 +36,8 @@
   <entry>
     <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-29</title>
-    <published>2013-04-28T22:00:00Z</published>
-    <updated>2013-04-28T22:00:00Z</updated>
+    <published>2013-04-29T07:00:00Z</published>
+    <updated>2013-04-29T07:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
@@ -84,8 +60,8 @@
   <entry>
     <id>tag:xquant.net,2013-04-27:/posts/2013/04/27/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-27</title>
-    <published>2013-04-26T22:00:00Z</published>
-    <updated>2013-04-26T22:00:00Z</updated>
+    <published>2013-04-27T07:00:00Z</published>
+    <updated>2013-04-27T07:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/04/27/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://lepture.com/work/vundle-vs-pathogen/&gt; Vundle vs Pathogen - Just lepture  &lt;/a&gt;&lt;/dt&gt;
