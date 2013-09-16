@@ -69,6 +69,25 @@
       
 
   <div class ="post">
+    <h3><a href="/posts/2013/09/iphone_and_RP/">Reactive programming and iPhone 5S</a></h3>
+   <div class="postcontent">
+    <p>The new iPhone is a good illustration of why Reactive Programming, meaning having a first class notion of <em>stream</em>, is important. Indeed, the new <a href="http://techcrunch.com/2013/09/15/apples-m7-motion-sensing-coprocessor-is-the-wizard-behind-the-curtain-for-the-iphone-5s/">M7</a> is really doing just that :</p>
+
+<p>It starts from multiple streams of data, namely acceleration, spatial orientation, and combines them into a higher level representation, to derive streams of <em>activity</em>, say walking, running, driving etc.. The key concept here is the combination, which is really what functional programming and reactive programming stands for.</p>
+
+<p>Another important aspect is that those operations are <strong>not</strong> happening on a <em>universal</em> microprocessor, but are compiled down to hardware. This view of hardware as being a compiled down version of a function application is a very rich one.</p>
+
+<p>One can indeed come with very precise equivalency rules to transform (in both ways) the functions performed by those reactive programs into a physical layout. cf <a href="http://en.wikipedia.org/wiki/G%C3%A9rard_Berry">Gérard Berry</a> in his <a href="http://www.college-de-france.fr/site/en-gerard-berry/course-2013-05-21-10h00.htm">College de France lecture on Time and Computing</a> for a no-nonsense lesson on this nice perspective (I recommend the french version for francophone..)</p>
+
+<p>One can even express tradeoff between the size of the circuit and how long it will take to compute, and prove functional equivalency between those layouts. Far from being a just a fancy observation, this proves essential when it comes to putting a computer in command of your airplane or nuclear central, where <em>proving</em> the lack of bug is of definite value !</p>
+
+<p>And here is also the key of the M7 chip : by having a hardware specific translation, one can lower the energy consumption of those operations to a minimum, which opens new applications… like a (ultra low power) wearable device !</p>
+
+</div> 
+    <aside>Posted at: 2013-09-16 11:00:00 +0200</aside>
+</div> 
+
+  <div class ="post">
     <h3><a href="/posts/2013/09/16/Weekly-links/">Weekly links for 2013-09-16</a></h3>
    <div class="postcontent">
     

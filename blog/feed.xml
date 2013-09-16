@@ -2,13 +2,32 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-09-15T22:00:00Z</updated>
+  <updated>2013-09-16T09:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2013-09-16:/posts/2013/09/iphone_and_RP/</id>
+    <title type="html">Reactive programming and iPhone 5S</title>
+    <published>2013-09-16T09:00:00Z</published>
+    <updated>2013-09-16T09:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/09/iphone_and_RP/"/>
+    <content type="html">&lt;p&gt;The new iPhone is a good illustration of why Reactive Programming, meaning having a first class notion of &lt;em&gt;stream&lt;/em&gt;, is important. Indeed, the new &lt;a href="http://techcrunch.com/2013/09/15/apples-m7-motion-sensing-coprocessor-is-the-wizard-behind-the-curtain-for-the-iphone-5s/"&gt;M7&lt;/a&gt; is really doing just that :&lt;/p&gt;
+
+&lt;p&gt;It starts from multiple streams of data, namely acceleration, spatial orientation, and combines them into a higher level representation, to derive streams of &lt;em&gt;activity&lt;/em&gt;, say walking, running, driving etc.. The key concept here is the combination, which is really what functional programming and reactive programming stands for.&lt;/p&gt;
+
+&lt;p&gt;Another important aspect is that those operations are &lt;strong&gt;not&lt;/strong&gt; happening on a &lt;em&gt;universal&lt;/em&gt; microprocessor, but are compiled down to hardware. This view of hardware as being a compiled down version of a function application is a very rich one.&lt;/p&gt;
+
+&lt;p&gt;One can indeed come with very precise equivalency rules to transform (in both ways) the functions performed by those reactive programs into a physical layout. cf &lt;a href="http://en.wikipedia.org/wiki/G%C3%A9rard_Berry"&gt;Gérard Berry&lt;/a&gt; in his &lt;a href="http://www.college-de-france.fr/site/en-gerard-berry/course-2013-05-21-10h00.htm"&gt;College de France lecture on Time and Computing&lt;/a&gt; for a no-nonsense lesson on this nice perspective (I recommend the french version for francophone..)&lt;/p&gt;
+
+&lt;p&gt;One can even express tradeoff between the size of the circuit and how long it will take to compute, and prove functional equivalency between those layouts. Far from being a just a fancy observation, this proves essential when it comes to putting a computer in command of your airplane or nuclear central, where &lt;em&gt;proving&lt;/em&gt; the lack of bug is of definite value !&lt;/p&gt;
+
+&lt;p&gt;And here is also the key of the M7 chip : by having a hardware specific translation, one can lower the energy consumption of those operations to a minimum, which opens new applications… like a (ultra low power) wearable device !&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2013-09-16:/posts/2013/09/16/Weekly-links/</id>
     <title type="html">Weekly links for 2013-09-16</title>

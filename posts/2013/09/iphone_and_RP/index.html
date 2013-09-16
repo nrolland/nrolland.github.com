@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> xQuant         </title>
+    <title> xQuant  Reactive programming and iPhone 5S       </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="These are various notes of computer science subjects. They sometime have accompanying F# implementation They are authored in a litterate programming style and each document is a valid.">
     <meta name="author" content="Nicolas Rolland">
@@ -54,7 +54,7 @@
   <div class="container">
       <div class="navbar">
         <div class="navbar-inner">
-        <a class="brand" href="#">  </a>
+        <a class="brand" href="#">Reactive programming and iPhone 5S  </a>
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
@@ -66,18 +66,28 @@
       </div>
       <hr>
     <div class="centered">
-      <p>Welcome,</p>
+      
+  <div class='post'>
+    <h1>Reactive programming and iPhone 5S</h1>
+    <aside>Posted on : 2013-09-16 11:00:00 +0200</aside>
+      <article>
+        <p>The new iPhone is a good illustration of why Reactive Programming, meaning having a first class notion of <em>stream</em>, is important. Indeed, the new <a href="http://techcrunch.com/2013/09/15/apples-m7-motion-sensing-coprocessor-is-the-wizard-behind-the-curtain-for-the-iphone-5s/">M7</a> is really doing just that :</p>
 
+<p>It starts from multiple streams of data, namely acceleration, spatial orientation, and combines them into a higher level representation, to derive streams of <em>activity</em>, say walking, running, driving etc.. The key concept here is the combination, which is really what functional programming and reactive programming stands for.</p>
 
+<p>Another important aspect is that those operations are <strong>not</strong> happening on a <em>universal</em> microprocessor, but are compiled down to hardware. This view of hardware as being a compiled down version of a function application is a very rich one.</p>
 
-<p>This is a repository of content that I keep, related to computing, machine learning, etc..</p>
+<p>One can indeed come with very precise equivalency rules to transform (in both ways) the functions performed by those reactive programs into a physical layout. cf <a href="http://en.wikipedia.org/wiki/G%C3%A9rard_Berry">Gérard Berry</a> in his <a href="http://www.college-de-france.fr/site/en-gerard-berry/course-2013-05-21-10h00.htm">College de France lecture on Time and Computing</a> for a no-nonsense lesson on this nice perspective (I recommend the french version for francophone..)</p>
 
-<p>It is a purposefully small and focused window, and therefore only partially representative of my interests and skillset.</p>
+<p>One can even express tradeoff between the size of the circuit and how long it will take to compute, and prove functional equivalency between those layouts. Far from being a just a fancy observation, this proves essential when it comes to putting a computer in command of your airplane or nuclear central, where <em>proving</em> the lack of bug is of definite value !</p>
 
+<p>And here is also the key of the M7 chip : by having a hardware specific translation, one can lower the energy consumption of those operations to a minimum, which opens new applications… like a (ultra low power) wearable device !</p>
 
-Nicolas R
+      </article>
+  </div>
 
     </div>
     </div>
   </body>
 </html>
+
