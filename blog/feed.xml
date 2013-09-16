@@ -2,13 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-06-04T22:00:00Z</updated>
+  <updated>2013-09-15T22:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2013-09-16:/posts/2013/09/16/Weekly-links/</id>
+    <title type="html">Weekly links for 2013-09-16</title>
+    <published>2013-09-15T22:00:00Z</published>
+    <updated>2013-09-15T22:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2013/09/16/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://www.cs.cornell.edu/courses/cs312/2008sp/&gt; Data Structures and Functional Programming CS312 Home  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;A course from Computer Science Department- Cornell University&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/courses/archive/spring10/cos433/mathcs.pdf&gt; Mathematics for Computer Science - Eric Lehman and Tom Leighton MIT  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;25 lessons. 1 a day keeps bug away.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://theinternetwishlist.com/&gt; The Internet Wishlist  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;The Internet Wishlist is a collection of ideas for apps and websites people are wishing for. Think of it like a suggestion box for the future of technology. Ideas range from web to mobile, realistic to imaginary, and helpful to humorous. In a world of me-too startups, we hope this project inspires entrepreneurs, developers and designers to innovate and build the products and features that people want. To contribute, post an idea on Twitter and include #theiwl in your tweet&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.vagrantup.com/&gt; Vagrant  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Create and configure lightweight, reproducible, and portable development environments&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.computing.dundee.ac.uk/staff/katya/ML4PG/sppics.pdf&gt; Statistical Proof-Patterns in Coq/SSReflect  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;In this paper, we are making the rst steps towards automated detection of signi cant proof patterns in Coq/SSReflect&lt;/dd&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-06-05</title>
