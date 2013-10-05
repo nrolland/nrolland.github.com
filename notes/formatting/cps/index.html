@@ -103,8 +103,8 @@ Instead of using a foldback to be applied to the element directly, we can build 
 <span class="l">3: </span>    (<span onmouseout="hideTip(event, 'fs1', 60)" onmouseover="showTip(event, 'fs1', 60)" class="i">foldBack</span> <span onmouseout="hideTip(event, 'fs21', 61)" onmouseover="showTip(event, 'fs21', 61)" class="i">step</span> <span onmouseout="hideTip(event, 'fs20', 62)" onmouseover="showTip(event, 'fs20', 62)" class="i">alist</span> <span onmouseout="hideTip(event, 'fs24', 63)" onmouseover="showTip(event, 'fs24', 63)" class="i">id</span>) <span onmouseout="hideTip(event, 'fs13', 64)" onmouseover="showTip(event, 'fs13', 64)" class="i">zero</span>                    </pre>
 <p>Let's re-read this definition : we apply a foldBack on the list alist at the last line.
 It will need a reducer which accepts the element of the list, x, some state, in our case a continuation k, and build a new state.
-In our case, the new state will be a new continuation, which takes some argument in, asks the original reduce function to execute <em>first</em>, 
-<em>then</em> hands over the control to the local continuation k.</p>
+In our case, the new state will be a new continuation, which takes some argument named 'res' in, asks the original reduce function to execute <em>first</em>, 
+<em>then</em> hands over the control to the local continuation k which we got from the previous step.</p>
 
 <p>So in a list [1,2,3], the last element x in the foldBack order, zero becomes the inception, and 1 will appear first to be called, as can be seen here</p>
 <pre class="fssnip">
