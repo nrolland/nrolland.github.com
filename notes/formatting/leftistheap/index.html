@@ -82,13 +82,15 @@ We don't need to keep everything sorted : we care only of the minimum element, n
 
 <h3>Leftist tree</h3>
 
-<p>A leftist tree (which exist independently of its use as a heap tree or not) contain smaller full trees on the right than on the left.
-The size of a full tree is equal to the "null path length" of its root, the length of the shortest path to a Leaf (null) node.</p>
+<p>The size of a full tree is equal to the "null path length" of its root, the length of the shortest path to a Leaf (null) node.
+Taking this definition for a node gives us the height of the smallest full tree below that node.</p>
 
-<p>So in a leftist every path on the left is always more (or equal) than every path on the right.
-In particular the rightmost path is the smallest of aevery path.
-Which implies that its length, the "null path length" of the root, is $r$, there are at least $2^r - 1 = (2^{r-1} - 1) + (2^{r-1} - 1) + 1$ elements in the tree.
-Or conversely, a tree of size N will have a right path shorter than  $log N$.</p>
+<p>If the "null path length" of the root, is $r$, there are at least $2^r - 1 = (2^{r-1} - 1) + (2^{r-1} - 1) + 1$ elements in the tree.
+Or conversely, N elements arranged in a tree will have its shortest path shorter than $log N$.</p>
+
+<p>A leftist tree (which exist independently of its use as a heap tree or not) contain smaller full trees on the right than on the left.
+It means that in a leftist tree, every path on the left is always more (or equal) than every path on the right, as it has to cross
+a bigger full tree. In particular the rightmost path is the smallest of every path.</p>
 
 <p>This property is useful if we have to recurse : that means if we have to enforce some property (like an ordering along every path in the case ), 
 which implies some new creation of trees, we will have $log n$ iterations if we recurse always on the right trees.</p>
@@ -101,9 +103,12 @@ which implies some new creation of trees, we will have $log n$ iterations if we 
 <span class="l">6: </span>        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">left</span>, <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="i">right</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="i">rank</span> <span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="i">branch1</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs5', 20)" onmouseover="showTip(event, 'fs5', 20)" class="i">rank</span> <span onmouseout="hideTip(event, 'fs10', 21)" onmouseover="showTip(event, 'fs10', 21)" class="i">branch2</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs9', 22)" onmouseover="showTip(event, 'fs9', 22)" class="i">branch1</span>, <span onmouseout="hideTip(event, 'fs10', 23)" onmouseover="showTip(event, 'fs10', 23)" class="i">branch2</span> <span class="k">else</span>  <span onmouseout="hideTip(event, 'fs10', 24)" onmouseover="showTip(event, 'fs10', 24)" class="i">branch2</span>, <span onmouseout="hideTip(event, 'fs9', 25)" onmouseover="showTip(event, 'fs9', 25)" class="i">branch1</span> 
 <span class="l">7: </span>        <span onmouseout="hideTip(event, 'fs2', 26)" onmouseover="showTip(event, 'fs2', 26)" class="i">LNode</span>(<span onmouseout="hideTip(event, 'fs5', 27)" onmouseover="showTip(event, 'fs5', 27)" class="i">rank</span> <span onmouseout="hideTip(event, 'fs11', 28)" onmouseover="showTip(event, 'fs11', 28)" class="i">left</span> <span class="o">+</span> <span class="n">1</span>, <span onmouseout="hideTip(event, 'fs11', 29)" onmouseover="showTip(event, 'fs11', 29)" class="i">left</span>, <span onmouseout="hideTip(event, 'fs8', 30)" onmouseover="showTip(event, 'fs8', 30)" class="i">e</span>, <span onmouseout="hideTip(event, 'fs12', 31)" onmouseover="showTip(event, 'fs12', 31)" class="i">right</span>)
 <span class="l">8: </span>                                          </pre>
+<p>Note that we make a specific type to separate the <em>use</em> of the leftist tree with the <em>heap</em> functionality which uses it.
+In practice, such a separation would be overkill but it drives the point home here.</p>
+
 <h3>Leftist heap</h3>
 
-<p>Now in a heap we want to ensure that the smallest element is on top, for our tree, and every subtree.
+<p>Now in a heap we want to ensure that the smallest element is on top and such is the case for every subtree.
 That is equivalent to saying that <strong>we want each path to be odered</strong>.</p>
 
 <p>Let's imagine that we remove an element. we retrieve the data on top and we are left with 2 subtrees.
@@ -111,8 +116,8 @@ We only know that the two subtree's are linearly ordered along every of their ow
 But there is no global ordering between the path of those trees.</p>
 
 <p>All we can do is inspect the top values of each tree to know which should be the new head that respect our minimum property. 
-Then we can reuse one child of that new head (it is already sorted!) and merge the other side with the tree that was not touched.
-If we systematically reuse the left part in a leftsit tree and recurse on the right side, we are guaranted to have at most $log n$ recursion !</p>
+Then we can reuse one child of that new head (it is already sorted!) and merge the other side with the second tree whose head was larger.
+If we systematically reuse the left part in a leftist tree and recurse on the right side, we are guaranted to have at most $log n$ recursion !</p>
 <pre class="fssnip">
 <span class="l"> 1: </span><span class="k">type</span> <span onmouseout="hideTip(event, 'fs13', 32)" onmouseover="showTip(event, 'fs13', 32)" class="i">LHeap</span><span class="o">&lt;</span><span class="o">'</span><span class="i">a</span><span class="o">&gt;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 33)" onmouseover="showTip(event, 'fs13', 33)" class="i">LHeap</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs14', 34)" onmouseover="showTip(event, 'fs14', 34)" class="i">LTree</span><span class="o">&lt;</span><span class="o">'</span><span class="i">a</span><span class="o">&gt;</span>
 <span class="l"> 2: </span>
