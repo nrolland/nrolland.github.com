@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> xQuant         </title>
+    <title> xQuant  Support Vector Machine [incomplete !]       </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="These are various notes of computer science subjects. They sometime have accompanying F# implementation They are authored in a litterate programming style and each document is a valid.">
     <meta name="author" content="Nicolas Rolland">
@@ -10,7 +10,7 @@
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
@@ -57,13 +57,13 @@
   <div class="container">
       <div class="navbar">
         <div class="navbar-inner">
-        <a class="brand" href="#">  </a>
+        <a class="brand" href="#">Support Vector Machine [incomplete !]  </a>
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/notes">Notes</a></li>  
-          <li class="divider"></li>
+          <li><a href="/notes">Notes</a></li>
+           <li><a href="/about">About</a></li>
+           <li class="divider"></li>
         </ul>
       </div>
       </div>
@@ -71,9 +71,10 @@
     <div class="centered">
       
   <div class='post'>
-    <h1></h1>
     <article>
-      <div class="span9" id="main">
+      <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<div class="span9" id="main">
           <h1>Support Vector Machine [incomplete !]</h1>
 
 <p>Support vector machines are a very popular and powerful way to classify.
@@ -116,7 +117,7 @@ $$a + \{ x \ |\   w \cdot x = 0 \} = \{ x \ |\ w\cdot (x-a) = 0 \} = \{ x \ |\ w
 
 <p>The distance from a point $z$ to a general hyperplan $H=\{ x \ |\ w \cdot x + b = 0 \} = a + \{ x \ |\   w \cdot x = 0 \}   $ is then 
 $$d(H,z) = d(H-a, z-a) = \frac{w \cdot (z-a)} {|w|} = \frac{w \cdot z + b_w} {|w|}  $$ 
-</notextile></p>
+</p></notextile>
 
 <ul>
 <li>The constant $b_w$ is dependant on both the hyperplan that we want to represent and the specific $w$ chosen for H</li>
@@ -228,7 +229,7 @@ var li4 = b.create('line',[step,one],    {straightFirst:true, straightLast:false
 var li4 = b.create('line',[one,[2,0]],   {straightFirst:false, straightLast:true, strokeWidth:2, strokeColor:'green'});
 </script>
 
-<p>But $(1-x)^{+}\leq \beta  \Leftrightarrow  \begin{cases}  \beta \geq 0 \\  x > 1 - \beta   \end{cases}  $
+<p>But $(1-x)^{+}\leq \beta  \Leftrightarrow  \begin{cases}  \beta \geq 0 \\  x &gt; 1 - \beta   \end{cases}  $
 So that we can solve 
 $$
 \begin{align} 
@@ -281,15 +282,15 @@ $$</p>
 
 <ul>
 <li>if $ \alpha_i = C  $ then $$\begin{cases}   y_i\cdot (w \cdot x_i + b) = 1-u_i  \hbox{ (by cs)} \\ 
-\lambda_i = 0 \hbox{ by C3 and } u_i > 0  \hbox{ by cs}
+\lambda_i = 0 \hbox{ by C3 and } u_i &gt; 0  \hbox{ by cs}
 \end{cases} $$
 which means $x_i$ is <strong>inside</strong> the margins</li>
-<li>if $ C > \alpha_i > 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) = 1-u_i \hbox{ (by cs)} \\ 
-\lambda_i > 0 \hbox{ by C3 and } u_i = 0  \hbox{ (by cs)}
+<li>if $ C &gt; \alpha_i &gt; 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) = 1-u_i \hbox{ (by cs)} \\ 
+\lambda_i &gt; 0 \hbox{ by C3 and } u_i = 0  \hbox{ (by cs)}
 \end{cases} $$
 which means $x_i$ is <strong>on</strong> the margins</li>
-<li>if  $   \alpha_i = 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) > 1-u_i \hbox{ (by cs)} \\ 
-\lambda_i > 0 \hbox{ by C3 and } u_i = 0  \hbox{(by cs)} \\
+<li>if  $   \alpha_i = 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) &gt; 1-u_i \hbox{ (by cs)} \\ 
+\lambda_i &gt; 0 \hbox{ by C3 and } u_i = 0  \hbox{(by cs)} \\
 \end{cases} $$
 so that $x_i$ plays <strong>no</strong> role in the problem, its constraint is loose, it is outside the margin</li>
 </ul>
@@ -373,20 +374,21 @@ $\alpha_2' = \alpha_2 - \frac{1}{2} \frac{\nabla g}{\nabla^2 g}</p>
   - we lookinto violation : who does it, and how much 
   - we loop for violating until convergence</p>
 
-          <div class="tip" id="fs1">Multiple items<br />type StructAttribute =<br />&#160;&#160;inherit Attribute<br />&#160;&#160;new : unit -&gt; StructAttribute<br /><br />Full name: Microsoft.FSharp.Core.StructAttribute<br /><br />--------------------<br />new : unit -&gt; StructAttribute</div>
-<div class="tip" id="fs2">Multiple items<br />type SupportVector =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;new : x:float list * y:float * alpha:float -&gt; SupportVector<br />&#160;&#160;&#160;&#160;member Alpha : float<br />&#160;&#160;&#160;&#160;member X : float list<br />&#160;&#160;&#160;&#160;member Y : float<br />&#160;&#160;end<br /><br />Full name: Svm.SupportVector<br /><br />--------------------<br />SupportVector()<br />new : x:float list * y:float * alpha:float -&gt; SupportVector</div>
+          <div class="tip" id="fs1">Multiple items<br>type StructAttribute =<br>&nbsp;&nbsp;inherit Attribute<br>&nbsp;&nbsp;new : unit -&gt; StructAttribute<br><br>Full name: Microsoft.FSharp.Core.StructAttribute<br><br>--------------------<br>new : unit -&gt; StructAttribute</div>
+<div class="tip" id="fs2">Multiple items<br>type SupportVector =<br>&nbsp;&nbsp;struct<br>&nbsp;&nbsp;&nbsp;&nbsp;new : x:float list * y:float * alpha:float -&gt; SupportVector<br>&nbsp;&nbsp;&nbsp;&nbsp;member Alpha : float<br>&nbsp;&nbsp;&nbsp;&nbsp;member X : float list<br>&nbsp;&nbsp;&nbsp;&nbsp;member Y : float<br>&nbsp;&nbsp;end<br><br>Full name: Svm.SupportVector<br><br>--------------------<br>SupportVector()<br>new : x:float list * y:float * alpha:float -&gt; SupportVector</div>
 <div class="tip" id="fs3">val x : float list</div>
-<div class="tip" id="fs4">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float</div>
-<div class="tip" id="fs5">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
+<div class="tip" id="fs4">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float</div>
+<div class="tip" id="fs5">type 'T list = List&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
 <div class="tip" id="fs6">val y : float</div>
 <div class="tip" id="fs7">val alpha : float</div>
 <div class="tip" id="fs8">val this : byref&lt;SupportVector&gt;</div>
-<div class="tip" id="fs9">member SupportVector.X : float list<br /><br />Full name: Svm.SupportVector.X</div>
-<div class="tip" id="fs10">member SupportVector.Y : float<br /><br />Full name: Svm.SupportVector.Y</div>
-<div class="tip" id="fs11">member SupportVector.Alpha : float<br /><br />Full name: Svm.SupportVector.Alpha</div>
+<div class="tip" id="fs9">member SupportVector.X : float list<br><br>Full name: Svm.SupportVector.X</div>
+<div class="tip" id="fs10">member SupportVector.Y : float<br><br>Full name: Svm.SupportVector.Y</div>
+<div class="tip" id="fs11">member SupportVector.Alpha : float<br><br>Full name: Svm.SupportVector.Alpha</div>
 
 </div>
 
+</body></html>
 
     </article>
   </div>

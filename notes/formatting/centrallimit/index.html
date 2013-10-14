@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> xQuant         </title>
+    <title> xQuant  Central limit       </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="These are various notes of computer science subjects. They sometime have accompanying F# implementation They are authored in a litterate programming style and each document is a valid.">
     <meta name="author" content="Nicolas Rolland">
@@ -10,7 +10,7 @@
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
@@ -57,13 +57,13 @@
   <div class="container">
       <div class="navbar">
         <div class="navbar-inner">
-        <a class="brand" href="#">  </a>
+        <a class="brand" href="#">Central limit  </a>
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/notes">Notes</a></li>  
-          <li class="divider"></li>
+          <li><a href="/notes">Notes</a></li>
+           <li><a href="/about">About</a></li>
+           <li class="divider"></li>
         </ul>
       </div>
       </div>
@@ -71,9 +71,10 @@
     <div class="centered">
       
   <div class='post'>
-    <h1></h1>
     <article>
-      <div class="span9" id="main">
+      <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<div class="span9" id="main">
           <h1>Central limit</h1>
 
 <h3>Variance</h3>
@@ -111,70 +112,71 @@ By the</p>
 <pre class="fssnip">
 <span class="l">1: </span>                                  </pre>
 
-          <div class="tip" id="fs1">val rseq : seq&lt;int&gt;<br /><br />Full name: Centrallimit.rseq</div>
+          <div class="tip" id="fs1">val rseq : seq&lt;int&gt;<br><br>Full name: Centrallimit.rseq</div>
 <div class="tip" id="fs2">val rng : System.Random</div>
 <div class="tip" id="fs3">namespace System</div>
-<div class="tip" id="fs4">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />Full name: System.Random<br /><br />--------------------<br />System.Random() : unit<br />System.Random(Seed: int) : unit</div>
-<div class="tip" id="fs5">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs6">val initInfinite : initializer:(int -&gt; &#39;T) -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.initInfinite</div>
-<div class="tip" id="fs7">System.Random.Next() : int<br />System.Random.Next(maxValue: int) : int<br />System.Random.Next(minValue: int, maxValue: int) : int</div>
-<div class="tip" id="fs8">val ints : seq&lt;int&gt;<br /><br />Full name: Centrallimit.ints</div>
-<div class="tip" id="fs9">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
-<div class="tip" id="fs10">val takeNSample : N:int -&gt; ls:&#39;a list -&gt; &#39;a list<br /><br />Full name: Centrallimit.takeNSample</div>
+<div class="tip" id="fs4">Multiple items<br>type Random =<br>&nbsp;&nbsp;new : unit -&gt; Random + 1 overload<br>&nbsp;&nbsp;member Next : unit -&gt; int + 2 overloads<br>&nbsp;&nbsp;member NextBytes : buffer:byte[] -&gt; unit<br>&nbsp;&nbsp;member NextDouble : unit -&gt; float<br><br>Full name: System.Random<br><br>--------------------<br>System.Random() : unit<br>System.Random(Seed: int) : unit</div>
+<div class="tip" id="fs5">module Seq<br><br>from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs6">val initInfinite : initializer:(int -&gt; 'T) -&gt; seq&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.Seq.initInfinite</div>
+<div class="tip" id="fs7">System.Random.Next() : int<br>System.Random.Next(maxValue: int) : int<br>System.Random.Next(minValue: int, maxValue: int) : int</div>
+<div class="tip" id="fs8">val ints : seq&lt;int&gt;<br><br>Full name: Centrallimit.ints</div>
+<div class="tip" id="fs9">val id : x:'T -&gt; 'T<br><br>Full name: Microsoft.FSharp.Core.Operators.id</div>
+<div class="tip" id="fs10">val takeNSample : N:int -&gt; ls:'a list -&gt; 'a list<br><br>Full name: Centrallimit.takeNSample</div>
 <div class="tip" id="fs11">val N : int</div>
-<div class="tip" id="fs12">val ls : &#39;a list</div>
+<div class="tip" id="fs12">val ls : 'a list</div>
 <div class="tip" id="fs13">val l : int</div>
-<div class="tip" id="fs14">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of &#39;T * &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs15">val length : list:&#39;T list -&gt; int<br /><br />Full name: Microsoft.FSharp.Collections.List.length</div>
-<div class="tip" id="fs16">val mapi : mapping:(int -&gt; &#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.mapi</div>
+<div class="tip" id="fs14">Multiple items<br>module List<br><br>from Microsoft.FSharp.Collections<br><br>--------------------<br>type List&lt;'T&gt; =<br>&nbsp;&nbsp;| ( [] )<br>&nbsp;&nbsp;| ( :: ) of 'T * 'T list<br>&nbsp;&nbsp;interface IEnumerable<br>&nbsp;&nbsp;interface IEnumerable&lt;'T&gt;<br>&nbsp;&nbsp;member Head : 'T<br>&nbsp;&nbsp;member IsEmpty : bool<br>&nbsp;&nbsp;member Item : index:int -&gt; 'T with get<br>&nbsp;&nbsp;member Length : int<br>&nbsp;&nbsp;member Tail : 'T list<br>&nbsp;&nbsp;static member Cons : head:'T * tail:'T list -&gt; 'T list<br>&nbsp;&nbsp;static member Empty : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs15">val length : list:'T list -&gt; int<br><br>Full name: Microsoft.FSharp.Collections.List.length</div>
+<div class="tip" id="fs16">val mapi : mapping:(int -&gt; 'T -&gt; 'U) -&gt; list:'T list -&gt; 'U list<br><br>Full name: Microsoft.FSharp.Collections.List.mapi</div>
 <div class="tip" id="fs17">val i : int</div>
-<div class="tip" id="fs18">val e : &#39;a</div>
-<div class="tip" id="fs19">union case Option.Some: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
-<div class="tip" id="fs20">union case Option.None: Option&lt;&#39;T&gt;</div>
-<div class="tip" id="fs21">val choose : chooser:(&#39;T -&gt; &#39;U option) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.choose</div>
-<div class="tip" id="fs22">val skip : n:int -&gt; ls:&#39;a list -&gt; &#39;a list<br /><br />Full name: Centrallimit.List.skip</div>
+<div class="tip" id="fs18">val e : 'a</div>
+<div class="tip" id="fs19">union case Option.Some: 'T -&gt; Option&lt;'T&gt;</div>
+<div class="tip" id="fs20">union case Option.None: Option&lt;'T&gt;</div>
+<div class="tip" id="fs21">val choose : chooser:('T -&gt; 'U option) -&gt; list:'T list -&gt; 'U list<br><br>Full name: Microsoft.FSharp.Collections.List.choose</div>
+<div class="tip" id="fs22">val skip : n:int -&gt; ls:'a list -&gt; 'a list<br><br>Full name: Centrallimit.List.skip</div>
 <div class="tip" id="fs23">val n : int</div>
-<div class="tip" id="fs24">val tail : list:&#39;T list -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.tail</div>
-<div class="tip" id="fs25">val split : n:int -&gt; ls:&#39;a list -&gt; &#39;a list * &#39;a list<br /><br />Full name: Centrallimit.List.split</div>
-<div class="tip" id="fs26">val hs : &#39;a list</div>
-<div class="tip" id="fs27">val ts : &#39;a list</div>
-<div class="tip" id="fs28">val fold : folder:(&#39;State -&gt; &#39;T -&gt; &#39;State) -&gt; state:&#39;State -&gt; list:&#39;T list -&gt; &#39;State<br /><br />Full name: Microsoft.FSharp.Collections.List.fold</div>
+<div class="tip" id="fs24">val tail : list:'T list -&gt; 'T list<br><br>Full name: Microsoft.FSharp.Collections.List.tail</div>
+<div class="tip" id="fs25">val split : n:int -&gt; ls:'a list -&gt; 'a list * 'a list<br><br>Full name: Centrallimit.List.split</div>
+<div class="tip" id="fs26">val hs : 'a list</div>
+<div class="tip" id="fs27">val ts : 'a list</div>
+<div class="tip" id="fs28">val fold : folder:('State -&gt; 'T -&gt; 'State) -&gt; state:'State -&gt; list:'T list -&gt; 'State<br><br>Full name: Microsoft.FSharp.Collections.List.fold</div>
 <div class="tip" id="fs29">val k : int</div>
-<div class="tip" id="fs30">val empty&lt;&#39;T&gt; : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.empty</div>
-<div class="tip" id="fs31">val rev : list:&#39;T list -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.rev</div>
-<div class="tip" id="fs32">val NStart : int<br /><br />Full name: Centrallimit.NStart</div>
-<div class="tip" id="fs33">val N : int<br /><br />Full name: Centrallimit.N</div>
-<div class="tip" id="fs34">val NSample : int<br /><br />Full name: Centrallimit.NSample</div>
-<div class="tip" id="fs35">val lAdditional : int list<br /><br />Full name: Centrallimit.lAdditional</div>
-<div class="tip" id="fs36">val take : count:int -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.take</div>
-<div class="tip" id="fs37">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>
-<div class="tip" id="fs38">Multiple items<br />module List<br /><br />from Centrallimit<br /><br />--------------------<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of &#39;T * &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs39">val rng : System.Random<br /><br />Full name: Centrallimit.rng</div>
-<div class="tip" id="fs40">val computeVar : es:seq&lt;float&gt; -&gt; float * float<br /><br />Full name: Centrallimit.computeVar</div>
+<div class="tip" id="fs30">val empty&lt;'T&gt; : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List.empty</div>
+<div class="tip" id="fs31">val rev : list:'T list -&gt; 'T list<br><br>Full name: Microsoft.FSharp.Collections.List.rev</div>
+<div class="tip" id="fs32">val NStart : int<br><br>Full name: Centrallimit.NStart</div>
+<div class="tip" id="fs33">val N : int<br><br>Full name: Centrallimit.N</div>
+<div class="tip" id="fs34">val NSample : int<br><br>Full name: Centrallimit.NSample</div>
+<div class="tip" id="fs35">val lAdditional : int list<br><br>Full name: Centrallimit.lAdditional</div>
+<div class="tip" id="fs36">val take : count:int -&gt; source:seq&lt;'T&gt; -&gt; seq&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.Seq.take</div>
+<div class="tip" id="fs37">val toList : source:seq&lt;'T&gt; -&gt; 'T list<br><br>Full name: Microsoft.FSharp.Collections.Seq.toList</div>
+<div class="tip" id="fs38">Multiple items<br>module List<br><br>from Centrallimit<br><br>--------------------<br>module List<br><br>from Microsoft.FSharp.Collections<br><br>--------------------<br>type List&lt;'T&gt; =<br>&nbsp;&nbsp;| ( [] )<br>&nbsp;&nbsp;| ( :: ) of 'T * 'T list<br>&nbsp;&nbsp;interface IEnumerable<br>&nbsp;&nbsp;interface IEnumerable&lt;'T&gt;<br>&nbsp;&nbsp;member Head : 'T<br>&nbsp;&nbsp;member IsEmpty : bool<br>&nbsp;&nbsp;member Item : index:int -&gt; 'T with get<br>&nbsp;&nbsp;member Length : int<br>&nbsp;&nbsp;member Tail : 'T list<br>&nbsp;&nbsp;static member Cons : head:'T * tail:'T list -&gt; 'T list<br>&nbsp;&nbsp;static member Empty : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs39">val rng : System.Random<br><br>Full name: Centrallimit.rng</div>
+<div class="tip" id="fs40">val computeVar : es:seq&lt;float&gt; -&gt; float * float<br><br>Full name: Centrallimit.computeVar</div>
 <div class="tip" id="fs41">val es : seq&lt;float&gt;</div>
 <div class="tip" id="fs42">val sum : float</div>
-<div class="tip" id="fs43">val fold : folder:(&#39;State -&gt; &#39;T -&gt; &#39;State) -&gt; state:&#39;State -&gt; source:seq&lt;&#39;T&gt; -&gt; &#39;State<br /><br />Full name: Microsoft.FSharp.Collections.Seq.fold</div>
+<div class="tip" id="fs43">val fold : folder:('State -&gt; 'T -&gt; 'State) -&gt; state:'State -&gt; source:seq&lt;'T&gt; -&gt; 'State<br><br>Full name: Microsoft.FSharp.Collections.Seq.fold</div>
 <div class="tip" id="fs44">val s : float</div>
 <div class="tip" id="fs45">val e : float</div>
 <div class="tip" id="fs46">val avg : float</div>
-<div class="tip" id="fs47">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float</div>
-<div class="tip" id="fs48">val sum : source:seq&lt;&#39;T&gt; -&gt; &#39;T (requires member ( + ) and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.sum</div>
-<div class="tip" id="fs49">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
+<div class="tip" id="fs47">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float</div>
+<div class="tip" id="fs48">val sum : source:seq&lt;'T&gt; -&gt; 'T (requires member ( + ) and member get_Zero)<br><br>Full name: Microsoft.FSharp.Collections.Seq.sum</div>
+<div class="tip" id="fs49">val map : mapping:('T -&gt; 'U) -&gt; source:seq&lt;'T&gt; -&gt; seq&lt;'U&gt;<br><br>Full name: Microsoft.FSharp.Collections.Seq.map</div>
 <div class="tip" id="fs50">val x : float</div>
-<div class="tip" id="fs51">val pown : x:&#39;T -&gt; n:int -&gt; &#39;T (requires member get_One and member ( * ) and member ( / ))<br /><br />Full name: Microsoft.FSharp.Core.Operators.pown</div>
-<div class="tip" id="fs52">val NAverage : int<br /><br />Full name: Centrallimit.NAverage</div>
-<div class="tip" id="fs53">val NRepeat : int<br /><br />Full name: Centrallimit.NRepeat</div>
-<div class="tip" id="fs54">val times : (int * (float * float)) list<br /><br />Full name: Centrallimit.times</div>
-<div class="tip" id="fs55">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
-<div class="tip" id="fs56">val init : length:int -&gt; initializer:(int -&gt; &#39;T) -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.init</div>
-<div class="tip" id="fs57">val average : list:&#39;T list -&gt; &#39;T (requires member ( + ) and member DivideByInt and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.List.average</div>
+<div class="tip" id="fs51">val pown : x:'T -&gt; n:int -&gt; 'T (requires member get_One and member ( * ) and member ( / ))<br><br>Full name: Microsoft.FSharp.Core.Operators.pown</div>
+<div class="tip" id="fs52">val NAverage : int<br><br>Full name: Centrallimit.NAverage</div>
+<div class="tip" id="fs53">val NRepeat : int<br><br>Full name: Centrallimit.NRepeat</div>
+<div class="tip" id="fs54">val times : (int * (float * float)) list<br><br>Full name: Centrallimit.times</div>
+<div class="tip" id="fs55">val map : mapping:('T -&gt; 'U) -&gt; list:'T list -&gt; 'U list<br><br>Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fs56">val init : length:int -&gt; initializer:(int -&gt; 'T) -&gt; 'T list<br><br>Full name: Microsoft.FSharp.Collections.List.init</div>
+<div class="tip" id="fs57">val average : list:'T list -&gt; 'T (requires member ( + ) and member DivideByInt and member get_Zero)<br><br>Full name: Microsoft.FSharp.Collections.List.average</div>
 <div class="tip" id="fs58">val ts : float list</div>
-<div class="tip" id="fs59">val av : int<br /><br />Full name: Centrallimit.av</div>
-<div class="tip" id="fs60">val std : float * float<br /><br />Full name: Centrallimit.std</div>
-<div class="tip" id="fs61">val find : predicate:(&#39;T -&gt; bool) -&gt; list:&#39;T list -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Collections.List.find</div>
+<div class="tip" id="fs59">val av : int<br><br>Full name: Centrallimit.av</div>
+<div class="tip" id="fs60">val std : float * float<br><br>Full name: Centrallimit.std</div>
+<div class="tip" id="fs61">val find : predicate:('T -&gt; bool) -&gt; list:'T list -&gt; 'T<br><br>Full name: Microsoft.FSharp.Collections.List.find</div>
 
 </div>
 
+</body></html>
 
     </article>
   </div>

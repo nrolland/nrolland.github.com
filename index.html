@@ -10,7 +10,7 @@
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
@@ -61,25 +61,215 @@
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/notes">Notes</a></li>  
-          <li class="divider"></li>
+          <li><a href="/notes">Notes</a></li>
+           <li><a href="/about">About</a></li>
+           <li class="divider"></li>
         </ul>
       </div>
       </div>
       <hr>
     <div class="centered">
-      <p>Welcome,</p>
+      
+
+  <div class ="post">
+    <h3>
+    
+        <a href="/notes/formatting/leftistheap/">Heaps</a></h3>
+    
+      <div class="postcontent">
+        <p>Commented F# code for the heap data structure, starting with the leftist tree heap, which exploits a clever recursive scheme.</p>
+
+        </div>
+        <aside>Posted at: 2013-10-13 11:00:00 +0200</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/09/iphone_and_RP/">Reactive programming and iPhone 5S</a></h3>
+    
+      <div class="postcontent">
+        <p>The new iPhone is a good illustration of why Reactive Programming, meaning having a first class notion of <em>stream</em>, is important. Indeed, the new <a href="http://techcrunch.com/2013/09/15/apples-m7-motion-sensing-coprocessor-is-the-wizard-behind-the-curtain-for-the-iphone-5s/">M7</a> is really doing just that :</p>
+
+<p>It starts from multiple streams of data, namely acceleration, spatial orientation, and combines them into a higher level representation, to derive streams of <em>activity</em>, say walking, running, driving etc.. The key concept here is the combination, which is really what functional programming and reactive programming stands for.</p>
+
+<p>Another important aspect is that those operations are <strong>not</strong> happening on a <em>universal</em> microprocessor, but are compiled down to hardware. This view of hardware as being a compiled down version of a function application is a very rich one.</p>
+
+<p>One can indeed come with very precise equivalency rules to transform (in both ways) the functions performed by those reactive programs into a physical layout. cf <a href="http://en.wikipedia.org/wiki/G%C3%A9rard_Berry">Gérard Berry</a> in his <a href="http://www.college-de-france.fr/site/en-gerard-berry/course-2013-05-21-10h00.htm">College de France lecture on Time and Computing</a> for a no-nonsense lesson on this nice perspective (I recommend the french version for francophone..)</p>
+
+<p>One can even express tradeoff between the size of the circuit and how long it will take to compute, and prove functional equivalency between those layouts. Far from being a just a fancy observation, this proves essential when it comes to putting a computer in command of your airplane or nuclear central, where <em>proving</em> the lack of bug is of definite value !</p>
+
+<p>And here is also the key of the M7 chip : by having a hardware specific translation, one can lower the energy consumption of those operations to a minimum, which opens new applications… like a (ultra low power) wearable device !</p>
+
+        </div>
+        <aside>Posted at: 2013-09-16 11:00:00 +0200</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/09/16/Weekly-links/">Weekly links for 2013-09-16</a></h3>
+    
+      <div class="postcontent">
+        
+<dt><a href=http://www.cs.cornell.edu/courses/cs312/2008sp/> Data Structures and Functional Programming CS312 Home  </a></dt>
+<dd>A course from Computer Science Department- Cornell University</dd>
+
+<dt><a href=http://www.cs.princeton.edu/courses/archive/spring10/cos433/mathcs.pdf> Mathematics for Computer Science - Eric Lehman and Tom Leighton MIT  </a></dt>
+<dd>25 lessons. 1 a day keeps bug away.</dd>
+
+<dt><a href=http://theinternetwishlist.com/> The Internet Wishlist  </a></dt>
+<dd>The Internet Wishlist is a collection of ideas for apps and websites people are wishing for. Think of it like a suggestion box for the future of technology. Ideas range from web to mobile, realistic to imaginary, and helpful to humorous. In a world of me-too startups, we hope this project inspires entrepreneurs, developers and designers to innovate and build the products and features that people want. To contribute, post an idea on Twitter and include #theiwl in your tweet</dd>
+
+<dt><a href=http://www.vagrantup.com/> Vagrant  </a></dt>
+<dd>Create and configure lightweight, reproducible, and portable development environments</dd>
+
+<dt><a href=http://www.computing.dundee.ac.uk/staff/katya/ML4PG/sppics.pdf> Statistical Proof-Patterns in Coq/SSReflect  </a></dt>
+<dd>In this paper, we are making the rst steps towards automated detection of signi cant proof patterns in Coq/SSReflect</dd>
 
 
+        </div>
+        <aside>Posted at: 2013-09-16</aside>
+</div>
 
-<p>This is a repository of explorations related to <em>computation</em>, <em>machine learning</em>, and all that..</p>
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/06/05/Weekly-links/">Weekly links for 2013-06-05</a></h3>
+    
+      <div class="postcontent">
+        
+<dt><a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&feature=player_embedded> Hamming, "You and Your Research" (June 6, 1995) - YouTube  </a></dt>
+<dd>The Art of Doing Science and Engineering: Learning to Learn&quot; was the capstone course by Dr. Richard W. Hamming (1915-1998) for graduate students at the Naval Postgraduate School (NPS) in Monterey California.</dd>
 
-<P>It is a purposefully small and focused window on such subjects for which I found time, tools, and envy to write about</p>
+<dt><a href=http://faculty.ycp.edu/~dbabcock/PastCourses/cs360/lecture/about.html> Lecture Notes  </a></dt>
+<dd>Following &quot;introduction to Algorithm&quot; of Cormen in a detailed way</dd>
+
+<dt><a href=http://www.seas.harvard.edu/courses/cs281/> CS281: Advanced Machine Learning  </a></dt>
+<dd>Harvard University, Fall 2011</dd>
+
+<dt><a href=http://danroy.org/papers/Roy-PHD-2011.pdf> Computability, inference and modeling in probabilistic programming  </a></dt>
+<dd>Phd thesis by Daniel M. Roy. The basic measure part is an excellent revision !</dd>
+
+<dt><a href=http://staff.aist.go.jp/reynald.affeldt/documents/affeldt-itp2012-preprint.pdf> Formalization of Shannon's Theorems in SSReflect-Coq  </a></dt>
+<dd>Our first contribution is to provide a library of formal de finitions and lemmas for information theory...</dd>
 
 
+        </div>
+        <aside>Posted at: 2013-06-05</aside>
+</div>
 
-Nicolas 
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/05/05/Weekly-links/">Weekly links for 2013-05-05</a></h3>
+    
+      <div class="postcontent">
+        
+<dt><a href=http://www.cis.upenn.edu/~plclub/popl08-tutorial/code/coqdoc/CoqIntro.html> Coq for POPL Folk  </a></dt>
+<dd>A streamlined interactive tutorial on fundamentals of Coq, focusing on a minimal set of features needed for developing programming language metatheory.</dd>
+
+<dt><a href=https://github.com/gmarik/vundle> gmarik/vundle  </a></dt>
+<dd>About Vundle is short for Vimb**undle** and is a Vim plugin manager.</dd>
+
+<dt><a href=http://www.jpaulmorrison.com/fbp/concepts.shtml> Basic Concepts of Flow-Based programming (FBP)  </a></dt>
+<dd>business applications are usually designed starting with data and viewing process as secondary - processes are just the way data is created, manipulated and destroyed</dd>
+
+<dt><a href=http://requestb.in/> RequestBin â€” Collect and inspect HTTP requests, debug webhooks  </a></dt>
+<dd>RequestBin lets you create a URL that will collect requests made to it, then let you inspect them in a human-friendly way. Use RequestBin to see what your HTTP client is sending or to look at webhook requests.</dd>
+
+<dt><a href=http://www.sketchometry.com/> Sketchometry  </a></dt>
+<dd>geometry by sketches : intuitive mathematics software for tablets, desktop computers, and whiteboards.</dd>
+
+
+        </div>
+        <aside>Posted at: 2013-05-05</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/04/29/Weekly-links/">Weekly links for 2013-04-29</a></h3>
+    
+      <div class="postcontent">
+        
+<dt><a href=http://twitter.github.com/effectivescala/> Effective Scala  </a></dt>
+<dd>Scala is one of the main application programming languages used at Twitter. Much of our infrastructure is written in Scala and we have several large libraries supporting our use. While highly effective, Scala is also a large language, and our experiences have taught us to practice great care in its application.</dd>
+
+<dt><a href=http://www.submodularity.org/> submodularity.org: Tutorials, References, Activities and Tools for Submodular Optimization  </a></dt>
+<dd>Similarly to convexity, submodularity allows one to efficiently find provably (near-)optimal solutions</dd>
+
+<dt><a href=http://www.cs.rpi.edu/~cutler/classes/advancedgraphics/F05/lectures/> CSCI-6962 Advanced Computer Graphics  </a></dt>
+<dd>CSCI-6962 Advanced Computer Graphics</dd>
+
+<dt><a href=http://www.cs.yale.edu/homes/el327/datamining2012a.html> Edo Liberty's homepage  </a></dt>
+<dd>It turns out the a rather small set of tools gives us many and wonderful abilities. Most of these are randomized in nature</dd>
+
+<dt><a href=http://www.cs.princeton.edu/~rs/AlgsDS07/> Algorithms and Data Structures  </a></dt>
+<dd>Robert Sedgewick and Kevin Wayne</dd>
+
+
+        </div>
+        <aside>Posted at: 2013-04-29</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/04/27/Weekly-links/">Weekly links for 2013-04-27</a></h3>
+    
+      <div class="postcontent">
+        
+<dt><a href=http://lepture.com/work/vundle-vs-pathogen/> Vundle vs Pathogen - Just lepture  </a></dt>
+<dd>Most people just want an answer. Yes, vundle is better</dd>
+
+<dt><a href=https://github.com/zaiste/vimified> zaiste/vimified  </a></dt>
+<dd>"Kick-ass Vim configuration framework, built on top of awesome Vundle"</dd>
+
+<dt><a href=http://www.nanex.net/FlashCrash/OngoingResearch.html> Nanex - Ongoing Research - Market Events and Phenomena.  </a></dt>
+<dd>Ongoing Research - Market Events and Phenomena   Our business is supplying a real-time data service comprising trade and quote data for all US equity, option, and futures exchanges. We have archived this data since 2004 and have created and used numerous tools to help us sift through the enormous dataset: approximately 4 trillion quotes and trades as of July 2011. May 6th, had approximately 7.6 billion trade, quote, and depth records.</dd>
+
+<dt><a href=http://www.geekdesk.com/default.asp?contentID=628> GeekDeskÂ® Adjustable Height Desks - Why GeekDesk  </a></dt>
+<dd>Give your back a rest, and your body some variety, with our GeekDeskÂ® electric quick-adjustable desk</dd>
+
+<dt><a href=http://seekingalpha.com/article/207638-etfs-what-does-your-swap-cost> ETFs: What Does Your Swap Cost? - Seeking Alpha  </a></dt>
+<dd>ETFs: What Does Your Swap Cost? Insightful comments on the inner workings of synth etfs</dd>
+
+
+        </div>
+        <aside>Posted at: 2013-04-27</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2012/02/help-have-you-seen-my-cats/">Help! Have you seen my cats?</a></h3>
+    
+      <div class="postcontent">
+        <p>My cats appear to have taken leave of me. Have you seen them?</p>
+
+        </div>
+        <aside>Posted at: 2012-02-12 10:00:00 +0100</aside>
+</div>
+
+  <div class ="post">
+    <h3>
+    
+       <a href="/posts/2013/03/my-first-post/">My first post</a></h3>
+    
+      <div class="postcontent">
+        <h1 id="welcome-to-my-blog">Welcome to my blog!</h1>
+
+<p>It is filled with wondrous, bloggy things. Cats, mostly.</p>
+
+<h2 id="where-are-the-cats">Where are the cats?</h2>
+
+<p>They’ve all wandered off. <em>Has anyone seen my cats?!</em>##</p>
+
+        </div>
+        <aside>Posted at: 2012-02-10 10:00:00 +0100</aside>
+</div>
+
 
     </div>
     </div>

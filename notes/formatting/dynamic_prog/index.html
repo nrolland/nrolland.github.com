@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> xQuant         </title>
+    <title> xQuant  Dynamic programming       </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="These are various notes of computer science subjects. They sometime have accompanying F# implementation They are authored in a litterate programming style and each document is a valid.">
     <meta name="author" content="Nicolas Rolland">
@@ -10,7 +10,7 @@
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
@@ -57,13 +57,13 @@
   <div class="container">
       <div class="navbar">
         <div class="navbar-inner">
-        <a class="brand" href="#">  </a>
+        <a class="brand" href="#">Dynamic programming  </a>
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/notes">Notes</a></li>  
-          <li class="divider"></li>
+          <li><a href="/notes">Notes</a></li>
+           <li><a href="/about">About</a></li>
+           <li class="divider"></li>
         </ul>
       </div>
       </div>
@@ -71,9 +71,10 @@
     <div class="centered">
       
   <div class='post'>
-    <h1></h1>
     <article>
-      <div class="span9" id="main">
+      <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<div class="span9" id="main">
           <h1>Dynamic programming</h1>
 
 <p>Dynamic programming is equivalent to the following two concepts used together : <em>recursion</em> and <em>deforestation</em></p>
@@ -191,63 +192,64 @@ This solution has low overhead but special care must be taken to the order of ev
 
 <h3>Optimal binary search tree</h3>
 
-          <div class="tip" id="fsd1">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fsd2">val minDef : def:&#39;a -&gt; items:seq&lt;&#39;a&gt; -&gt; &#39;a (requires comparison)<br /><br />Full name: Dynamic_prog.Seq.minDef</div>
-<div class="tip" id="fsd3">val def : &#39;a (requires comparison)</div>
-<div class="tip" id="fsd4">val items : seq&lt;&#39;a&gt; (requires comparison)</div>
-<div class="tip" id="fsd5">val isEmpty : source:seq&lt;&#39;T&gt; -&gt; bool<br /><br />Full name: Microsoft.FSharp.Collections.Seq.isEmpty</div>
-<div class="tip" id="fsd6">val min : source:seq&lt;&#39;T&gt; -&gt; &#39;T (requires comparison)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.min</div>
-<div class="tip" id="fsd7">val matrixproduct_bu : ifinal:int * jfinal:int -&gt; int<br /><br />Full name: Dynamic_prog.matrixproduct_bu</div>
+          <div class="tip" id="fsd1">module Seq<br><br>from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fsd2">val minDef : def:'a -&gt; items:seq&lt;'a&gt; -&gt; 'a (requires comparison)<br><br>Full name: Dynamic_prog.Seq.minDef</div>
+<div class="tip" id="fsd3">val def : 'a (requires comparison)</div>
+<div class="tip" id="fsd4">val items : seq&lt;'a&gt; (requires comparison)</div>
+<div class="tip" id="fsd5">val isEmpty : source:seq&lt;'T&gt; -&gt; bool<br><br>Full name: Microsoft.FSharp.Collections.Seq.isEmpty</div>
+<div class="tip" id="fsd6">val min : source:seq&lt;'T&gt; -&gt; 'T (requires comparison)<br><br>Full name: Microsoft.FSharp.Collections.Seq.min</div>
+<div class="tip" id="fsd7">val matrixproduct_bu : ifinal:int * jfinal:int -&gt; int<br><br>Full name: Dynamic_prog.matrixproduct_bu</div>
 <div class="tip" id="fsd8">val ifinal : int</div>
 <div class="tip" id="fsd9">val jfinal : int</div>
 <div class="tip" id="fsd10">val m : int [,]</div>
-<div class="tip" id="fsd11">module Array2D<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fsd12">val init : length1:int -&gt; length2:int -&gt; initializer:(int -&gt; int -&gt; &#39;T) -&gt; &#39;T [,]<br /><br />Full name: Microsoft.FSharp.Collections.Array2D.init</div>
-<div class="tip" id="fsd13">val p : int []<br /><br />Full name: Dynamic_prog.p</div>
+<div class="tip" id="fsd11">module Array2D<br><br>from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fsd12">val init : length1:int -&gt; length2:int -&gt; initializer:(int -&gt; int -&gt; 'T) -&gt; 'T [,]<br><br>Full name: Microsoft.FSharp.Collections.Array2D.init</div>
+<div class="tip" id="fsd13">val p : int []<br><br>Full name: Dynamic_prog.p</div>
 <div class="tip" id="fsd14">property System.Array.Length: int</div>
 <div class="tip" id="fsd15">val up : (int -&gt; int)</div>
 <div class="tip" id="fsd16">val pbsize : int</div>
-<div class="tip" id="fsd17">Multiple items<br />module Seq<br /><br />from Dynamic_prog<br /><br />--------------------<br />module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fsd18">val init : count:int -&gt; initializer:(int -&gt; &#39;T) -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.init</div>
+<div class="tip" id="fsd17">Multiple items<br>module Seq<br><br>from Dynamic_prog<br><br>--------------------<br>module Seq<br><br>from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fsd18">val init : count:int -&gt; initializer:(int -&gt; 'T) -&gt; seq&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.Seq.init</div>
 <div class="tip" id="fsd19">val i : int</div>
-<div class="tip" id="fsd20">val iter : action:(&#39;T -&gt; unit) -&gt; source:seq&lt;&#39;T&gt; -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.Seq.iter</div>
+<div class="tip" id="fsd20">val iter : action:('T -&gt; unit) -&gt; source:seq&lt;'T&gt; -&gt; unit<br><br>Full name: Microsoft.FSharp.Collections.Seq.iter</div>
 <div class="tip" id="fsd21">val j : int</div>
 <div class="tip" id="fsd22">val k : int</div>
-<div class="tip" id="fsd23">val product : xs:seq&lt;&#39;a&gt; -&gt; ys:seq&lt;&#39;b&gt; -&gt; (&#39;a * &#39;b) list<br /><br />Full name: Dynamic_prog.product</div>
-<div class="tip" id="fsd24">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of &#39;T * &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fsd25">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fsd23">val product : xs:seq&lt;'a&gt; -&gt; ys:seq&lt;'b&gt; -&gt; ('a * 'b) list<br><br>Full name: Dynamic_prog.product</div>
+<div class="tip" id="fsd24">Multiple items<br>module List<br><br>from Microsoft.FSharp.Collections<br><br>--------------------<br>type List&lt;'T&gt; =<br>&nbsp;&nbsp;| ( [] )<br>&nbsp;&nbsp;| ( :: ) of 'T * 'T list<br>&nbsp;&nbsp;interface IEnumerable<br>&nbsp;&nbsp;interface IEnumerable&lt;'T&gt;<br>&nbsp;&nbsp;member Head : 'T<br>&nbsp;&nbsp;member IsEmpty : bool<br>&nbsp;&nbsp;member Item : index:int -&gt; 'T with get<br>&nbsp;&nbsp;member Length : int<br>&nbsp;&nbsp;member Tail : 'T list<br>&nbsp;&nbsp;static member Cons : head:'T * tail:'T list -&gt; 'T list<br>&nbsp;&nbsp;static member Empty : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fsd25">val map : mapping:('T -&gt; 'U) -&gt; list:'T list -&gt; 'U list<br><br>Full name: Microsoft.FSharp.Collections.List.map</div>
 <div class="tip" id="fsd26">val i : int * int</div>
-<div class="tip" id="fsd27">val tee : f:(&#39;a -&gt; unit) -&gt; x:&#39;a -&gt; &#39;a<br /><br />Full name: Dynamic_prog.tee</div>
-<div class="tip" id="fsd28">val f : (&#39;a -&gt; unit)</div>
-<div class="tip" id="fsd29">val x : &#39;a</div>
-<div class="tip" id="fsd30">val matrixproduct_rec : i:int * j:int -&gt; int<br /><br />Full name: Dynamic_prog.matrixproduct_rec</div>
+<div class="tip" id="fsd27">val tee : f:('a -&gt; unit) -&gt; x:'a -&gt; 'a<br><br>Full name: Dynamic_prog.tee</div>
+<div class="tip" id="fsd28">val f : ('a -&gt; unit)</div>
+<div class="tip" id="fsd29">val x : 'a</div>
+<div class="tip" id="fsd30">val matrixproduct_rec : i:int * j:int -&gt; int<br><br>Full name: Dynamic_prog.matrixproduct_rec</div>
 <div class="tip" id="fsd31">val n : int</div>
-<div class="tip" id="fsd32">val xs : seq&lt;&#39;a&gt;</div>
-<div class="tip" id="fsd33">val ys : seq&lt;&#39;b&gt;</div>
-<div class="tip" id="fsd34">val y : &#39;b</div>
-<div class="tip" id="fsd35">val memoize : f:(&#39;a -&gt; &#39;b) -&gt; System.Collections.Generic.Dictionary&lt;&#39;a,&#39;b&gt; * (&#39;a -&gt; &#39;b) (requires equality)<br /><br />Full name: Dynamic_prog.memoize</div>
-<div class="tip" id="fsd36">val f : (&#39;a -&gt; &#39;b) (requires equality)</div>
-<div class="tip" id="fsd37">val d : System.Collections.Generic.Dictionary&lt;&#39;a,&#39;b&gt; (requires equality)</div>
+<div class="tip" id="fsd32">val xs : seq&lt;'a&gt;</div>
+<div class="tip" id="fsd33">val ys : seq&lt;'b&gt;</div>
+<div class="tip" id="fsd34">val y : 'b</div>
+<div class="tip" id="fsd35">val memoize : f:('a -&gt; 'b) -&gt; System.Collections.Generic.Dictionary&lt;'a,'b&gt; * ('a -&gt; 'b) (requires equality)<br><br>Full name: Dynamic_prog.memoize</div>
+<div class="tip" id="fsd36">val f : ('a -&gt; 'b) (requires equality)</div>
+<div class="tip" id="fsd37">val d : System.Collections.Generic.Dictionary&lt;'a,'b&gt; (requires equality)</div>
 <div class="tip" id="fsd38">namespace System</div>
 <div class="tip" id="fsd39">namespace System.Collections</div>
 <div class="tip" id="fsd40">namespace System.Collections.Generic</div>
-<div class="tip" id="fsd41">Multiple items<br />type Dictionary&lt;&#39;TKey,&#39;TValue&gt; =<br />&#160;&#160;new : unit -&gt; Dictionary&lt;&#39;TKey, &#39;TValue&gt; + 5 overloads<br />&#160;&#160;member Add : key:&#39;TKey * value:&#39;TValue -&gt; unit<br />&#160;&#160;member Clear : unit -&gt; unit<br />&#160;&#160;member Comparer : IEqualityComparer&lt;&#39;TKey&gt;<br />&#160;&#160;member ContainsKey : key:&#39;TKey -&gt; bool<br />&#160;&#160;member ContainsValue : value:&#39;TValue -&gt; bool<br />&#160;&#160;member Count : int<br />&#160;&#160;member GetEnumerator : unit -&gt; Enumerator&lt;&#39;TKey, &#39;TValue&gt;<br />&#160;&#160;member GetObjectData : info:SerializationInfo * context:StreamingContext -&gt; unit<br />&#160;&#160;member Item : &#39;TKey -&gt; &#39;TValue with get, set<br />&#160;&#160;...<br />&#160;&#160;nested type Enumerator<br />&#160;&#160;nested type KeyCollection<br />&#160;&#160;nested type ValueCollection<br /><br />Full name: System.Collections.Generic.Dictionary&lt;_,_&gt;<br /><br />--------------------<br />System.Collections.Generic.Dictionary() : unit<br />System.Collections.Generic.Dictionary(capacity: int) : unit<br />System.Collections.Generic.Dictionary(comparer: System.Collections.Generic.IEqualityComparer&lt;&#39;TKey&gt;) : unit<br />System.Collections.Generic.Dictionary(dictionary: System.Collections.Generic.IDictionary&lt;&#39;TKey,&#39;TValue&gt;) : unit<br />System.Collections.Generic.Dictionary(capacity: int, comparer: System.Collections.Generic.IEqualityComparer&lt;&#39;TKey&gt;) : unit<br />System.Collections.Generic.Dictionary(dictionary: System.Collections.Generic.IDictionary&lt;&#39;TKey,&#39;TValue&gt;, comparer: System.Collections.Generic.IEqualityComparer&lt;&#39;TKey&gt;) : unit</div>
-<div class="tip" id="fsd42">val n : &#39;a (requires equality)</div>
-<div class="tip" id="fsd43">System.Collections.Generic.Dictionary.ContainsKey(key: &#39;a) : bool</div>
-<div class="tip" id="fsd44">System.Collections.Generic.Dictionary.Add(key: &#39;a, value: &#39;b) : unit</div>
-<div class="tip" id="fsd45">val rodcutting_dp : n:int -&gt; int<br /><br />Full name: Dynamic_prog.rodcutting_dp</div>
+<div class="tip" id="fsd41">Multiple items<br>type Dictionary&lt;'TKey,'TValue&gt; =<br>&nbsp;&nbsp;new : unit -&gt; Dictionary&lt;'TKey, 'TValue&gt; + 5 overloads<br>&nbsp;&nbsp;member Add : key:'TKey * value:'TValue -&gt; unit<br>&nbsp;&nbsp;member Clear : unit -&gt; unit<br>&nbsp;&nbsp;member Comparer : IEqualityComparer&lt;'TKey&gt;<br>&nbsp;&nbsp;member ContainsKey : key:'TKey -&gt; bool<br>&nbsp;&nbsp;member ContainsValue : value:'TValue -&gt; bool<br>&nbsp;&nbsp;member Count : int<br>&nbsp;&nbsp;member GetEnumerator : unit -&gt; Enumerator&lt;'TKey, 'TValue&gt;<br>&nbsp;&nbsp;member GetObjectData : info:SerializationInfo * context:StreamingContext -&gt; unit<br>&nbsp;&nbsp;member Item : 'TKey -&gt; 'TValue with get, set<br>&nbsp;&nbsp;...<br>&nbsp;&nbsp;nested type Enumerator<br>&nbsp;&nbsp;nested type KeyCollection<br>&nbsp;&nbsp;nested type ValueCollection<br><br>Full name: System.Collections.Generic.Dictionary&lt;_,_&gt;<br><br>--------------------<br>System.Collections.Generic.Dictionary() : unit<br>System.Collections.Generic.Dictionary(capacity: int) : unit<br>System.Collections.Generic.Dictionary(comparer: System.Collections.Generic.IEqualityComparer&lt;'TKey&gt;) : unit<br>System.Collections.Generic.Dictionary(dictionary: System.Collections.Generic.IDictionary&lt;'TKey,'TValue&gt;) : unit<br>System.Collections.Generic.Dictionary(capacity: int, comparer: System.Collections.Generic.IEqualityComparer&lt;'TKey&gt;) : unit<br>System.Collections.Generic.Dictionary(dictionary: System.Collections.Generic.IDictionary&lt;'TKey,'TValue&gt;, comparer: System.Collections.Generic.IEqualityComparer&lt;'TKey&gt;) : unit</div>
+<div class="tip" id="fsd42">val n : 'a (requires equality)</div>
+<div class="tip" id="fsd43">System.Collections.Generic.Dictionary.ContainsKey(key: 'a) : bool</div>
+<div class="tip" id="fsd44">System.Collections.Generic.Dictionary.Add(key: 'a, value: 'b) : unit</div>
+<div class="tip" id="fsd45">val rodcutting_dp : n:int -&gt; int<br><br>Full name: Dynamic_prog.rodcutting_dp</div>
 <div class="tip" id="fsd46">val rodcutting_rec : (int -&gt; int)</div>
-<div class="tip" id="fsd47">val price : int []<br /><br />Full name: Dynamic_prog.price</div>
-<div class="tip" id="fsd48">val max : source:seq&lt;&#39;T&gt; -&gt; &#39;T (requires comparison)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.max</div>
+<div class="tip" id="fsd47">val price : int []<br><br>Full name: Dynamic_prog.price</div>
+<div class="tip" id="fsd48">val max : source:seq&lt;'T&gt; -&gt; 'T (requires comparison)<br><br>Full name: Microsoft.FSharp.Collections.Seq.max</div>
 <div class="tip" id="fsd49">val mf : (int -&gt; int)</div>
-<div class="tip" id="fsd50">val rodcutting_bu : n:int -&gt; int<br /><br />Full name: Dynamic_prog.rodcutting_bu</div>
+<div class="tip" id="fsd50">val rodcutting_bu : n:int -&gt; int<br><br>Full name: Dynamic_prog.rodcutting_bu</div>
 <div class="tip" id="fsd51">val r : int []</div>
-<div class="tip" id="fsd52">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fsd53">val init : count:int -&gt; initializer:(int -&gt; &#39;T) -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Array.init</div>
-<div class="tip" id="fsd54">val rodcutting_rec : _arg1:int -&gt; int<br /><br />Full name: Dynamic_prog.rodcutting_rec</div>
+<div class="tip" id="fsd52">module Array<br><br>from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fsd53">val init : count:int -&gt; initializer:(int -&gt; 'T) -&gt; 'T []<br><br>Full name: Microsoft.FSharp.Collections.Array.init</div>
+<div class="tip" id="fsd54">val rodcutting_rec : _arg1:int -&gt; int<br><br>Full name: Dynamic_prog.rodcutting_rec</div>
 
 </div>
 
+</body></html>
 
     </article>
   </div>

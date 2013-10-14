@@ -10,7 +10,7 @@
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
@@ -61,70 +61,27 @@
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/notes">Notes</a></li>  
-          <li class="divider"></li>
+          <li><a href="/notes">Notes</a></li>
+           <li><a href="/about">About</a></li>
+           <li class="divider"></li>
         </ul>
       </div>
       </div>
       <hr>
     <div class="centered">
-      
-  <div class='post'>
-    <h1></h1>
-    <article>
-      var currentTip = null;
-var currentTipElement = null;
+      <p>Welcome,</p>
 
-function hideTip(evt, name, unique)
-{
-  var el = document.getElementById(name);
-  el.style.display = "none";
-  currentTip = null;
-}
 
-function findPos(obj)
-{
-  var curleft = 0;
-  var curtop = obj.offsetHeight;
-  while (obj)
-  {
-    curleft += obj.offsetLeft;
-    curtop += obj.offsetTop;
-    obj = obj.offsetParent;
-  };
-  return [curleft, curtop];
-}
 
-function hideUsingEsc(e)
-{
-  if (!e) { e = event; }
-  hideTip(e, currentTipElement, currentTip);
-}
+<p>This is a repository of explorations related to <em>computation</em>, <em>machine learning</em>, and all that..</p>
 
-function showTip(evt, name, unique, owner)
-{
-  document.onkeydown = hideUsingEsc;
-  if (currentTip == unique) return;
-  currentTip = unique;
-  currentTipElement = name;
+<P>It is a purposefully small and focused window on such subjects for which I found time, tools, and envy to write about</p>
 
-  var pos = findPos(owner ? owner : (evt.srcElement ? evt.srcElement : evt.target));
-  var posx = pos[0];
-  var posy = pos[1];
 
-  var el = document.getElementById(name);
-  var parent = (document.documentElement == null) ? document.body : document.documentElement;
-  el.style.position = "absolute";
-  el.style.left = posx + "px";
-  el.style.top = posy + "px";
-  el.style.display = "block";
-}
-    </article>
-  </div>
+
+Nicolas 
 
     </div>
     </div>
   </body>
 </html>
-
