@@ -13,7 +13,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/blog/feed.xml" />
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/stylesheet/formatting.css" />
+    <link type="text/css" rel="stylesheet" href="/stylesheet/tooltips.css" />
     <link type="text/css" rel="stylesheet" href="/stylesheet/style.css" />
     <link type="text/css" rel="stylesheet" href="/stylesheet/jsxgraph.css" />
 
@@ -73,8 +73,7 @@
   <div class='post'>
     <article>
       <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div class="span9" id="main">
+<html><body><div class="span9" id="main">
           <h1>Support Vector Machine [incomplete !]</h1>
 
 <p>Support vector machines are a very popular and powerful way to classify.
@@ -87,8 +86,7 @@ We will examine a bit of theory and look at some example using F# as a solver.</
 <p>Starting from a bit of geometry, we know that the (signed) distance <strong>from</strong> a $N-1$dimensional subspace whose
 normal is $w$  <strong>to</strong> a point z  is given by the normalized scalar product with the vector from the origin to the point.</p>
 
-<notextile>
-<div id="jsxline" class="jxgbox" style="width:400px; height:400px;"></div>
+<notextile><div id="jsxline" class="jxgbox" style="width:400px; height:400px;"></div>
 <script type="text/javascript">
 var brd, k;
 JXG.Options.text.useMathJax = true;
@@ -105,9 +103,7 @@ var t2 = b.create('text',[function(){return somepoint.X()-1;},function(){return 
                      JXG.Math.innerProduct([wx.X(),wx.Y()],[somepoint.X(),somepoint.Y()],2)/
                      Math.sqrt(JXG.Math.innerProduct([wx.X(),wx.Y()], [wx.X(),wx.Y()],2))
                    ).toFixed(3) + "\\]";}]);
-</script>
-
-<h3>Hyperplan</h3>
+</script><h3>Hyperplan</h3>
 
 <p>A hyperplan has the important property of separating a space in 2 regions.
 Furthermore if we choose a particular normal $w$, we can orientate the space in a positive an a negative region.</p>
@@ -117,9 +113,7 @@ $$a + \{ x \ |\   w \cdot x = 0 \} = \{ x \ |\ w\cdot (x-a) = 0 \} = \{ x \ |\ w
 
 <p>The distance from a point $z$ to a general hyperplan $H=\{ x \ |\ w \cdot x + b = 0 \} = a + \{ x \ |\   w \cdot x = 0 \}   $ is then 
 $$d(H,z) = d(H-a, z-a) = \frac{w \cdot (z-a)} {|w|} = \frac{w \cdot z + b_w} {|w|}  $$ 
-</p></notextile>
-
-<ul>
+</p></notextile><ul>
 <li>The constant $b_w$ is dependant on both the hyperplan that we want to represent and the specific $w$ chosen for H</li>
 <li>Note that scaling $w$ (along with $b_w$) does not change the hyperplane $H$, nor a fortiori the physical distance to it,
 but will change the value taken by $w \cdot x + b_w$. the distance is akin to a physical quantity, wehereas the numerator is
@@ -129,7 +123,6 @@ just a quantity in a local coordinate system</li>
 and increasing it indeed shifts $H$ toward negative $w$.</li>
 <li>Lastly, reducing the modulus of $b$ shifts $H$ toward the origin, irrespectively of $w$'s orientation.</li>
 </ul>
-
 <h2>Separation of points</h2>
 
 <p>As we are looking to extract a separating plan H automatically, we need to come up with a measure of how well a plane separates points</p>
@@ -155,7 +148,6 @@ select the outermost points. this does not seem like a sensible choice if we are
 whatever it is, it must happens at the boundary between the two.</li>
 <li>If the two sets are not separated by H, we can not distinguish an orientation of $w$ toward the positive class anymore.</li>
 </ul>
-
 <p>To fix the last two remarks, we could still define a sensible measure of separation by taking the maximum over all parameterization $w$.
 The separated case would always yield a positive quantity. And there would be some continuity between the unseparable and the separable case.
 We end up with the following measure of separation : 
@@ -227,9 +219,7 @@ var li2 = b.create('line',[step,origin], {straightFirst:false, straightLast:fals
 var li3 = b.create('line',[origin,one],  {straightFirst:false, straightLast:true, strokeWidth:2});
 var li4 = b.create('line',[step,one],    {straightFirst:true, straightLast:false, strokeWidth:2, strokeColor:'green'});
 var li4 = b.create('line',[one,[2,0]],   {straightFirst:false, straightLast:true, strokeWidth:2, strokeColor:'green'});
-</script>
-
-<p>But $(1-x)^{+}\leq \beta  \Leftrightarrow  \begin{cases}  \beta \geq 0 \\  x &gt; 1 - \beta   \end{cases}  $
+</script><p>But $(1-x)^{+}\leq \beta  \Leftrightarrow  \begin{cases}  \beta \geq 0 \\  x &gt; 1 - \beta   \end{cases}  $
 So that we can solve 
 $$
 \begin{align} 
@@ -294,7 +284,6 @@ which means $x_i$ is <strong>on</strong> the margins</li>
 \end{cases} $$
 so that $x_i$ plays <strong>no</strong> role in the problem, its constraint is loose, it is outside the margin</li>
 </ul>
-
 <p>The optimality conditions allow us to write the dual problem as</p>
 
 <p>$$
@@ -386,9 +375,7 @@ $\alpha_2' = \alpha_2 - \frac{1}{2} \frac{\nabla g}{\nabla^2 g}</p>
 <div class="tip" id="fs10">member SupportVector.Y : float<br><br>Full name: Svm.SupportVector.Y</div>
 <div class="tip" id="fs11">member SupportVector.Alpha : float<br><br>Full name: Svm.SupportVector.Alpha</div>
 
-</div>
-
-</body></html>
+</div></body></html>
 
     </article>
   </div>
