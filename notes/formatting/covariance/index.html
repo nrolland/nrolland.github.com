@@ -166,6 +166,34 @@ A \longrightarrow b &amp;= b^A <br>\end{align}$$</p>
 <p>*: $x \in E$ specifies a projection $p_x : F^E \to F$ which we can apply to the graph
  $gf\in F^E$ to get the values $f(x)$. conversely given the projection operator $p : E \to F^E \to F$, we define  $gf = \bigcap_{x\in E} p_x^{-1}(f(x))$</p>
 
+<h2>The algebraic way</h2>
+
+<p>as if another connection was necessary, one can use a very general (read:useful) set property to find the same result</p>
+
+<p>$$\begin{align}
+&amp;a_j &amp;&amp;\in &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall j,k     \\
+\iff  \bigcup &amp;a_j &amp;&amp;\subset &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall k      \\
+\iff  \bigcup &amp;a_j &amp;&amp;\subset \bigcap &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;<br>\end{align}$$</p>
+
+<p>so that if we start from the first line, and add more constraint that is should be true for all j, then for all k, we obviously have a more specific constraint, and we can see that the ordering matches the previous examples where</p>
+
+<p>$$\begin{align}
+a_k = \mbox{apple} &amp;&lt;: A = \bigcup a_k  = \mbox{ the fruits}     \\
+\bigcap B_k = \mbox{orange juice} &amp;&lt;: B_1 = \mbox{ the juices and } B_2 = \mbox{ the things made of oranges }
+\end{align}$$</p>
+
+<p>This writing allows us ro see that this is not a total ordering:  from the first line, if we apply $\forall k $ on one hand and $\forall j$ on the other, we can't say that one is more specific than another. only that they are both more specific than when we dont quantify, and less specific than if we quantify over everything.</p>
+
+<p>PS: A classic illustration how this property is useful : prove that the vector span of a set $S$ (defined as as the intersection of all vector spaces containing $S$) is equal to all the linear combination of the elements of $S$.</p>
+
+<p>just apply the property to the fact that : $$ \sum_j \alpha_j s_j \in V_k $$</p>
+
+<p>which is true $\forall j,\alpha_j \in R, s_j \in S, V_k \supset S $ so that</p>
+
+<p>$$ \mbox{linear combinations of } S = \bigcup \sum_j \alpha_j s_j \subset \bigcap_{V_k \supset S} V_k = \mbox{ span S} $$</p>
+
+<p>the converse being trivial as the linear combinations of $S$ is a vector space containing $S$</p>
+
           
 </div></body></html>
 
