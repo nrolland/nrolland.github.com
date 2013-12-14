@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> xQuant  First-level heading       </title>
+    <title> xQuant  Covariance and all that       </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="These are various notes of computer science subjects. They sometime have accompanying F# implementation They are authored in a litterate programming style and each document is a valid.">
     <meta name="author" content="Nicolas Rolland">
@@ -80,7 +80,7 @@
   <div class="container">
       <div class="navbar">
         <div class="navbar-inner">
-        <a class="brand" href="#">First-level heading  </a>
+        <a class="brand" href="#">Covariance and all that  </a>
           <hr>
         <ul class="nav">
           <li><a href="/">Home</a></li>
@@ -97,18 +97,67 @@
     <article>
       <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div class="span9" id="main">
-          <h1>First-level heading</h1>
+          <h1>Covariance and all that</h1>
 
-<p>Some more documentation using <code>Markdown</code>.</p>
-<pre class="fssnip">
-<span class="l">1: </span><span class="k">let</span> <span onmouseout="hideTip(event, 'fsd1', 1)" onmouseover="showTip(event, 'fsd1', 1)" class="i">helloWorld</span>() <span class="o">=</span> <span onmouseout="hideTip(event, 'fsd2', 2)" onmouseover="showTip(event, 'fsd2', 2)" class="i">printfn</span> <span class="s">"</span><span class="s">Hello</span><span class="s"> </span><span class="s">world</span><span class="s">!</span><span class="s">"</span></pre>
-<h2>Second-level heading</h2>
+<p>I was confused a few times by what 'covariance' and  'contravariance'.
+I must not be the only one as there is even a <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">14 pages explanation</a> on wikipedia for it,
+and Bart de Smet has <a href="http://bartdesmet.net/blogs/bart/archive/2009/04/13/c-4-0-feature-focus-part-4-generic-co-and-contra-variance-for-delegate-and-interface-types.aspx">one as well</a>,
+with pretty apple pictures, that I go back to every 3 years or so.</p>
 
-<p>With some more documentation</p>
+<p>But they are just the equivalent for types of what 'increasing' and 'decreasing' functions are for ordinary values, 
+which can be seen from 3 different angles.</p>
 
-          <div class="tip" id="fsd1">val helloWorld : unit -&gt; unit<br><br>Full name: Test.helloWorld</div>
-<div class="tip" id="fsd2">val printfn : format:Printf.TextWriterFormat&lt;'T&gt; -&gt; 'T<br><br>Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<h2>The apple way</h2>
 
+<p>say we define &lt;: to be the inheritance and</p>
+
+<p>$$\begin{align}
+a = \mbox{apple} &amp;&lt;: A = \mbox{ the fruits}     \\
+b = \mbox{orange juice} &amp;&lt;: B = \mbox{ the juices}
+\end{align}$$</p>
+
+<p>then a function which conforms to</p>
+
+<p>$a \longrightarrow B$  : which for all <strong>apple</strong> gives back a Juice (and for other fruits does what it wants )</p>
+
+<p>is more general than a function</p>
+
+<p>$A \longrightarrow B$  : which for <strong>all fruits</strong> gives back a Juice</p>
+
+<p>which itself is more general than a function</p>
+
+<p>$A \longrightarrow b$ : which for all fruits gives back an <strong>orange</strong> juice (and not just any Juice)</p>
+
+<h2>The definition way</h2>
+
+<p>We can also see this ordering is correct by writing down what it means for a function f to belong to $A\to B$
+$$f \in A\longrightarrow B \iff \forall x \in D(f)\cap A, f(x) \in B$$</p>
+
+<p>We then clearly see that it is</p>
+
+<ul>
+<li>
+<strong>increasing in $B$</strong> as trivially $B \subset B' \implies \left(f(x)\in B\implies f(x)\in B'\right) \implies  f \in A\longrightarrow B' $</li>
+<li>
+<strong>decreasing in $A$</strong> for if a property is true on $A$ it remains so on $A' \subset A \implies  f \in A'\longrightarrow B$</li>
+</ul>
+<h2>The relation way</h2>
+
+<p>A function $f:x \in E \to f(x) \in F \mbox{    .}$     can be seen as an element of $F^E$ : we identify it with its graph*.<br>If we adopt this view, a type of the form $f:A\in E \to B \in F\mbox{    .}$ is a <strong>subset</strong> of $F^E$  and in particular :</p>
+
+<p>$$\begin{align}
+a \longrightarrow B &amp;= B^a     \\
+A \longrightarrow B  &amp;= B^A     \\
+A \longrightarrow b &amp;= b^A <br>\end{align}$$</p>
+
+<p>And we can check that indeed</p>
+
+<p>$$b^A = \bigcap_{x \in A} p_{x}^{-1}(b) \subset \bigcap_{x \in A} p_{x}^{-1}(B) = B^A \subset \bigcap_{x = a} p_{x}^{-1}(B) = B^a$$</p>
+
+<p>*: $x \in E$ specifies a projection $p_x : F^E \to F$ which we can apply to the graph
+ $gf\in F^E$ to get the values $f(x)$. conversely given the projection operator $p : E \to F^E \to F$, we define  $gf = \bigcap_{x\in E} p_x^{-1}(f(x))$</p>
+
+          
 </div></body></html>
 
     </article>

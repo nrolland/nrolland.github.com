@@ -35,9 +35,18 @@
           for(i = 0; i < all.length; i += 1) {
               all[i].SourceElement().parentNode.className += ' has-jax';
           }
-      });
+      })
       </script>
-     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+      setTimeout(function() {
+      if(typeof(MathJax)=='undefined') return;
+      var n = document.getElementsByTagName("script")[0];
+      n.parentNode.insertBefore(document.createElement("script"), n).src = "/javascript/MathJax.js";
+      }, 5000);
+    </script>
+     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></Script>
+     <script type="text/javascript" src="/javascript/MathJax.js"></Script>
+     
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -84,6 +93,7 @@
       <hr>
     <div class="centered">
        <div class='post'>
+    <h3><a href="./formatting/covariance/index.html">covariance</a></h1>
     <h3><a href="./formatting/huffman/index.html">Huffman coding</a></h1>
     <h3><a href="./formatting/leftistheap/index.html">leftist heap</a></h1>
     <h3><a href="./formatting/hashing/index.html">hashing</a></h1>

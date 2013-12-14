@@ -1,96 +1,67 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono|PT+Sans:400);
 /* identifier */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\000034}}
 span.i {
-  color: #eaeaea;
-}
+  color: #eaeaea; }
 
 /* string */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\000036}}
 span.s, span.str {
-  color: #d4943c;
-}
+  color: #d4943c; }
 
 /* keywords */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\000038}}
 span.k, span.kwrd {
-  color: #67aded;
-}
+  color: #67aded; }
 
 /* comment */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000310}}
 span.c, span.rem {
-  color: #96C71D;
-}
+  color: #96C71D; }
 
 /* operators */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000312}}
 span.o, span.op {
-  color: #af75c1;
-}
+  color: #af75c1; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000313}}
 span.html {
-  color: #af75c1;
-}
+  color: #af75c1; }
 
 /* numbers */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000315}}
 span.n {
-  color: #96C71D;
-}
+  color: #96C71D; }
 
 /* line number */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000317}}
 span.l {
-  color: #80b0b0;
-}
+  color: #80b0b0; }
 
 /* inactive code */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000320}}
 span.inactive {
-  color: #808080;
-}
+  color: #808080; }
 
 /* preprocessor */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000322}}
 span.prep, span.preproc {
-  color: #af75c1;
-}
+  color: #af75c1; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000323}}
 span.attr, span.asp {
-  color: #af75c1;
-}
+  color: #af75c1; }
 
 /* fsi output */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000325}}
 span.fsi {
   font-style: italic;
-  color: #888888;
-}
+  color: #888888; }
 
 /* omitted */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000328}}
 span.omitted {
   background: #3c4e52;
   border-radius: 5px;
   color: #808080;
-  padding: 0px 0px 1px 0px;
-}
+  padding: 0px 0px 1px 0px; }
 
 /* tool tip */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000335}}
 div.tip {
   background: #475b5f;
   border-radius: 4px;
   font: 400 10pt 'PT Sans', arial, sans-serif;
   padding: 6px 8px 6px 8px;
   display: none;
-  color: #eaeaea;
-}
+  color: #eaeaea; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000344}}
 code {
   font: 10pt 'Droid Sans Mono',consolas,monospace;
   border: 1px solid #e8e8e8;
@@ -98,27 +69,19 @@ code {
   border-radius: 2px;
   border-radius: 3px;
   padding: 1px 3px 1px 3px;
-  color: #c31515;
-}
+  color: #c31515; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000353}}
 table.pre td {
-  padding: 0px;
-}
+  padding: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000356}}
 table.pre td.lines {
-  width: 20px;
-}
+  width: 20px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000359}}
 table.pre pre {
   padding: 0px;
   margin: 0px;
-  border-radius: 0px;
-}
+  border-radius: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000364}}
 table.pre, pre.fssnip, pre {
   font: 75% 'Droid Sans Mono',consolas,monospace;
   width: 90%;
@@ -126,19 +89,14 @@ table.pre, pre.fssnip, pre {
   background-color: #111415;
   padding: 10px;
   border-radius: 5px;
-  color: #eaeaea;
-}
+  color: #eaeaea; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000373}}
 table.pre {
-  font-size: 100%;
-}
+  font-size: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/nrolland\/clones\/xquant\/compass\/sass\/tooltips\.scss}line{font-family:\0000376}}
 pre code {
   font: 100% 'Droid Sans Mono',consolas,monospace;
   border-style: none;
   background-color: #111415;
   padding: 0px;
-  color: #eaeaea;
-}
+  color: #eaeaea; }

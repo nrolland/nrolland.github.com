@@ -35,9 +35,18 @@
           for(i = 0; i < all.length; i += 1) {
               all[i].SourceElement().parentNode.className += ' has-jax';
           }
-      });
+      })
       </script>
-     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+      setTimeout(function() {
+      if(typeof(MathJax)=='undefined') return;
+      var n = document.getElementsByTagName("script")[0];
+      n.parentNode.insertBefore(document.createElement("script"), n).src = "/javascript/MathJax.js";
+      }, 5000);
+    </script>
+     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></Script>
+     <script type="text/javascript" src="/javascript/MathJax.js"></Script>
+     
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -86,7 +95,7 @@
       
   <div class='post'>
     <h1>Heaps</h1>
-    <aside>Posted on : 2013-10-13 11:00:00 +0200</aside>
+    <aside>Posted on : 2013-10-13 10:00:00 +0100</aside>
       <article>
         <p>Commented F# code for the heap data structure, starting with the leftist tree heap, which exploits a clever recursive scheme.</p>
 
