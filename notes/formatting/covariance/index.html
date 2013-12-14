@@ -104,8 +104,16 @@ I must not be the only one as there is even a <a href="https://en.wikipedia.org/
 and Bart de Smet has <a href="http://bartdesmet.net/blogs/bart/archive/2009/04/13/c-4-0-feature-focus-part-4-generic-co-and-contra-variance-for-delegate-and-interface-types.aspx">one as well</a>,
 with pretty apple pictures, that I go back to every 3 years or so.</p>
 
-<p>But they are just the equivalent for types of what 'increasing' and 'decreasing' functions are for ordinary values, 
-which can be seen from 3 different angles.</p>
+<p>But they are just the equivalent for types of what 'increasing' and 'decreasing' functions are for ordinary values, which can be seen from 3 different angles.</p>
+
+<h2>Forget co-contra-variance</h2>
+
+<p>Once you see this, to know if a type can replace another or not, one can just look at its constructor (seen as a function that takes a value and return an element of the said type)</p>
+
+<p>That is, the usual <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a> works just like usual. no more co-contra-variance extra keywords, just good old general principle.</p>
+
+<p>[Of course if you do category theory, then it is another story.
+But as a principle, I never do category theory when programming or drinking]</p>
 
 <h2>The apple way</h2>
 
