@@ -99,22 +99,18 @@
 <html><body><div class="span9" id="main">
           <h1>Covariance and all that</h1>
 
-<p>I was confused a few times by what 'covariance' and  'contravariance'.
-I must not be the only one as there is even a <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">14 pages explanation</a> on wikipedia for it,
-and Bart de Smet has <a href="http://bartdesmet.net/blogs/bart/archive/2009/04/13/c-4-0-feature-focus-part-4-generic-co-and-contra-variance-for-delegate-and-interface-types.aspx">one as well</a>,
-with pretty apple pictures, that I go back to every 3 years or so.</p>
+<p>Not being a category theory practitionner, I was confused a few times by what 'covariance' and  'contravariance'.</p>
 
-<p>But they are just the equivalent for types of what 'increasing' and 'decreasing' functions are for ordinary values, which can be seen from 3 different angles.</p>
+<p>I must not be the only one confused as there is even a <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">14 pages explanation</a> on wikipedia for it, and Bart de Smet has <a href="http://bartdesmet.net/blogs/bart/archive/2009/04/13/c-4-0-feature-focus-part-4-generic-co-and-contra-variance-for-delegate-and-interface-types.aspx">one as well</a>, with pretty apple pictures.</p>
 
-<h2>Forget co-contra-variance</h2>
+<p>I do however understand that you can substitute a <em>more precise</em> type when some <em>more general</em> type is expected, which is how the OO and the <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a> works.</p>
 
-<p>Once you see this, to know if a type can replace another or not, just look at its constructor (a function that takes a value and return an element of the said type).</p>
+<p>And it turns out that's all you need, (if you dont care about category theory as much as <a href="http://tomasp.net/blog/variance-explained.aspx">some do</a>)</p>
 
-<p>Now the usual <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a> works with such constructor, just like usual!
-No more co-contra-variance extra keywords, just good old general principle.</p>
+<p>How is contra/co-variance just like standard type hierarchy which we all know ?
+Here are 3 different points of view [updated : <strong>4 !</strong>]  to remember how, pick your favorite.</p>
 
-<p>[Of course if you do category theory, then it is another story.
-But as a principle, I never do category theory when programming or drinking]</p>
+<p>Once you see get how it works for function, then you know how it works for a type (say Action) as a type is isomorphic to its constructor's argument, (an Action is the same as a function  $ T \to ()$ )</p>
 
 <h2>The apple way</h2>
 
@@ -168,14 +164,15 @@ A \longrightarrow b &amp;= b^A <br>\end{align}$$</p>
 
 <h2>The algebraic way</h2>
 
-<p>as if another connection was necessary, one can use a very general (read:useful) set property to find the same result</p>
+<p>as if another connection was necessary, one can use a very simple (read:useful) set property to find the same result.
+This one is my new favorite.</p>
 
 <p>$$\begin{align}
 &amp;a_j &amp;&amp;\in &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall j,k     \\
 \iff  \bigcup &amp;a_j &amp;&amp;\subset &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall k      \\
 \iff  \bigcup &amp;a_j &amp;&amp;\subset \bigcap &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;<br>\end{align}$$</p>
 
-<p>so that if we start from the first line, and add more constraint that is should be true for all j, then for all k, we obviously have a more specific constraint, and we can see that the ordering matches the previous examples where</p>
+<p>so that if we start from the first line, and add more constraint that the condition should be true for all j, then for all k, we obviously have a more specific constraint, and we can see that the ordering matches the previous examples where</p>
 
 <p>$$\begin{align}
 a_k = \mbox{apple} &amp;&lt;: A = \bigcup a_k  = \mbox{ the fruits}     \\
@@ -184,15 +181,15 @@ a_k = \mbox{apple} &amp;&lt;: A = \bigcup a_k  = \mbox{ the fruits}     \\
 
 <p>This writing allows us ro see that this is not a total ordering:  from the first line, if we apply $\forall k $ on one hand and $\forall j$ on the other, we can't say that one is more specific than another. only that they are both more specific than when we dont quantify, and less specific than if we quantify over everything.</p>
 
-<p>PS: A classic illustration how this property is useful : prove that the vector span of a set $S$ (defined as as the intersection of all vector spaces containing $S$) is equal to all the linear combination of the elements of $S$.</p>
+<p>PS: I can't resist but to put an example of how this property is, unsurprisingly, versatile  : prove that the vector span of a set $S$ (defined as as the intersection of all vector spaces containing $S$) is equal to the set of all the linear combinations of the elements of $S$.</p>
 
-<p>just apply the property to the fact that : $$ \sum_j \alpha_j s_j \in V_k $$</p>
+<p>Well, it just falls naturally from the fact that : $$ \sum_j \alpha_j s_j \in V_k $$</p>
 
-<p>which is true $\forall j,\alpha_j \in R, s_j \in S, V_k \supset S $ so that</p>
+<p>is true $\forall j,\alpha_j \in R, s_j \in S, V_k \mbox{ vector space} \supset S $ so that</p>
 
 <p>$$ \mbox{linear combinations of } S = \bigcup \sum_j \alpha_j s_j \subset \bigcap_{V_k \supset S} V_k = \mbox{ span S} $$</p>
 
-<p>the converse being trivial as the linear combinations of $S$ is a vector space containing $S$</p>
+<p>the opposite inclusion being trivial  the linear combinations of $S$ is a obviously a vector space containing $S$</p>
 
           
 </div></body></html>
