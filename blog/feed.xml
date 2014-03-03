@@ -2,13 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2013-12-14T09:00:00Z</updated>
+  <updated>2014-03-01T09:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2014-03-01:/notes/formatting/qr/</id>
+    <title type="html">Projection, QR, Gram Schmidt</title>
+    <published>2014-03-01T09:00:00Z</published>
+    <updated>2014-03-01T09:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/notes/formatting/qr/"/>
+    <content type="html">&lt;p&gt;A little note about projections using F# to illustrate QR&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2013-12-14:/notes/formatting/covariance/</id>
     <title type="html">Covariance and contravariance compressed redux</title>
@@ -62,8 +71,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-09-16:/posts/2013/09/16/Weekly-links/</id>
     <title type="html">Weekly links for 2013-09-16</title>
-    <published>2013-09-15T23:00:00Z</published>
-    <updated>2013-09-15T23:00:00Z</updated>
+    <published>2013-09-15T22:00:00Z</published>
+    <updated>2013-09-15T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/09/16/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.cs.cornell.edu/courses/cs312/2008sp/&gt; Data Structures and Functional Programming CS312 Home  &lt;/a&gt;&lt;/dt&gt;
@@ -86,8 +95,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-06-05</title>
-    <published>2013-06-04T23:00:00Z</published>
-    <updated>2013-06-04T23:00:00Z</updated>
+    <published>2013-06-04T22:00:00Z</published>
+    <updated>2013-06-04T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/06/05/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&amp;feature=player_embedded&gt; Hamming, "You and Your Research" (June 6, 1995) - YouTube  &lt;/a&gt;&lt;/dt&gt;
@@ -110,8 +119,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-05-05:/posts/2013/05/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-05-05</title>
-    <published>2013-05-04T23:00:00Z</published>
-    <updated>2013-05-04T23:00:00Z</updated>
+    <published>2013-05-04T22:00:00Z</published>
+    <updated>2013-05-04T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/05/05/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.cis.upenn.edu/~plclub/popl08-tutorial/code/coqdoc/CoqIntro.html&gt; Coq for POPL Folk  &lt;/a&gt;&lt;/dt&gt;
@@ -134,8 +143,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-29</title>
-    <published>2013-04-28T23:00:00Z</published>
-    <updated>2013-04-28T23:00:00Z</updated>
+    <published>2013-04-28T22:00:00Z</published>
+    <updated>2013-04-28T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
@@ -158,8 +167,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-04-27:/posts/2013/04/27/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-27</title>
-    <published>2013-04-26T23:00:00Z</published>
-    <updated>2013-04-26T23:00:00Z</updated>
+    <published>2013-04-26T22:00:00Z</published>
+    <updated>2013-04-26T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/04/27/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://lepture.com/work/vundle-vs-pathogen/&gt; Vundle vs Pathogen - Just lepture  &lt;/a&gt;&lt;/dt&gt;
@@ -177,15 +186,6 @@ this as a preparation step to a future illustration of Shannon source coding the
 &lt;dt&gt;&lt;a href=http://seekingalpha.com/article/207638-etfs-what-does-your-swap-cost&gt; ETFs: What Does Your Swap Cost? - Seeking Alpha  &lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;ETFs: What Does Your Swap Cost? Insightful comments on the inner workings of synth etfs&lt;/dd&gt;
 
-</content>
-  </entry>
-  <entry>
-    <id>tag:xquant.net,2012-02-12:/posts/2012/02/help-have-you-seen-my-cats/</id>
-    <title type="html">Help! Have you seen my cats?</title>
-    <published>2012-02-12T09:00:00Z</published>
-    <updated>2012-02-12T09:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2012/02/help-have-you-seen-my-cats/"/>
-    <content type="html">&lt;p&gt;My cats appear to have taken leave of me. Have you seen them?&lt;/p&gt;
 </content>
   </entry>
 </feed>
