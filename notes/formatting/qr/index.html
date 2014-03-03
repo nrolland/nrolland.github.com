@@ -145,15 +145,15 @@ so the decomposition is <strong>unique</strong>
 
 <h3>General operator</h3>
 
-<p>The projectors on <span class="math">\(Range(A\in \mathcal{R}^{m\times n})\)</span> spanning the column of <span class="math">\(A\)</span> along <span class="math">\(B'\in\mathcal{R}^{k*n}\)</span> with <span class="math">\(m+k =n\)</span></p>
+<p>The projectors on <span class="math">\(Range(A\in \mathcal{R}^{m\times n})\)</span> spanning the column of <span class="math">\(A\)</span> along <span class="math">\(B'\in\mathcal{R}^{k*n}\)</span> with <span class="math">\(m+k =n\)</span> are all of the following form :</p>
 
 <p>\[P=A(A^\dagger+BZ')\]</p>
 
-<p>with <span class="math">\(Z\in Ker(A^\perp)\)</span></p>
+<p>with <span class="math">\(Z\in Ker(A^\perp)\)</span> and <span class="math">\(A^\dagger\)</span> the pseudo-inverse.</p>
 
 <p>This defines a split <span class="math">\(E = Range(A) \oplus Ker(A) = Range(P) \oplus Ker(P)\)</span></p>
 
-<p>Minimizing <span class="math">\(\|x-P_Bx\|\)</span> over <span class="math">\(B\)</span> leads to the orthogonal projection and a symetric <span class="math">\(P_B\)</span>.</p>
+<p>Minimizing <span class="math">\(\|x-P_Bx\|\)</span> over <span class="math">\(B\)</span> leads to the orthogonal projection and a symetric <span class="math">\(P_B\)</span>, unifying by way of minimisation both definition.</p>
 
 <h3>Unification</h3>
 
@@ -176,13 +176,13 @@ Range(P)&amp;= Ker(P')^\perp \\
 Range(P) \oplus Ker(P)  &amp;= Range(P) \oplus Range(P)^\perp\\
 \end{align*}\)</span> or <span class="math">\(Range(P)^C = Range(P)^{\perp}\)</span></p>
 
-<p>Effectively uniting both definition of projection, algebraic and geometric</p>
+<p>Effectively also unifying by way of symetry both definition of projection, algebraic and geometric.</p>
 
 <h1>Euclidian distance and QR decomposition</h1>
 
 <h3>QR decomposition</h3>
 
-<p>Given a matrix <span class="math">\(A\)</span> whose columns, we would like to build up a simple orthonormal basis <span class="math">\(Q=[q_1..q_n]\)</span> which spans <span class="math">\(Range(A)\)</span>, and rewrite <span class="math">\(A=QR\)</span> in it. The columns of <span class="math">\(R\)</span> are the coordinates in the basis <span class="math">\(Q\)</span> of the columns of <span class="math">\(A\)</span> as<br><span class="math">\(\begin{align*}
+<p>Given a matrix <span class="math">\(A=[a^1..a^i..a^n]\)</span>, we would like to build up a simple orthonormal basis <span class="math">\(Q=[q_1..q_n]\)</span> which spans <span class="math">\(Range(A)\)</span>, and rewrite <span class="math">\(A=QR\)</span> in it. The columns of <span class="math">\(R\)</span> are the coordinates in the basis <span class="math">\(Q\)</span> of the columns of <span class="math">\(A\)</span> as<br><span class="math">\(\begin{align*}
 [a^1..a^i..a^n] &amp;= Q[r^1..r^i..r_n] = [Qr^1..Qr^i..Qr^n]\\
 Qr^i &amp;= [q^1..q^n]\begin{bmatrix}r^i_1\\..\\r^i_n\end{bmatrix}=\sum_{j=1..n}q^jr^i_j
 \end{align*}\)</span></p>
@@ -213,7 +213,8 @@ our main code works for <span class="math">\(rows \geq columns\)</span></p>
     </pre>
 
 
-<p>We will build up a the columns of Q incrementally, such that <span class="math">\(span(A[1..k]) = span(Q[1..k])\)</span> has the desired properties. For each column of <span class="math">\(A\)</span> considered we have to compute its coordinates, and potentially extend the basis.</p>
+<p>We will build up a the columns of Q incrementally, such that <span class="math">\(Q\)</span> has the desired properties : <span class="math">\(span(A[1..k]) = span(Q[1..k])\)</span> and the columns of <span class="math">\(Q\)</span> are jointly orhtogonal. 
+For each column of <span class="math">\(A\)</span> considered we have to compute its coordinates, and potentially extend the basis.</p>
 
 <pre class="fssnip">
         <span class="k">let</span> <span class="i">res</span> <span class="o">=</span> { <span class="i">Q</span><span class="o">=</span> <span class="i">DenseMatrix</span><span class="o">.</span><span class="i">zeroCreate</span> <span class="i">n</span> <span class="i">n</span>  ; <span class="i">R</span> <span class="o">=</span> <span class="i">DenseMatrix</span><span class="o">.</span><span class="i">zeroCreate</span> <span class="i">n</span> <span class="i">tk</span> }
@@ -243,10 +244,11 @@ our main code works for <span class="math">\(rows \geq columns\)</span></p>
             </pre>
 
 
-<p>the final remainder is orthogonal to every  <span class="math">\(Q[,i], i = 0..k-1\)</span> because they are themselves orthogonal
+<p>the final remainder is orthogonal to <span class="math">\(every\)</span>  <span class="math">\(Q[,i], i = 0..k-1\)</span> because they are themselves orthogonal
 <span class="math">\(\begin{align*}(I-P_j)(I-P_i)&amp;= I -P_i - P_j\\ P_i (I-\sum_{j=0..k-1}P_j)&amp;= P_i\prod_{j=0..k-1}(1-P_j)=0\end{align*}\)</span></p>
 
-<p>More precisely <span class="math">\(P_1\)</span> projector on <span class="math">\(V_1\)</span> along <span class="math">\(W_1\)</span>, <span class="math">\(P_2\)</span> projector on <span class="math">\(V_2\)</span> along <span class="math">\(W2\)</span> then <span class="math">\(P_1P_2 = P_2P_1 = 0 \implies (P_1+P_2)^2 = P_1+P_2\)</span>and <span class="math">\((P_1+P_2) (V_1\cap V_2) =  0, (P1+P2)(V1+V2) = (V1+V2)\)</span></p>
+<p>More precisely <span class="math">\(P_1\)</span> projector on <span class="math">\(V_1\)</span> along <span class="math">\(W_1\)</span>, <span class="math">\(P_2\)</span> projector on <span class="math">\(V_2\)</span> along <span class="math">\(W2\)</span> then <span class="math">\(P_1P_2 = P_2P_1 = 0 \implies (P_1+P_2)^2 = P_1+P_2\)</span>and <span class="math">\((P_1+P_2) (V_1\cap V_2) =  0, (P1+P2)(V1+V2) = (V1+V2)\)</span>
+So that <span class="math">\(P_1+P_2\)</span> is projector on <span class="math">\(V_1+V_2\)</span> along <span class="math">\(V_1 \cap V_2\)</span></p>
 
 <p>We compute the norm of the remainder, and normalize it. <span class="math">\(Q[,i = 0..k-1] + remainder\)</span> will be a orthonormal family, and will constitute the new orthonormal family</p>
 
