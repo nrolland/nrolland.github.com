@@ -244,19 +244,25 @@ For each column of <span class="math">\(A\)</span> considered we have to compute
             </pre>
 
 
-<p>the final remainder is orthogonal to <span class="math">\(every\)</span>  <span class="math">\(Q[,i], i = 0..k-1\)</span> because they are themselves orthogonal
-<span class="math">\(\begin{align*}(I-P_j)(I-P_i)&amp;= I -P_i - P_j\\ P_i (I-\sum_{j=0..k-1}P_j)&amp;= P_i\prod_{j=0..k-1}(1-P_j)=0\end{align*}\)</span></p>
+<p>the final remainder is orthogonal to <strong>every</strong>  <span class="math">\(Q[,i], i = 0..k-1\)</span> because they are themselves orthogonal</p>
 
-<p>More precisely <span class="math">\(P_1\)</span> projector on <span class="math">\(V_1\)</span> along <span class="math">\(W_1\)</span>, <span class="math">\(P_2\)</span> projector on <span class="math">\(V_2\)</span> along <span class="math">\(W2\)</span> then <span class="math">\(P_1P_2 = P_2P_1 = 0 \implies (P_1+P_2)^2 = P_1+P_2\)</span>and <span class="math">\((P_1+P_2) (V_1\cap V_2) =  0, (P1+P2)(V1+V2) = (V1+V2)\)</span>
-So that <span class="math">\(P_1+P_2\)</span> is projector on <span class="math">\(V_1+V_2\)</span> along <span class="math">\(V_1 \cap V_2\)</span></p>
+<p><span class="math">\[  \begin{align*}(I-P_j)(I-P_i)&amp;= I -P_i - P_j\\ P_i (I-\sum_{j=0..k-1}P_j)&amp;= P_i\prod_{j=0..k-1}(1-P_j)=0\end{align*}\]</span></p>
 
-<p>We compute the norm of the remainder, and normalize it. <span class="math">\(Q[,i = 0..k-1] + remainder\)</span> will be a orthonormal family, and will constitute the new orthonormal family</p>
+<blockquote>
+  <p>More precisely <span class="math">\(P_1,P_2\)</span> projector on <span class="math">\(V_1,V_2\)</span> along <span class="math">\(W_1,W_2\)</span>, then <span class="math">\(P_1P_2 = P_2P_1 = 0 \implies (P_1+P_2)^2 = P_1+P_2\)</span>and <span class="math">\((P_1+P_2) (V_1\cap V_2) =  0, (P1+P2)(V1+V2) = (V1+V2)\)</span>
+So that <span class="math">\(P_1+P_2\)</span> is projector on <span class="math">\(W_1+W_2\)</span> along <span class="math">\(W_1 \cap W_2\)</span>, and <span class="math">\(I-P_1-P_2 \in\)</span>. 
+  In our case <span class="math">\(W_1=V_1^\perp\)</span> (we are doing orthogonal projection) and <span class="math">\(I-P_1-P2 \in W_1 \cap W_2 = V_1^\perp \cap V_2^\perp = (V_1 \cup V_2)^\perp\)</span> and orthogonality with <strong>every</strong> column
+  See <a href="http://optics.szfki.kfki.hu/~psinko/alj/menu/04/nummod/Projection_Matrices.pdf">this</a> for more algebra on projector</p>
+</blockquote>
+
+<p>We compute the norm of the remainder</p>
 
 <pre class="fssnip">
              <span class="k">let</span> <span class="i">normnewStuff</span> <span class="o">=</span> <span class="i">current</span><span class="o">.</span><span class="i">Norm</span>(<span class="n">2.</span>)</pre>
 
 
-<p>It the norm of the remainder is zero, then it was dependant on the previous basis, so we skip it.</p>
+<p>If the norm of the remainder is zero, then it was dependant on the previous basis, so we skip it.
+Otherwise we normalize it. <span class="math">\(Q[,i]_{i = 0..k-1} +_{set} \{remainder\}\)</span> is now be a orthonormal family, and will constitute the new basis for the next iteration.</p>
 
 <pre class="fssnip">
              <span class="k">if</span> <span class="i">normnewStuff</span> <span class="o">&gt;</span> <span class="n">0.0</span> <span class="k">then</span> 
