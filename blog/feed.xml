@@ -2,13 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2014-03-01T09:00:00Z</updated>
+  <updated>2014-08-07T09:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2014-08-07:/posts/2014/08/Tokyo2014/</id>
+    <title type="html">こにちわ　東京 - Types, universals and existentials</title>
+    <published>2014-08-07T09:00:00Z</published>
+    <updated>2014-08-07T09:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2014/08/Tokyo2014/"/>
+    <content type="html">&lt;h2 id="slides"&gt;Slides&lt;/h2&gt;
+
+&lt;p&gt;These are the slides of the presentation I gave at the &lt;a href="http://fsmutokyo.connpass.com/event/7247/"&gt;Tokyo F# meetup&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It was really good to see so many interested people and a real
+pleasure to connect with the technical crowd of Tokyo, which I never
+had the occasion before. As usual, Japan was top quality for the people,
+just like the rest !&lt;/p&gt;
+
+&lt;p&gt;Hopefully the event was useful to connect among the functional
+programmers of the industry and beyond.&lt;/p&gt;
+
+&lt;h2 id="why-functional-"&gt;Why functional ?&lt;/h2&gt;
+
+&lt;p&gt;Thinking functionally is useful even for imperative programmer : Just like
+@Bleis -san mentioned during the event, learning F# is an excellent way to
+take your C# to the next level.&lt;/p&gt;
+
+&lt;p&gt;It is also clear across the board that functional programming is a common theme
+among the next generation languages. The good news is that the ideas are
+&lt;strong&gt;universal&lt;/strong&gt; and stand the trial of time, it never gets outdated by a new
+technology : the ideas you learn in one language are often true in another.&lt;/p&gt;
+
+&lt;p&gt;Of course FP can also be appreciated for its own beauty, as it is also a mathematical
+science which deals with universal truth.&lt;/p&gt;
+
+&lt;p&gt;So wether it is for real application or oxygen for the mind, practice your ラジオ体操
+[Taiso, a popular morning exercise] for the mind, and collect the stamps,
+they will stay forever with you and help many around you.&lt;/p&gt;
+
+&lt;iframe src="//www.slideshare.net/slideshow/embed_code/37611598" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" align="center" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""&gt; &lt;/iframe&gt;
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2014-03-01:/notes/formatting/qr/</id>
     <title type="html">Projection, QR, Gram Schmidt</title>
@@ -71,8 +110,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-09-16:/posts/2013/09/16/Weekly-links/</id>
     <title type="html">Weekly links for 2013-09-16</title>
-    <published>2013-09-15T23:00:00Z</published>
-    <updated>2013-09-15T23:00:00Z</updated>
+    <published>2013-09-15T22:00:00Z</published>
+    <updated>2013-09-15T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/09/16/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.cs.cornell.edu/courses/cs312/2008sp/&gt; Data Structures and Functional Programming CS312 Home  &lt;/a&gt;&lt;/dt&gt;
@@ -95,8 +134,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-06-05</title>
-    <published>2013-06-04T23:00:00Z</published>
-    <updated>2013-06-04T23:00:00Z</updated>
+    <published>2013-06-04T22:00:00Z</published>
+    <updated>2013-06-04T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/06/05/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&amp;feature=player_embedded&gt; Hamming, "You and Your Research" (June 6, 1995) - YouTube  &lt;/a&gt;&lt;/dt&gt;
@@ -119,8 +158,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-05-05:/posts/2013/05/05/Weekly-links/</id>
     <title type="html">Weekly links for 2013-05-05</title>
-    <published>2013-05-04T23:00:00Z</published>
-    <updated>2013-05-04T23:00:00Z</updated>
+    <published>2013-05-04T22:00:00Z</published>
+    <updated>2013-05-04T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/05/05/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://www.cis.upenn.edu/~plclub/popl08-tutorial/code/coqdoc/CoqIntro.html&gt; Coq for POPL Folk  &lt;/a&gt;&lt;/dt&gt;
@@ -143,8 +182,8 @@ this as a preparation step to a future illustration of Shannon source coding the
   <entry>
     <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
     <title type="html">Weekly links for 2013-04-29</title>
-    <published>2013-04-28T23:00:00Z</published>
-    <updated>2013-04-28T23:00:00Z</updated>
+    <published>2013-04-28T22:00:00Z</published>
+    <updated>2013-04-28T22:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
     <content type="html">
 &lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
@@ -161,30 +200,6 @@ this as a preparation step to a future illustration of Shannon source coding the
 
 &lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/~rs/AlgsDS07/&gt; Algorithms and Data Structures  &lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;Robert Sedgewick and Kevin Wayne&lt;/dd&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:xquant.net,2013-04-27:/posts/2013/04/27/Weekly-links/</id>
-    <title type="html">Weekly links for 2013-04-27</title>
-    <published>2013-04-26T23:00:00Z</published>
-    <updated>2013-04-26T23:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/04/27/Weekly-links/"/>
-    <content type="html">
-&lt;dt&gt;&lt;a href=http://lepture.com/work/vundle-vs-pathogen/&gt; Vundle vs Pathogen - Just lepture  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Most people just want an answer. Yes, vundle is better&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=https://github.com/zaiste/vimified&gt; zaiste/vimified  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;"Kick-ass Vim configuration framework, built on top of awesome Vundle"&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.nanex.net/FlashCrash/OngoingResearch.html&gt; Nanex - Ongoing Research - Market Events and Phenomena.  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Ongoing Research - Market Events and Phenomena   Our business is supplying a real-time data service comprising trade and quote data for all US equity, option, and futures exchanges. We have archived this data since 2004 and have created and used numerous tools to help us sift through the enormous dataset: approximately 4 trillion quotes and trades as of July 2011. May 6th, had approximately 7.6 billion trade, quote, and depth records.&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.geekdesk.com/default.asp?contentID=628&gt; GeekDeskÂ® Adjustable Height Desks - Why GeekDesk  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Give your back a rest, and your body some variety, with our GeekDeskÂ® electric quick-adjustable desk&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://seekingalpha.com/article/207638-etfs-what-does-your-swap-cost&gt; ETFs: What Does Your Swap Cost? - Seeking Alpha  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;ETFs: What Does Your Swap Cost? Insightful comments on the inner workings of synth etfs&lt;/dd&gt;
 
 </content>
   </entry>
