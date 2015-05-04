@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2014-08-07T09:00:00Z</updated>
+  <updated>2015-05-03T22:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
@@ -10,8 +10,32 @@
     <uri>http://xquant.net/</uri>
   </author>
   <entry>
+    <id>tag:xquant.net,2015-05-04:/posts/2015/05/04/Weekly-links/</id>
+    <title type="html">Weekly links for 2015-05-04</title>
+    <published>2015-05-03T22:00:00Z</published>
+    <updated>2015-05-03T22:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2015/05/04/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://www.stat.cmu.edu/~cshalizi/uADA/13/&gt; 36-402, Undergraduate Advanced Data Analysis (2013)  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;The goal of this class is to train you in using statistical models to analyze data — as data summaries, as predictive instruments, and as tools for scientific inference. We will build on the theory and applications of the linear model, introduced in 36-401, extending it to more general functional forms, and more general kinds of data, emphasizing the computation-intensive methods introduced since the 1980s. After taking the class, when you're faced with a new data-analysis problem, you should be able to (1) select appropriate methods, (2) use statistical software to implement them, (3) critically evaluate the resulting statistical models, and (4) communicate the results of their analyses to collaborators and to non-statisticians.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://www.gitignore.io/&gt; gitignore.io  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Create .gitignore files for your project&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.firepad.io/#1&gt; Firepad - An open source collaborative code and text editor  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Real-time collaboration with no server code.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://www.haskell.org/haskellwiki/Cookbook&gt; Cookbook - HaskellWiki  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Haskell Cookbook&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://roscidus.com/blog/blog/2014/06/06/python-to-ocaml-retrospective/&gt; Python to OCaml: retrospective - Thomas Leonard's blog  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;/dd&gt;
+
+</content>
+  </entry>
+  <entry>
     <id>tag:xquant.net,2014-08-07:/posts/2014/08/Tokyo2014/</id>
-    <title type="html">こんにちわ　東京 - Types, universals and existentials</title>
+    <title type="html">こにちわ　東京 - Types, universals and existentials</title>
     <published>2014-08-07T09:00:00Z</published>
     <updated>2014-08-07T09:00:00Z</updated>
     <link rel="alternate" href="http://xquant.net/posts/2014/08/Tokyo2014/"/>
@@ -176,30 +200,6 @@ this as a preparation step to a future illustration of Shannon source coding the
 
 &lt;dt&gt;&lt;a href=http://www.sketchometry.com/&gt; Sketchometry  &lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;geometry by sketches : intuitive mathematics software for tablets, desktop computers, and whiteboards.&lt;/dd&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:xquant.net,2013-04-29:/posts/2013/04/29/Weekly-links/</id>
-    <title type="html">Weekly links for 2013-04-29</title>
-    <published>2013-04-28T22:00:00Z</published>
-    <updated>2013-04-28T22:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/04/29/Weekly-links/"/>
-    <content type="html">
-&lt;dt&gt;&lt;a href=http://twitter.github.com/effectivescala/&gt; Effective Scala  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Scala is one of the main application programming languages used at Twitter. Much of our infrastructure is written in Scala and we have several large libraries supporting our use. While highly effective, Scala is also a large language, and our experiences have taught us to practice great care in its application.&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.submodularity.org/&gt; submodularity.org: Tutorials, References, Activities and Tools for Submodular Optimization  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Similarly to convexity, submodularity allows one to efficiently find provably (near-)optimal solutions&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.cs.rpi.edu/~cutler/classes/advancedgraphics/F05/lectures/&gt; CSCI-6962 Advanced Computer Graphics  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;CSCI-6962 Advanced Computer Graphics&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.cs.yale.edu/homes/el327/datamining2012a.html&gt; Edo Liberty's homepage  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;It turns out the a rather small set of tools gives us many and wonderful abilities. Most of these are randomized in nature&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/~rs/AlgsDS07/&gt; Algorithms and Data Structures  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Robert Sedgewick and Kevin Wayne&lt;/dd&gt;
 
 </content>
   </entry>

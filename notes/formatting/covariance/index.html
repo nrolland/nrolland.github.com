@@ -111,86 +111,88 @@
 <p>How is contra/co-variance just like standard type hierarchy which we all know ?
 Here are 3 different points of view [updated : <strong>4 !</strong>]  to remember how, pick your favorite.</p>
 
-<p>Once you see get how it works for function, then you know how it works for a type (say <code>Action&lt;'T&gt;</code>) as a type is isomorphic to its constructor's argument, (an <code>Action&lt;'T&gt;</code> is the same as a function  $ T \to ()$ )</p>
+<p>Once you see get how it works for function, then you know how it works for a type (say <code>Action&lt;'T&gt;</code>) as a type is isomorphic to its constructor's argument, (an <code>Action&lt;'T&gt;</code> is the same as a function  <span class="math">\(T \to ()\)</span> )</p>
 
 <h2>The apple way</h2>
 
 <p>say we define &lt;: to be the inheritance and</p>
 
-<p>$$\begin{align}
+<p><span class="math">\(\)</span>\begin{align}
 a = \mbox{apple} &amp;&lt;: A = \mbox{ the fruits}     \\
 b = \mbox{orange juice} &amp;&lt;: B = \mbox{ the juices}
-\end{align}$$</p>
+\end{align}<span class="math">\(\)</span></p>
 
 <p>then a function which conforms to</p>
 
-<p>$a \longrightarrow B$  : which for all <strong>apple</strong> gives back a Juice (and for other fruits does what it wants )</p>
+<p><span class="math">\(a \longrightarrow B\)</span>  : which for all <strong>apple</strong> gives back a Juice (and for other fruits does what it wants )</p>
 
 <p>is more general than a function</p>
 
-<p>$A \longrightarrow B$  : which for <strong>all fruits</strong> gives back a Juice</p>
+<p><span class="math">\(A \longrightarrow B\)</span>  : which for <strong>all fruits</strong> gives back a Juice</p>
 
 <p>which itself is more general than a function</p>
 
-<p>$A \longrightarrow b$ : which for all fruits gives back an <strong>orange</strong> juice (and not just any Juice)</p>
+<p><span class="math">\(A \longrightarrow b\)</span> : which for all fruits gives back an <strong>orange</strong> juice (and not just any Juice)</p>
 
 <h2>The definition way</h2>
 
-<p>We can also see this ordering is correct by writing down what it means for a function f to belong to $A\to B$
-$$f \in A\longrightarrow B \iff \forall x \in D(f)\cap A, f(x) \in B$$</p>
+<p>We can also see this ordering is correct by writing down what it means for a function f to belong to <span class="math">\(A\to B\)</span>
+<span class="math">\(\)</span>f \in A\longrightarrow B \iff \forall x \in D(f)\cap A, f(x) \in B<span class="math">\(\)</span></p>
 
 <p>We then clearly see that it is</p>
 
 <ul>
 <li>
-<strong>increasing in $B$</strong> as trivially $B \subset B' \implies \left(f(x)\in B\implies f(x)\in B'\right) \implies  f \in A\longrightarrow B' $</li>
+<strong>increasing in <span class="math">\(B\)</span></strong> as trivially <span class="math">\(B \subset B' \implies \left(f(x)\in B\implies f(x)\in B'\right) \implies  f \in A\longrightarrow B'\)</span>
+</li>
 <li>
-<strong>decreasing in $A$</strong> for if a property is true on $A$ it remains so on $A' \subset A \implies  f \in A'\longrightarrow B$</li>
+<strong>decreasing in <span class="math">\(A\)</span></strong> for if a property is true on <span class="math">\(A\)</span> it remains so on <span class="math">\(A' \subset A \implies  f \in A'\longrightarrow B\)</span>
+</li>
 </ul>
 <h2>The relation way</h2>
 
-<p>A function $f:x \in E \to f(x) \in F \mbox{    .}$     can be seen as an element of $F^E$ : we identify it with its graph*.<br>If we adopt this view, a type of the form $f:A\in E \to B \in F\mbox{    .}$ is a <strong>subset</strong> of $F^E$  and in particular :</p>
+<p>A function <span class="math">\(f:x \in E \to f(x) \in F \mbox{    .}\)</span>     can be seen as an element of <span class="math">\(F^E\)</span> : we identify it with its graph*.<br>If we adopt this view, a type of the form <span class="math">\(f:A\in E \to B \in F\mbox{    .}\)</span> is a <strong>subset</strong> of <span class="math">\(F^E\)</span>  and in particular :</p>
 
-<p>$$\begin{align}
+<p><span class="math">\(\)</span>\begin{align}
 a \longrightarrow B &amp;= B^a     \\
 A \longrightarrow B  &amp;= B^A     \\
-A \longrightarrow b &amp;= b^A <br>\end{align}$$</p>
+A \longrightarrow b &amp;= b^A <br>\end{align}<span class="math">\(\)</span></p>
 
 <p>And we can check that indeed</p>
 
-<p>$$b^A = \bigcap_{x \in A} p_{x}^{-1}(b) \subset \bigcap_{x \in A} p_{x}^{-1}(B) = B^A \subset \bigcap_{x = a} p_{x}^{-1}(B) = B^a$$</p>
+<p><span class="math">\(\)</span>b^A = \bigcap_{x \in A} p_{x}^{-1}(b) \subset \bigcap_{x \in A} p_{x}^{-1}(B) = B^A \subset \bigcap_{x = a} p_{x}^{-1}(B) = B^a<span class="math">\(\)</span></p>
 
-<p>*: $x \in E$ specifies a projection $p_x : F^E \to F$ which we can apply to the graph
- $gf\in F^E$ to get the values $f(x)$. conversely given the projection operator $p : E \to F^E \to F$, we define  $gf = \bigcap_{x\in E} p_x^{-1}(f(x))$</p>
+<p>*: <span class="math">\(x \in E\)</span> specifies a projection <span class="math">\(p\_x : F^E \to F\)</span> which we can apply to the graph
+ <span class="math">\(gf\in F^E\)</span> to get the values <span class="math">\(f(x)\)</span>. conversely given the projection operator <span class="math">\(p : E \to F^E \to F\)</span>, we define  <span class="math">\(gf = \bigcap\_{x\in E} p\_x^{-1}(f(x))\)</span></p>
 
 <h2>The algebraic way</h2>
 
 <p>as if another connection was necessary, one can use a very simple (read:useful) set property to find the same result.
 This one is my new favorite.</p>
 
-<p>$$\begin{align}
+<p><span class="math">\(\)</span>\begin{align}
 &amp;a_j &amp;&amp;\in &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall j,k     \\
 \iff  \bigcup &amp;a_j &amp;&amp;\subset &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;\forall k      \\
-\iff  \bigcup &amp;a_j &amp;&amp;\subset \bigcap &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;<br>\end{align}$$</p>
+\iff  \bigcup &amp;a_j &amp;&amp;\subset \bigcap &amp;&amp;&amp;B_k &amp;&amp;&amp;&amp;<br>\end{align}<span class="math">\(\)</span></p>
 
 <p>so that if we start from the first line, and add more constraint that the condition should be true for all j, then for all k, we obviously have a more specific constraint, and we can see that the ordering matches the previous examples where</p>
 
-<p>$$\begin{align}
+<p><span class="math">\(\)</span>\begin{align}
 a_k = \mbox{apple} &amp;&lt;: A = \bigcup a_k  = \mbox{ the fruits}     \\
 \bigcap B_k = \mbox{orange juice} &amp;&lt;: B_1 = \mbox{ the juices and } B_2 = \mbox{ the things made of oranges }
-\end{align}$$</p>
+\end{align}<span class="math">\(\)</span></p>
 
-<p>This writing allows us ro see that this is not a total ordering:  from the first line, if we apply $\forall k $ on one hand and $\forall j$ on the other, we can't say that one is more specific than another. only that they are both more specific than when we dont quantify, and less specific than if we quantify over everything.</p>
+<p>This writing allows us ro see that this is not a total ordering:  from the first line, if we apply <span class="math">\(\forall k\)</span> on one hand and <span class="math">\(\forall j\)</span> on the other, we can't say that one is more specific than another. only that they are both more specific than when we dont quantify, and less specific than if we quantify over everything.</p>
 
-<p>PS: I can't resist but to put an example of how this property is, unsurprisingly, versatile  : prove that the vector span of a set $S$ (defined as as the intersection of all vector spaces containing $S$) is equal to the set of all the linear combinations of the elements of $S$.</p>
+<p>PS: I can't resist but to put an example of how this property is, unsurprisingly, versatile  : prove that the vector span of a set <span class="math">\(S\)</span> (defined as as the intersection of all vector spaces containing <span class="math">\(S\)</span>) is equal to the set of all the linear combinations of the elements of <span class="math">\(S\)</span>.</p>
 
-<p>Well, it just falls naturally from the fact that : $$ \sum_j \alpha_j s_j \in V_k $$</p>
+<p>Well, it just falls naturally from the fact that : <span class="math">\(\)</span> \sum_j \alpha_j s_j \in V_k <span class="math">\(\)</span></p>
 
-<p>is true $\forall j,\alpha_j \in R, s_j \in S, V_k \mbox{ vector space} \supset S $ so that</p>
+<p>is true <span class="math">\(\forall j,\alpha\_j \in R, s\_j \in S, V\_k \mbox{ vector space} \supset S\)</span> so that</p>
 
-<p>$$ \mbox{linear combinations of } S = \bigcup \sum_j \alpha_j s_j \subset \bigcap_{V_k \supset S} V_k = \mbox{ span S} $$</p>
+<p><span class="math">\(\)</span> \mbox{linear combinations of } S = \bigcup \sum_j \alpha_j s_j \subset \bigcap_{V_k \supset S} V_k = \mbox{ span S} <span class="math">\(\)</span></p>
 
-<p>the opposite inclusion being trivial  the linear combinations of $S$ is a obviously a vector space containing $S$</p>
+<p>the opposite inclusion being trivial  the linear combinations of <span class="math">\(S\)</span> is a obviously a vector space containing <span class="math">\(S\)</span></p>
 
           
 </div></body></html>

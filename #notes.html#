@@ -1,8 +1,0 @@
- <div class='post'>
-    <h3><%= link_to 'leftist heap', './formatting/leftistheap/index.html' %></h1>
-    <h3><%= link_to 'leftist heap', './formatting/leftistheap/index.html' %></h1>
-    <h3><%= link_to 'hashing', './formatting/hashing/index.html' %></h1>
-    <h3><%= link_to 'continuation passing style', './formatting/cps/index.html' %></h1>
-    <h3><%= link_to 'dynamic programming', './formatting/dynamic_prog/index.html' %></h1>
-    <h3><%= link_to 'support vector machine', './formatting/svm/index.html' %></h1>
-  </div>

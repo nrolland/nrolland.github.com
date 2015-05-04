@@ -286,7 +286,7 @@ and 1 to the right Map.</p>
 <div class="tip" id="fs3">namespace System.Collections.Generic</div>
 <div class="tip" id="fs4">type CodeTree&lt;'T&gt; =<br>&nbsp;&nbsp;| Leaf of 'T * float<br>&nbsp;&nbsp;| Fork of CodeTree&lt;'T&gt; * CodeTree&lt;'T&gt; * 'T list * float<br><br>Full name: Huffman.CodeTree&lt;_&gt;</div>
 <div class="tip" id="fs5">union case CodeTree.Leaf: 'T * float -&gt; CodeTree&lt;'T&gt;</div>
-<div class="tip" id="fs6">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br><br>--------------------<br>type float = Double<br><br>Full name: Microsoft.FSharp.Core.float</div>
+<div class="tip" id="fs6">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float = Double<br><br>Full name: Microsoft.FSharp.Core.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
 <div class="tip" id="fs7">union case CodeTree.Fork: CodeTree&lt;'T&gt; * CodeTree&lt;'T&gt; * 'T list * float -&gt; CodeTree&lt;'T&gt;</div>
 <div class="tip" id="fs8">type 'T list = List&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
 <div class="tip" id="fs9">val chars : _arg1:CodeTree&lt;'a&gt; -&gt; 'a list<br><br>Full name: Huffman.CodeTree.chars</div>
@@ -350,7 +350,7 @@ and 1 to the right Map.</p>
 <div class="tip" id="fs67">val decode : codeTree:CodeTree&lt;'a&gt; -&gt; bits:int list -&gt; 'a list<br><br>Full name: Huffman.Huffman.decode</div>
 <div class="tip" id="fs68">val codeTree : CodeTree&lt;'a&gt;</div>
 <div class="tip" id="fs69">val bits : int list</div>
-<div class="tip" id="fs70">Multiple items<br>val int : value:'T -&gt; int (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.int<br><br>--------------------<br>type int&lt;'Measure&gt; = int<br><br>Full name: Microsoft.FSharp.Core.int&lt;_&gt;<br><br>--------------------<br>type int = int32<br><br>Full name: Microsoft.FSharp.Core.int</div>
+<div class="tip" id="fs70">Multiple items<br>val int : value:'T -&gt; int (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.int<br><br>--------------------<br>type int = int32<br><br>Full name: Microsoft.FSharp.Core.int<br><br>--------------------<br>type int&lt;'Measure&gt; = int<br><br>Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
 <div class="tip" id="fs71">val o : CodeTree&lt;'a&gt; * 'a list</div>
 <div class="tip" id="fs72">val fold : folder:('State -&gt; 'T -&gt; 'State) -&gt; state:'State -&gt; list:'T list -&gt; 'State<br><br>Full name: Microsoft.FSharp.Collections.List.fold</div>
 <div class="tip" id="fs73">val l : CodeTree&lt;'a&gt;</div>

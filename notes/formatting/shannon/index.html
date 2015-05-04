@@ -110,28 +110,28 @@ added as to minimize the expected length of our code final code.</p>
 <p>At each step of the Huffman algorithm, we take the best decision.
 Is it correct globally though ? Is the sequence of small optimal decision really the best overall decision ?</p>
 
-<p>What we really want to do is find a mapping $X_i \rightarrow M_i$ where the $M_i$ are made of a sequence of 
-$l_i$ values from $\begin{cases} 0,1\end{cases} $.</p>
+<p>What we really want to do is find a mapping <span class="math">\(X\_i \\rightarrow M\_i\)</span> where the <span class="math">\(M\_i\)</span> are made of a sequence of 
+<span class="math">\(l\_i\)</span> values from <span class="math">\(\\begin{cases} 0,1\\end{cases}\)</span>.</p>
 
-<p>This mapping should minimize the expected length $\sum_i p_i l_i$
+<p>This mapping should minimize the expected length <span class="math">\(\sum\_i p\_i l\_i\)</span>
 We also want those messages to be distinguishable, which means no message can start with another.
 This implies, if we indentify the message to the node of a tree, that no potential descendant of a codeword of length
-$l_i$, of which there are $2^{l_max-l_i}$, overlaps the descendant of another, so that by adding all the descendants,
- none get counted twice, which itself implies that $\sum_i 2^{l_{max}-l_i} \leq 2^{l_{max}}$</p>
+<span class="math">\(l\_i\)</span>, of which there are <span class="math">\(2^{l\_max-l\_i}\)</span>, overlaps the descendant of another, so that by adding all the descendants,
+ none get counted twice, which itself implies that <span class="math">\(\\sum\_i 2^{l\_{max}-l\_i} \leq 2^{l\_{max}}\)</span></p>
 
 <p>This leads to the following program</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align}
 \arg\min \sum_i p_i l_i \\
  s.t.\ \sum_i 2^{-l_i} \leq 1
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <p>This gives us the optimal length for the symbol code.
 It might mandate non-integer length, which we'll have to round up.</p>
 
-<p>In particular, a symbol whose probability is above $\frac{1}{2}$ should have a length of less than one bit !
+<p>In particular, a symbol whose probability is above <span class="math">\(\\frac{1}{2}\)</span> should have a length of less than one bit !
 So, if a binarysource emits a "1" 90% of the time, do we have to use 1 bit even though we know a value is very likely ?</p>
 
 <h3>Spread 1 bit loss</h3>
@@ -251,7 +251,7 @@ codetree, and the reduction this will.</p>
 <div class="tip" id="fs11">val basen : int</div>
 <div class="tip" id="fs12">val n : int</div>
 <div class="tip" id="fs13">val enext : int list list</div>
-<div class="tip" id="fs14">Multiple items<br>module List<br><br>from Microsoft.FSharp.Collections<br><br>--------------------<br>type List&lt;'T&gt; =<br>&nbsp;&nbsp;| ( [] )<br>&nbsp;&nbsp;| ( :: ) of 'T * 'T list<br>&nbsp;&nbsp;interface IEnumerable<br>&nbsp;&nbsp;interface IEnumerable&lt;'T&gt;<br>&nbsp;&nbsp;member Head : 'T<br>&nbsp;&nbsp;member IsEmpty : bool<br>&nbsp;&nbsp;member Item : index:int -&gt; 'T with get<br>&nbsp;&nbsp;member Length : int<br>&nbsp;&nbsp;member Tail : 'T list<br>&nbsp;&nbsp;static member Cons : head:'T * tail:'T list -&gt; 'T list<br>&nbsp;&nbsp;static member Empty : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs14">Multiple items<br>module List<br><br>from Microsoft.FSharp.Collections<br><br>--------------------<br>type List&lt;'T&gt; =<br>&nbsp;&nbsp;| ( [] )<br>&nbsp;&nbsp;| ( :: ) of Head: 'T * Tail: 'T list<br>&nbsp;&nbsp;interface IEnumerable<br>&nbsp;&nbsp;interface IEnumerable&lt;'T&gt;<br>&nbsp;&nbsp;member Head : 'T<br>&nbsp;&nbsp;member IsEmpty : bool<br>&nbsp;&nbsp;member Item : index:int -&gt; 'T with get<br>&nbsp;&nbsp;member Length : int<br>&nbsp;&nbsp;member Tail : 'T list<br>&nbsp;&nbsp;static member Cons : head:'T * tail:'T list -&gt; 'T list<br>&nbsp;&nbsp;static member Empty : 'T list<br><br>Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
 <div class="tip" id="fs15">val map : mapping:('T -&gt; 'U) -&gt; list:'T list -&gt; 'U list<br><br>Full name: Microsoft.FSharp.Collections.List.map</div>
 <div class="tip" id="fs16">val x : int</div>
 <div class="tip" id="fs17">val l : int list</div>
@@ -269,7 +269,7 @@ codetree, and the reduction this will.</p>
 <div class="tip" id="fs29">val s : int list</div>
 <div class="tip" id="fs30">val ones : float</div>
 <div class="tip" id="fs31">val sum : list:'T list -&gt; 'T (requires member ( + ) and member get_Zero)<br><br>Full name: Microsoft.FSharp.Collections.List.sum</div>
-<div class="tip" id="fs32">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float</div>
+<div class="tip" id="fs32">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
 <div class="tip" id="fs33">val printfn : format:Printf.TextWriterFormat&lt;'T&gt; -&gt; 'T<br><br>Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
 <div class="tip" id="fs34">val codeTree : obj</div>
 <div class="tip" id="fs35">module Huffman</div>
@@ -289,7 +289,7 @@ codetree, and the reduction this will.</p>
 <div class="tip" id="fs49">val message : int []</div>
 <div class="tip" id="fs50">module Seq<br><br>from Microsoft.FSharp.Collections</div>
 <div class="tip" id="fs51">val take : count:int -&gt; source:seq&lt;'T&gt; -&gt; seq&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.Seq.take</div>
-<div class="tip" id="fs52">Multiple items<br>val int : value:'T -&gt; int (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.int<br><br>--------------------<br>type int&lt;'Measure&gt; = int<br><br>Full name: Microsoft.FSharp.Core.int&lt;_&gt;<br><br>--------------------<br>type int = int32<br><br>Full name: Microsoft.FSharp.Core.int</div>
+<div class="tip" id="fs52">Multiple items<br>val int : value:'T -&gt; int (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.int<br><br>--------------------<br>type int = int32<br><br>Full name: Microsoft.FSharp.Core.int<br><br>--------------------<br>type int&lt;'Measure&gt; = int<br><br>Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
 <div class="tip" id="fs53">val toArray : source:seq&lt;'T&gt; -&gt; 'T []<br><br>Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
 <div class="tip" id="fs54">val sizeOriginal : int</div>
 <div class="tip" id="fs55">val a : int list list</div>

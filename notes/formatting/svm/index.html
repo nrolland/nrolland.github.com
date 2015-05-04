@@ -107,8 +107,8 @@ We will examine a bit of theory and look at some example using F# as a solver.</
 
 <h3>Distance</h3>
 
-<p>Starting from a bit of geometry, we know that the (signed) distance <strong>from</strong> a $N-1$dimensional subspace whose
-normal is $w$  <strong>to</strong> a point z  is given by the normalized scalar product with the vector from the origin to the point.</p>
+<p>Starting from a bit of geometry, we know that the (signed) distance <strong>from</strong> a <span class="math">\(N-1\)</span>dimensional subspace whose
+normal is <span class="math">\(w\)</span>  <strong>to</strong> a point z  is given by the normalized scalar product with the vector from the origin to the point.</p>
 
 <notextile><div id="jsxline" class="jxgbox" style="width:400px; height:400px;"></div>
 <script type="text/javascript">
@@ -130,22 +130,22 @@ var t2 = b.create('text',[function(){return somepoint.X()-1;},function(){return 
 </script><h3>Hyperplan</h3>
 
 <p>A hyperplan has the important property of separating a space in 2 regions.
-Furthermore if we choose a particular normal $w$, we can orientate the space in a positive an a negative region.</p>
+Furthermore if we choose a particular normal <span class="math">\(w\)</span>, we can orientate the space in a positive an a negative region.</p>
 
-<p>The general formula for a hyperplan is some offset $a$ belonging to it, plus a $N-1$ subspace
-$$a + \{ x \ |\   w \cdot x = 0 \} = \{ x \ |\ w\cdot (x-a) = 0 \} = \{ x \ |\ w \cdot x + b = 0 \} $$</p>
+<p>The general formula for a hyperplan is some offset <span class="math">\(a\)</span> belonging to it, plus a <span class="math">\(N-1\)</span> subspace
+<span class="math">\(\)</span>a + \{ x \ |\   w \cdot x = 0 \} = \{ x \ |\ w\cdot (x-a) = 0 \} = \{ x \ |\ w \cdot x + b = 0 \} <span class="math">\(\)</span></p>
 
-<p>The distance from a point $z$ to a general hyperplan $H=\{ x \ |\ w \cdot x + b = 0 \} = a + \{ x \ |\   w \cdot x = 0 \}   $ is then 
-$$d(H,z) = d(H-a, z-a) = \frac{w \cdot (z-a)} {|w|} = \frac{w \cdot z + b_w} {|w|}  $$ 
+<p>The distance from a point <span class="math">\(z\)</span> to a general hyperplan <span class="math">\(H=\\{ x \ |\ w \\cdot x + b = 0 \\} = a + \\{ x \\ |\\   w \\cdot x = 0 \\}\)</span> is then 
+<span class="math">\(\)</span>d(H,z) = d(H-a, z-a) = \frac{w \cdot (z-a)} {|w|} = \frac{w \cdot z + b_w} {|w|}  <span class="math">\(\)</span> 
 </p></notextile><ul>
-<li>The constant $b_w$ is dependant on both the hyperplan that we want to represent and the specific $w$ chosen for H</li>
-<li>Note that scaling $w$ (along with $b_w$) does not change the hyperplane $H$, nor a fortiori the physical distance to it,
-but will change the value taken by $w \cdot x + b_w$. the distance is akin to a physical quantity, wehereas the numerator is
+<li>The constant <span class="math">\(b_w\)</span> is dependant on both the hyperplan that we want to represent and the specific <span class="math">\(w\)</span> chosen for H</li>
+<li>Note that scaling <span class="math">\(w\)</span> (along with <span class="math">\(b\_w\)</span>) does not change the hyperplane <span class="math">\(H\)</span>, nor a fortiori the physical distance to it,
+but will change the value taken by <span class="math">\(w \\cdot x + b\_w\)</span>. the distance is akin to a physical quantity, wehereas the numerator is
 just a quantity in a local coordinate system</li>
-<li>Increasing $b= w \cdot -a$ (while keeping $w$ constant) will move $-a$ in the direction of $w$, which means shifting $H$ in the direction opposite to $w$.</li>
-<li>Another way to see this is by applying the formula to $z=0$, we see that the $\frac{b}{|w|}$ is the signed distance from $H$ to the origin,
-and increasing it indeed shifts $H$ toward negative $w$.</li>
-<li>Lastly, reducing the modulus of $b$ shifts $H$ toward the origin, irrespectively of $w$'s orientation.</li>
+<li>Increasing <span class="math">\(b= w \cdot -a\)</span> (while keeping <span class="math">\(w\)</span> constant) will move <span class="math">\(-a\)</span> in the direction of <span class="math">\(w\)</span>, which means shifting <span class="math">\(H\)</span> in the direction opposite to <span class="math">\(w\)</span>.</li>
+<li>Another way to see this is by applying the formula to <span class="math">\(z=0\)</span>, we see that the <span class="math">\(\\frac{b}{|w|}\)</span> is the signed distance from <span class="math">\(H\)</span> to the origin,
+and increasing it indeed shifts <span class="math">\(H\)</span> toward negative <span class="math">\(w\)</span>.</li>
+<li>Lastly, reducing the modulus of <span class="math">\(b\)</span> shifts <span class="math">\(H\)</span> toward the origin, irrespectively of <span class="math">\(w\)</span>'s orientation.</li>
 </ul>
 <h2>Separation of points</h2>
 
@@ -153,61 +153,61 @@ and increasing it indeed shifts $H$ toward negative $w$.</li>
 
 <h3>First attempt</h3>
 
-<p>Given a set of points $x_i$ of associated class $y_i \in \{-1,+1\}$, we can define for every hyperplane $H$ the following function, 
+<p>Given a set of points <span class="math">\(x\_i\)</span> of associated class <span class="math">\(y\_i \\in \\{-1,+1\\}\)</span>, we can define for every hyperplane <span class="math">\(H\)</span> the following function, 
 as a measure of how well it separates a group of points :
-$$d(H) = \min_{\substack{y_i = +1}} d(H,x_i) - \max_{\substack{y_i = -1}} d(H,x_i)   $$</p>
+<span class="math">\(\)</span>d(H) = \min_{\substack{y_i = +1}} d(H,x_i) - \max_{\substack{y_i = -1}} d(H,x_i)   <span class="math">\(\)</span></p>
 
-<p>We see that, as long as the selected point realizing the extrema do not change, this measure is invariant by a shift in $H$, 
+<p>We see that, as long as the selected point realizing the extrema do not change, this measure is invariant by a shift in <span class="math">\(H\)</span>, 
 and is only determined by its direction. Indeed, adding a constant value will add to the left term the same amount the right term would substract)</p>
 
 <p>This definition is actually incomplete : the distances defined earlier is signed, and therefore not determined only by the hyperplan H but also by the orientation
-of the normal $w$. Let's try to see what it means nonetheless :</p>
+of the normal <span class="math">\(w\)</span>. Let's try to see what it means nonetheless :</p>
 
 <ul>
-<li>The min will select the deepest points in the oposite direction of $w$ while the max will select those deepest in its direction.</li>
-<li>In the particular case where the two sets of points are <strong>separated</strong> by H <strong>and</strong> $w$ is oriented toward the class $y_i = +1$
+<li>The min will select the deepest points in the oposite direction of <span class="math">\(w\)</span> while the max will select those deepest in its direction.</li>
+<li>In the particular case where the two sets of points are <strong>separated</strong> by H <strong>and</strong> <span class="math">\(w\)</span> is oriented toward the class <span class="math">\(y\_i = +1\)</span>
 this will lead to a positive quantity, and the selected points will be for each class the closest to the hyperplan.</li>
-<li>Still in the case where H separates points, if we take $w$ oriented towards $y_i = +1$ then $d(H)$ will be negative and 
+<li>Still in the case where H separates points, if we take <span class="math">\(w\)</span> oriented towards <span class="math">\(y\_i = +1\)</span> then <span class="math">\(d(H)\)</span> will be negative and 
 select the outermost points. this does not seem like a sensible choice if we are looking at what diffentiate the two classes :
 whatever it is, it must happens at the boundary between the two.</li>
-<li>If the two sets are not separated by H, we can not distinguish an orientation of $w$ toward the positive class anymore.</li>
+<li>If the two sets are not separated by H, we can not distinguish an orientation of <span class="math">\(w\)</span> toward the positive class anymore.</li>
 </ul>
-<p>To fix the last two remarks, we could still define a sensible measure of separation by taking the maximum over all parameterization $w$.
+<p>To fix the last two remarks, we could still define a sensible measure of separation by taking the maximum over all parameterization <span class="math">\(w\)</span>.
 The separated case would always yield a positive quantity. And there would be some continuity between the unseparable and the separable case.
 We end up with the following measure of separation : 
-$$d(H) = \max_{\substack{s\in +1,-1}} ( \min_{\substack{y_i = +1}} d(x_i,s\cdot w) - \max_{\substack{y_i = -1}} d(x_i,s\cdot w) )  $$</p>
+<span class="math">\(\)</span>d(H) = \max_{\substack{s\in +1,-1}} ( \min_{\substack{y_i = +1}} d(x_i,s\cdot w) - \max_{\substack{y_i = -1}} d(x_i,s\cdot w) )  <span class="math">\(\)</span></p>
 
 <p>where w is any normal vector to H.</p>
 
 <h4>Interpreting</h4>
 
-<p>We can now try to find the direction $w$ which maximizes the distance $d(H)$.</p>
+<p>We can now try to find the direction <span class="math">\(w\)</span> which maximizes the distance <span class="math">\(d(H)\)</span>.</p>
 
-<p>Without losses of generality, we select by translation the hyperplane $H$ for which
-$$ t := \min_{\substack{y_i = +1}} d(x_i,s\cdot w) = - \max_{\substack{y_i = g(\lambda, \alpha) -1}} d(x_i,s\cdot w)$$ and scale $w$ so that $|w|=1$.
+<p>Without losses of generality, we select by translation the hyperplane <span class="math">\(H\)</span> for which
+<span class="math">\(\)</span> t := \min_{\substack{y_i = +1}} d(x_i,s\cdot w) = - \max_{\substack{y_i = g(\lambda, \alpha) -1}} d(x_i,s\cdot w)<span class="math">\(\)</span> and scale <span class="math">\(w\)</span> so that <span class="math">\(|w|=1\)</span>.
 This scaling does not change the distance, only the way it is expressed as a function of the other parameters.
 With those notations, the solution to our initial problem is the same as the solution to:</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align}
 \arg\max_{\substack{t,w,b}}  t\\
  s.t.\ \  (w \cdot x_i + b) &amp;\geq t \hbox{ when } y_i = +1 \\
  \ \  (w \cdot x_i + b) &amp;\leq t \hbox{ when } y_i = -1 \\
  |w| &amp;= 1
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <p>We can see that the criteria amount to finding the largest slab to insert between the 2 classes.
 If the two groups are not separable, the quantity will be negative, so the absolute value will be minimized.
-Let's note that by taking another parameterization for $w$ so that at the extremal point $ y_i\cdot (w \cdot x_i + b) = 1 $ 
+Let's note that by taking another parameterization for <span class="math">\(w\)</span> so that at the extremal point <span class="math">\(y\_i\\cdot (w \\cdot x\_i + b) = 1\)</span> 
 this is equivalent to solving the following problem :</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align}
 \arg\max \frac{2}{|w|} = \arg\min \frac{1}{2} \cdot |w|^2 \\
  s.t.\ \  y_i\cdot (w \cdot x_i + b) \geq 1 
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <h3>Second attempt</h3>
 
@@ -215,20 +215,20 @@ $$</p>
 Why not, in that case, limit the number of misclassified points, instead of finding an elusive best margin ?</p>
 
 <p>This amounts to the solving following problem :
-$$
+<span class="math">\(\)</span>
 \begin{align}
 \arg\min_{\substack{t,w,b}}  \sum_{i} I(y_i\cdot (w \cdot x_i + b) )\\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
-<p>where $I (x)= \begin{cases}  +1   &amp; x &lt; 0 \\  0 &amp;x \geq 0   \end{cases} $</p>
+<p>where <span class="math">\(I (x)= \\begin{cases}  +1   &amp; x &lt; 0 \\\\  0 &amp;x \\geq 0   \\end{cases}\)</span></p>
 
-<p>This function not convex, as illustrated below, but we approximate it with the function $\Theta(x) = (1-x)^{+}$ to get a convex problem
-$$
+<p>This function not convex, as illustrated below, but we approximate it with the function <span class="math">\(\\Theta(x) = (1-x)^{+}\)</span> to get a convex problem
+<span class="math">\(\)</span>
 \begin{align} 
 \arg\min_{\substack{t,w,b}}  \sum_{i} \Theta(y_i\cdot (w \cdot x_i + b) ) \\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <div id="jsxapprox" class="jxgbox" style="width:400px; height:200px;"></div>
 <script type="text/javascript">
@@ -243,109 +243,112 @@ var li2 = b.create('line',[step,origin], {straightFirst:false, straightLast:fals
 var li3 = b.create('line',[origin,one],  {straightFirst:false, straightLast:true, strokeWidth:2});
 var li4 = b.create('line',[step,one],    {straightFirst:true, straightLast:false, strokeWidth:2, strokeColor:'green'});
 var li4 = b.create('line',[one,[2,0]],   {straightFirst:false, straightLast:true, strokeWidth:2, strokeColor:'green'});
-</script><p>But $(1-x)^{+}\leq \beta  \Leftrightarrow  \begin{cases}  \beta \geq 0 \\  x &gt; 1 - \beta   \end{cases}  $
+</script><p>But <span class="math">\((1-x)^{+}\\leq \\beta  \\Leftrightarrow  \\begin{cases}  \\beta \\geq 0 \\\\  x &gt; 1 - \\beta   \\end{cases}\)</span>
 So that we can solve 
-$$
+<span class="math">\(\)</span>
 \begin{align} 
 \arg\min_{\substack{t,w,b}}  \sum_{i} u_i  \\
  s.t.\ \  \Theta(y_i\cdot (w \cdot x_i + b) ) \leq u_i \\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <p>or equivalently</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align} 
 \arg\min_{\substack{t,w,b}}  \sum_{i} u_i  \\
  s.t.\ \  y_i\cdot (w \cdot x_i + b) &amp;\geq 1-u_i \\
    u_i &amp;\geq 0 \\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <h3>Support Vector Machine</h3>
 
-<p>We can merge the two criteria using a tradeoff parameter $C$, to finally define the SVM :</p>
+<p>We can merge the two criteria using a tradeoff parameter <span class="math">\(C\)</span>, to finally define the SVM :</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align} 
 \arg\min_{\substack{u,w,b}}  \frac{1}{2} \cdot |w|^2 + C \cdot \sum_{i} u_i  \\
  s.t.\ \  y_i\cdot (w \cdot x_i + b) &amp;\geq 1-u_i \\
    u_i &amp;\geq 0 \\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <h3>Dual problem</h3>
 
 <p>The dual problem is much simpler to solve.
 If we then write the Lagrangian</p>
 
-<p>$$L(w,b,u,\lambda,\alpha) =  \frac{1}{2} \cdot |w|^2 + C \cdot  u_i - \lambda_i u_i + \alpha_i (  1-u_i -  y_i\cdot (w \cdot x_i + b) ) $$</p>
+<p><span class="math">\(\)</span>L(w,b,u,\lambda,\alpha) =  \frac{1}{2} \cdot |w|^2 + C \cdot  u_i - \lambda_i u_i + \alpha_i (  1-u_i -  y_i\cdot (w \cdot x_i + b) ) <span class="math">\(\)</span></p>
 
-<p>As usual, the Lagrange multiplier are $\geq 0$.
-Computing the dual function $g(\lambda, \alpha) = \min_{\substack{u,w,b}}L(w,b,u,\lambda,\alpha) $ we find the following constraints</p>
+<p>As usual, the Lagrange multiplier are <span class="math">\(\geq 0\)</span>.
+Computing the dual function <span class="math">\(g(\lambda, \alpha) = \min\_{\\substack{u,w,b}}L(w,b,u,\lambda,\alpha)\)</span> we find the following constraints</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align} 
 \frac{\partial L}{\partial w} &amp;= w -   \alpha_i  y_i  x_i = 0 &amp;&amp;\Rightarrow w =  \alpha_i  y_i  x_i \label{eq:C1}\\
 \frac{\partial L}{\partial b} &amp;= - \alpha_i  y_i = 0 &amp;&amp;\Rightarrow  \alpha_i  y_i  = 0  \\
 \frac{\partial L}{\partial u_i} &amp;= C - \lambda_i - \alpha_i  = 0 &amp;&amp;\Rightarrow  \alpha_i = C - \lambda_i\ ,\ \lambda_i \geq 0 \\
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
-<p>From those conditions on $g$ follows by complementary slackness (cs) the following cases :</p>
+<p>From those conditions on <span class="math">\(g\)</span> follows by complementary slackness (cs) the following cases :</p>
 
 <ul>
-<li>if $ \alpha_i = C  $ then $$\begin{cases}   y_i\cdot (w \cdot x_i + b) = 1-u_i  \hbox{ (by cs)} \\ 
+<li>if <span class="math">\(\\alpha\_i = C\)</span> then <span class="math">\(\)</span>\begin{cases}   y_i\cdot (w \cdot x_i + b) = 1-u_i  \hbox{ (by cs)} \\ 
 \lambda_i = 0 \hbox{ by C3 and } u_i &gt; 0  \hbox{ by cs}
-\end{cases} $$
-which means $x_i$ is <strong>inside</strong> the margins</li>
-<li>if $ C &gt; \alpha_i &gt; 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) = 1-u_i \hbox{ (by cs)} \\ 
+\end{cases} <span class="math">\(\)</span>
+which means <span class="math">\(x_i\)</span> is <strong>inside</strong> the margins</li>
+<li>if <span class="math">\(C &gt; \\alpha\_i &gt; 0\)</span> then <span class="math">\(\)</span>\begin{cases} y_i\cdot (w \cdot x_i + b) = 1-u_i \hbox{ (by cs)} \\ 
 \lambda_i &gt; 0 \hbox{ by C3 and } u_i = 0  \hbox{ (by cs)}
-\end{cases} $$
-which means $x_i$ is <strong>on</strong> the margins</li>
-<li>if  $   \alpha_i = 0 $ then $$\begin{cases} y_i\cdot (w \cdot x_i + b) &gt; 1-u_i \hbox{ (by cs)} \\ 
+\end{cases} <span class="math">\(\)</span>
+which means <span class="math">\(x_i\)</span> is <strong>on</strong> the margins</li>
+<li>if  <span class="math">\(\\alpha\_i = 0\)</span> then <span class="math">\(\)</span>\begin{cases} y_i\cdot (w \cdot x_i + b) &gt; 1-u_i \hbox{ (by cs)} \\ 
 \lambda_i &gt; 0 \hbox{ by C3 and } u_i = 0  \hbox{(by cs)} \\
-\end{cases} $$
-so that $x_i$ plays <strong>no</strong> role in the problem, its constraint is loose, it is outside the margin</li>
+\end{cases} <span class="math">\(\)</span>
+so that <span class="math">\(x_i\)</span> plays <strong>no</strong> role in the problem, its constraint is loose, it is outside the margin</li>
 </ul>
 <p>The optimality conditions allow us to write the dual problem as</p>
 
-<p>$$
+<p><span class="math">\(\)</span>
 \begin{align} 
  min_{\substack{u,w,b}}  g(\lambda, \alpha) &amp;=  \frac{1}{2}\alpha_i \alpha_j y_i y_j x_i x_j-\alpha_i  \\
  s.t.\ \ 0 \geq \alpha_i \geq C &amp;\hbox{ (encodes C3) } \\ 
  \ y_i \alpha_i = 0  &amp;\hbox{ (encodes C2)} 
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
-<p>This expression is easier to deal with as we know that many $\alpha_i$ will be null and reveals the kernel structure of the problem.
+<p>This expression is easier to deal with as we know that many <span class="math">\(\alpha_i\)</span> will be null and reveals the kernel structure of the problem.
 It is also a simple quadratic programm.</p>
 
 <h2>Sequential minimal optimization</h2>
 
-<p>The goal of a SVM is therefore to find the set of $\alpha_i$ realizing the maximum of the quadratic program layed out.
+<p>The goal of a SVM is therefore to find the set of <span class="math">\(\alpha\_i\)</span> realizing the maximum of the quadratic program layed out.
 We start by defining a structure to hold the support vectors</p>
+
 <pre class="fssnip">
-<span class="l">1: </span>[&lt;<span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">Struct</span>&gt;]
-<span class="l">2: </span><span class="k">type</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">SupportVector</span>(<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">x</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">float</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">list</span>, <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">y</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">float</span>, <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">alpha</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 9)" onmouseover="showTip(event, 'fs4', 9)" class="i">float</span>) <span class="o">=</span> 
-<span class="l">3: </span>  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">X</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 12)" onmouseover="showTip(event, 'fs3', 12)" class="i">x</span>
-<span class="l">4: </span>  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">Y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 15)" onmouseover="showTip(event, 'fs6', 15)" class="i">y</span>
-<span class="l">5: </span>  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">Alpha</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 18)" onmouseover="showTip(event, 'fs7', 18)" class="i">alpha</span></pre>
-<p>SMO performs a partial optimisation by considering just a pair $\alpha_1, \alpha_2$, and cycles through the factor until it can not progress.
+[&lt;<span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">Struct</span>&gt;]
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">SupportVector</span>(<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">x</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">float</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">list</span>, <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">y</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">float</span>, <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">alpha</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs4', 9)" onmouseover="showTip(event, 'fs4', 9)" class="i">float</span>) <span class="o">=</span> 
+  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">X</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 12)" onmouseover="showTip(event, 'fs3', 12)" class="i">x</span>
+  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">Y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 15)" onmouseover="showTip(event, 'fs6', 15)" class="i">y</span>
+  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="i">this</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">Alpha</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 18)" onmouseover="showTip(event, 'fs7', 18)" class="i">alpha</span></pre>
+
+
+<p>SMO performs a partial optimisation by considering just a pair <span class="math">\(\\alpha\_1, \\alpha\_2\)</span>, and cycles through the factor until it can not progress.
 At each steps it find the maximum of 
-$g(\alpha_1, \alpha_2) = \frac{1}{2}\alpha_1^2 |x_1|^2 + \frac{1}{2}\alpha_2^2 |x_2|^2 
-+ y_1 y_2 \alpha_1 \alpha_2 x_1'x_2 +  y_1 \alpha_1 v_1  +  y_2 \alpha_2 v_2   - \alpha_1 - \alpha_2  $</p>
+<span class="math">\(g(\\alpha\_1, \\alpha\_2) = \\frac{1}{2}\\alpha\_1^2 |x\_1|^2 + \\frac{1}{2}\\alpha\_2^2 |x\_2|^2 
++ y\_1 y\_2 \\alpha\_1 \\alpha\_2 x\_1'x\_2 +  y\_1 \alpha\_1 v\_1  +  y\_2 \alpha\_2 v\_2   - \\alpha\_1 - \\alpha_2\)</span></p>
 
 <p>(This decomposition is easily visualized by representing it in a matrix : it corresponds to the two first diagonal elements, 
 their single offdiagonal element, the product of the first element with the rest, of the second element with the rest, and of the rest with the rest)
-$v_i= \sum_{j=3}^{n}y_j\alpha_j x_j'x_i = (w^{old} - y_1\alpha^{old}_1x_1' - y_2\alpha^{old}_2x_2')x_i  $ 
+<span class="math">\(v\_i= \sum\_{j=3}^{n}y\_j\\alpha\_j x\_j'x\_i = (w^{old} - y\_1\\alpha^{old}\_1x\_1' - y\_2\\alpha^{old}\_2x\_2')x\_i\)</span> 
 where the last equality comes from the condition C1</p>
 
-<p>As we have $y_1 \alpha_1 + y_2 \alpha_2 = constant \Rightarrow \alpha_1 + s \alpha_2 = k $ with $s := y_1 y_2 $ we can reduce $g$ 
-to a simple quadratic function of $\alpha_2$. We could inject the functional dependency and derive, but
+<p>As we have <span class="math">\(y\_1 \\alpha\_1 + y\_2 \\alpha\_2 = constant \Rightarrow \\alpha\_1 + s \\alpha\_2 = k\)</span> with <span class="math">\(s := y\_1 y\_2\)</span> we can reduce <span class="math">\(g\)</span> 
+to a simple quadratic function of <span class="math">\(\\alpha\_2\)</span>. We could inject the functional dependency and derive, but
 <a href="http://en.wikipedia.org/wiki/Fr%C3%A9chet_derivative">Frechet derivative</a>, what we are really doing, allow us to do the opposite 
 which simplifies calculus :
-$$
+<span class="math">\(\)</span>
 \begin{align} 
 \frac {\partial g(\alpha_2)}{\partial \alpha_2 } &amp;=
 \frac {\partial g(\alpha_1,\alpha_2)}{\partial \alpha_1 } \frac {\partial \alpha_1}{\partial \alpha_2 } 
@@ -354,43 +357,43 @@ $$
    &amp; + \alpha_1 x_1^2 + s \alpha_1 x_1'x_2 + y_2 v_2 - 1  = 0 \hbox{ at the optima}  \\
 \Rightarrow &amp;\alpha_2  ( x_2^2 + x_1^2 - 2  x_1'  x_2 ) = skx_1( x_1 - x_2) + y_2(v_1-v_2) + 1 - s
 \end{align}
-$$
+<span class="math">\(\)</span>
 rewriting
-$$
+<span class="math">\(\)</span>
 \begin{align} 
  y_2(v_1-v_2) &amp;= y_2\cdot ( w(x_1-x_2) - y_1\alpha_1^{old} x_1( x_1 - x_2) - y_2\alpha_2^{old} x_2( x_1 - x_2) )  \\
 &amp;=  y_2\cdot (  w(x_1-x_2) - y_1(k-s\alpha_2^{old})x_1( x_1 - x_2) - y_2\alpha_2^{old} x_2( x_1 - x_2) \\
 &amp;=  y_2\cdot (  w(x_1-x_2) - y_1 k x_1( x_1 - x_2) + y_2\alpha_2^{old} (x_1( x_1 - x_2)  -x_2( x_1 - x_2)) \\
 &amp;=  y_2\cdot  w(x_1-x_2) - s k x_1( x_1 - x_2) + \alpha_2^{old} ( x_2^2 + x_1^2 - 2  x_1'  x_2 ) 
 \end{align}
-$$
+<span class="math">\(\)</span>
 the optimality condition get rewritten
-$$
+<span class="math">\(\)</span>
 \begin{align} 
 \alpha_2  ( x_2^2 + x_1^2 - 2  x_1'  x_2 ) =  y_2\cdot  w(x_2-x_1) + \alpha_2^{old} ( x_2^2 + x_1^2 - 2  x_1'  x_2 ) + s -1
 \end{align}
-$$</p>
+<span class="math">\(\)</span></p>
 
 <p>Note that this has the shape of taking a single step of the Newton's method
 $\alpha_2' = \alpha_2 - \frac{1}{2} \frac{\nabla g}{\nabla^2 g}</p>
 
 <p>and that we can identify the gradient as</p>
 
-<p><em></em>)</p>
+<p>*</p>
 
-<p>(<em></em>
-  - we write some first fsharp code for the structures
-  - we write about Newton method
-  - fsharp code
-  - we figure out first and second derivative for SVM
-  - we write the reestimation for b
-  - we lookinto violation : who does it, and how much 
-  - we loop for violating until convergence</p>
-
-          <div class="tip" id="fs1">Multiple items<br>type StructAttribute =<br>&nbsp;&nbsp;inherit Attribute<br>&nbsp;&nbsp;new : unit -&gt; StructAttribute<br><br>Full name: Microsoft.FSharp.Core.StructAttribute<br><br>--------------------<br>new : unit -&gt; StructAttribute</div>
+<ul>
+<li>we write some first fsharp code for the structures</li>
+<li>we write about Newton method</li>
+<li>fsharp code</li>
+<li>we figure out first and second derivative for SVM</li>
+<li>we write the reestimation for b</li>
+<li>we lookinto violation : who does it, and how much</li>
+<li>we loop for violating until convergence</li>
+</ul>
+<div class="tip" id="fs1">Multiple items<br>type StructAttribute =<br>&nbsp;&nbsp;inherit Attribute<br>&nbsp;&nbsp;new : unit -&gt; StructAttribute<br><br>Full name: Microsoft.FSharp.Core.StructAttribute<br><br>--------------------<br>new : unit -&gt; StructAttribute</div>
 <div class="tip" id="fs2">Multiple items<br>type SupportVector =<br>&nbsp;&nbsp;struct<br>&nbsp;&nbsp;&nbsp;&nbsp;new : x:float list * y:float * alpha:float -&gt; SupportVector<br>&nbsp;&nbsp;&nbsp;&nbsp;member Alpha : float<br>&nbsp;&nbsp;&nbsp;&nbsp;member X : float list<br>&nbsp;&nbsp;&nbsp;&nbsp;member Y : float<br>&nbsp;&nbsp;end<br><br>Full name: Svm.SupportVector<br><br>--------------------<br>SupportVector()<br>new : x:float list * y:float * alpha:float -&gt; SupportVector</div>
 <div class="tip" id="fs3">val x : float list</div>
-<div class="tip" id="fs4">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float</div>
+<div class="tip" id="fs4">Multiple items<br>val float : value:'T -&gt; float (requires member op_Explicit)<br><br>Full name: Microsoft.FSharp.Core.Operators.float<br><br>--------------------<br>type float = System.Double<br><br>Full name: Microsoft.FSharp.Core.float<br><br>--------------------<br>type float&lt;'Measure&gt; = float<br><br>Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
 <div class="tip" id="fs5">type 'T list = List&lt;'T&gt;<br><br>Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
 <div class="tip" id="fs6">val y : float</div>
 <div class="tip" id="fs7">val alpha : float</div>
