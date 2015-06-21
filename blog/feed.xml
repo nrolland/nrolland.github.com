@@ -2,13 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2015-05-11T22:00:00Z</updated>
+  <updated>2015-06-20T22:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2015-06-21:/posts/2015/06/21/Weekly-links/</id>
+    <title type="html">Weekly links for 2015-06-21</title>
+    <published>2015-06-20T22:00:00Z</published>
+    <updated>2015-06-20T22:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2015/06/21/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=http://www.haskellforall.com/2012/05/scrap-your-type-classes.html&gt; Haskell for all: Scrap your type classes  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;we as Haskell programmers have been conditioned to believe that it is correct and normal to have operators change behavior silently when passed different arguments, which completely subverts type-safety.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://www.cb1.com/~john/computing/emacs/beyond-tutorial.html&gt; GNUemacs: beyond the tutorial  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;The Emacs tutorial introduces a few tens of commands; this document introduces around a hundred more that I have found useful (in over 25 years of using Emacs).&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://unisonweb.org/2015-05-22/why-compile.html&gt; Unison: Why are we still "compiling" and "building" code?  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Compilation, linking, the whole notion of “building” programs being a phase separate from the act of editing them is a relic from the punchcard era&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/jlevy/the-art-of-command-line/blob/master/README.md&gt; the-art-of-command-line/README.md at master · jlevy/the-art-of-command-line  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Fluency on the command line is a skill often neglected or considered arcane, but it improves your flexibility and productivity as an engineer in both obvious and subtle ways. This is a selection of notes and tips on using the command-line that I've found useful when working on Linux.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition&gt; FizzBuzz - EnterpriseEdition  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Enterprise software marks a special high-grade class of software that makes careful use of relevant software architecture design principles to build particularly customizable and extensible solutions to real problems. This project is an example of how the popular FizzBuzz game might be built were it subject to the high quality standards of enterprise software.&lt;/dd&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2015-05-12:/posts/2015/05/12/Weekly-links/</id>
     <title type="html">Weekly links for 2015-05-12</title>
@@ -176,30 +200,6 @@ this as a preparation step to a future illustration of Shannon source coding the
 
 &lt;dt&gt;&lt;a href=http://www.computing.dundee.ac.uk/staff/katya/ML4PG/sppics.pdf&gt; Statistical Proof-Patterns in Coq/SSReflect  &lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;In this paper, we are making the rst steps towards automated detection of signi cant proof patterns in Coq/SSReflect&lt;/dd&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:xquant.net,2013-06-05:/posts/2013/06/05/Weekly-links/</id>
-    <title type="html">Weekly links for 2013-06-05</title>
-    <published>2013-06-04T22:00:00Z</published>
-    <updated>2013-06-04T22:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/06/05/Weekly-links/"/>
-    <content type="html">
-&lt;dt&gt;&lt;a href=http://www.youtube.com/watch?v=a1zDuOPkMSw&amp;feature=player_embedded&gt; Hamming, "You and Your Research" (June 6, 1995) - YouTube  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;The Art of Doing Science and Engineering: Learning to Learn&amp;quot; was the capstone course by Dr. Richard W. Hamming (1915-1998) for graduate students at the Naval Postgraduate School (NPS) in Monterey California.&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://faculty.ycp.edu/~dbabcock/PastCourses/cs360/lecture/about.html&gt; Lecture Notes  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Following &amp;quot;introduction to Algorithm&amp;quot; of Cormen in a detailed way&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.seas.harvard.edu/courses/cs281/&gt; CS281: Advanced Machine Learning  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Harvard University, Fall 2011&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://danroy.org/papers/Roy-PHD-2011.pdf&gt; Computability, inference and modeling in probabilistic programming  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Phd thesis by Daniel M. Roy. The basic measure part is an excellent revision !&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://staff.aist.go.jp/reynald.affeldt/documents/affeldt-itp2012-preprint.pdf&gt; Formalization of Shannon's Theorems in SSReflect-Coq  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Our first contribution is to provide a library of formal de finitions and lemmas for information theory...&lt;/dd&gt;
 
 </content>
   </entry>
