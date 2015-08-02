@@ -2,13 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://xquant.net/</id>
   <title>xQuant strange blog</title>
-  <updated>2015-06-20T22:00:00Z</updated>
+  <updated>2015-08-01T22:00:00Z</updated>
   <link rel="alternate" href="http://xquant.net/"/>
   <link rel="self" href="http://xquant.net/blog/feed.xml"/>
   <author>
     <name>Nicolas</name>
     <uri>http://xquant.net/</uri>
   </author>
+  <entry>
+    <id>tag:xquant.net,2015-08-02:/posts/2015/08/02/Weekly-links/</id>
+    <title type="html">Weekly links for 2015-08-02</title>
+    <published>2015-08-01T22:00:00Z</published>
+    <updated>2015-08-01T22:00:00Z</updated>
+    <link rel="alternate" href="http://xquant.net/posts/2015/08/02/Weekly-links/"/>
+    <content type="html">
+&lt;dt&gt;&lt;a href=https://github.com/jlevy/the-art-of-command-line/blob/master/README.md&gt; the-art-of-command-line/README.md at master · jlevy/the-art-of-command-line  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Fluency on the command line is a skill often neglected or considered arcane, but it improves your flexibility and productivity as an engineer in both obvious and subtle ways. This is a selection of notes and tips on using the command-line that I've found useful when working on Linux.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition&gt; FizzBuzz - EnterpriseEdition  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Enterprise software marks a special high-grade class of software that makes careful use of relevant software architecture design principles to build particularly customizable and extensible solutions to real problems. This project is an example of how the popular FizzBuzz game might be built were it subject to the high quality standards of enterprise software.&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/Laverna/laverna&gt; Laverna/laverna · GitHub  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Laverna is a JavaScript note taking application with Markdown editor and encryption support. Consider it like open source alternative to Evernote. https://laverna.cc/index.html&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=http://showterm.io/&gt; showterm  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;/dd&gt;
+
+&lt;dt&gt;&lt;a href=https://github.com/gfredericks/test.chuck#string-from-regex&gt; gfredericks/test.chuck  &lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;string-from-regex is a suspiciously robust generator that will generate strings matching a regular expression&lt;/dd&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:xquant.net,2015-06-21:/posts/2015/06/21/Weekly-links/</id>
     <title type="html">Weekly links for 2015-06-21</title>
@@ -177,30 +201,6 @@ this as a preparation step to a future illustration of Shannon source coding the
 &lt;p&gt;One can even express tradeoff between the size of the circuit and how long it will take to compute, and prove functional equivalency between those layouts. Far from being a just a fancy observation, this proves essential when it comes to putting a computer in command of your airplane or nuclear central, where &lt;em&gt;proving&lt;/em&gt; the lack of bug is of definite value !&lt;/p&gt;
 
 &lt;p&gt;And here is also the key of the M7 chip : by having a hardware specific translation, one can lower the energy consumption of those operations to a minimum, which opens new applications… like a (ultra low power) wearable device !&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <id>tag:xquant.net,2013-09-16:/posts/2013/09/16/Weekly-links/</id>
-    <title type="html">Weekly links for 2013-09-16</title>
-    <published>2013-09-15T22:00:00Z</published>
-    <updated>2013-09-15T22:00:00Z</updated>
-    <link rel="alternate" href="http://xquant.net/posts/2013/09/16/Weekly-links/"/>
-    <content type="html">
-&lt;dt&gt;&lt;a href=http://www.cs.cornell.edu/courses/cs312/2008sp/&gt; Data Structures and Functional Programming CS312 Home  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;A course from Computer Science Department- Cornell University&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.cs.princeton.edu/courses/archive/spring10/cos433/mathcs.pdf&gt; Mathematics for Computer Science - Eric Lehman and Tom Leighton MIT  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;25 lessons. 1 a day keeps bug away.&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://theinternetwishlist.com/&gt; The Internet Wishlist  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;The Internet Wishlist is a collection of ideas for apps and websites people are wishing for. Think of it like a suggestion box for the future of technology. Ideas range from web to mobile, realistic to imaginary, and helpful to humorous. In a world of me-too startups, we hope this project inspires entrepreneurs, developers and designers to innovate and build the products and features that people want. To contribute, post an idea on Twitter and include #theiwl in your tweet&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.vagrantup.com/&gt; Vagrant  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Create and configure lightweight, reproducible, and portable development environments&lt;/dd&gt;
-
-&lt;dt&gt;&lt;a href=http://www.computing.dundee.ac.uk/staff/katya/ML4PG/sppics.pdf&gt; Statistical Proof-Patterns in Coq/SSReflect  &lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;In this paper, we are making the rst steps towards automated detection of signi cant proof patterns in Coq/SSReflect&lt;/dd&gt;
-
 </content>
   </entry>
 </feed>
