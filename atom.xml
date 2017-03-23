@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>xQuant</title>
+    <link href="http://xquant.net/atom.xml" rel="self" />
+    <link href="http://xquant.net" />
+    <id>http://xquant.net/atom.xml</id>
+    <author>
+        <name>Nicolas Rolland</name>
+        <email></email>
+    </author>
+    <updated>2017-02-03T00:00:00Z</updated>
+    <entry>
+    <title>Directed Acyclic Graphs</title>
+    <link href="http://xquant.net/notes/graphvalue/readme.html" />
+    <id>http://xquant.net/notes/graphvalue/readme.html</id>
+    <published>2017-02-03T00:00:00Z</published>
+    <updated>2017-02-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February  3, 2017
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+<p>(just imports ignore that)</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Protolude</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Examples.Fold</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">AG</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.AG</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.Render</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.FilePath</span>  ((&lt;/&gt;))
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Directory</span> (getTemporaryDirectory)
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Process</span>   (system)
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.IO.Unsafe</span> (unsafePerformIO )</code></pre></div>
+<h5 id="section"></h5>
+<hr />
+<h2 id="representing-graphs">Representing graphs</h2>
+<p>There are a few ways to represent a graph:</p>
+<ul>
+<li>as a list of Nodes and a list of edges</li>
+<li>as a list of neighbors</li>
+</ul>
+<p>each representation is optimized for a runtime behaviour (cf Kormen) but it’s useful to abstract representation to express operations. A convenient way to abstract over those representations is shown in <a href="https://scholar.google.fr/scholar?cluster=6598618604128829558&amp;hl=en&amp;as_sdt=0,5&amp;sciodt=0,5">Fun with type function</a></p>
+<p>But what if we could abuse haskell somehow to represent graph not with some external description but with haskell itself ?</p>
+<hr />
+<h2 id="breaking-referential-transparency">Breaking referential transparency</h2>
+<p>We want to write graph that way</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph1 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
+<span class="ot">&gt;</span> graph1 <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) a) b
+<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>)(iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
+<span class="ot">&gt;</span>                  b <span class="fu">=</span> a</code></pre></div>
+<p>instead of some variation of</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="co">-- graph1&#39; = mkDag (Node (Node (Leaf 2) (Ref 0)) (Ref 0)) [(0, Node (Node (Leaf 2) (Leaf 2)) (Leaf 2))]</span></code></pre></div>
+<p>But normally, in Haskell there should be no way to distinguish graph1 from</p>
+<p>from</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph2 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
+<span class="ot">&gt;</span> graph2 <span class="fu">=</span>  iNode (iNode (iLeaf <span class="dv">2</span>) a) b
+<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
+<span class="ot">&gt;</span>                  b <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</code></pre></div>
+<p>But we can actually abuse haskell by going to <code>IO</code> and relying on some implementation of GHC to observe the sharing using <a href="https://scholar.google.fr/scholar?cluster=13707349448701947240&amp;hl=en&amp;as_sdt=0,5&amp;sciodt=0,5">Type-safe observable sharing in Haskell</a> a technique implemented and extended in <a href="http://hackage.haskell.org/package/data-reify">data-reify</a></p>
+<p>With this we can produce two different output for two values which <em>should have been</em> be undistinguishable.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">graph1</th>
+<th align="center">graph2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><img src="static/graph1.svg" /></td>
+<td align="center"><img src="static/graph2.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>basically the second graph is maximal sharing of subnodes. because we only ever use names like a and b once, they are irrelevant. whereas in the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph. to make sure they are equal, the equivalent relation a = b gets its own private copy which is not shared with other subgraphs.</p>
+<p>using this we can directly represent graphs with haskell which is convienent and more visual than labeling nodes. indeed compare the code, visual, with the following ‘normal’ representation of first and second example.</p>
+<p>TBC</p>
+<h2 id="junk">junk</h2>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; main ::</span> <span class="dt">IO</span> ()
+<span class="ot">&gt;</span> main <span class="fu">=</span> <span class="kw">do</span> putStrLn (<span class="st">&quot;building assets&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)
+<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph1) <span class="st">&quot;./static/graph1&quot;</span>
+<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph2) <span class="st">&quot;./static/graph2&quot;</span>
+<span class="ot">&gt;</span>           writeFile  <span class="st">&quot;./static/graph1.txt&quot;</span>  (show <span class="fu">.</span> unsafePerformIO <span class="fu">$</span> reifyDag graph1) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; renderDag2 ::</span>  (<span class="dt">ShowConstr</span> f, <span class="dt">Traversable</span> f) <span class="ot">=&gt;</span>  <span class="dt">Dag</span> f <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
+<span class="ot">&gt;</span> renderDag2 dag fn <span class="fu">=</span> <span class="kw">do</span>
+<span class="ot">&gt;</span>    tmpd <span class="ot">&lt;-</span> getTemporaryDirectory
+<span class="ot">&gt;</span>    <span class="kw">let</span> tmpf <span class="fu">=</span> tmpd <span class="fu">&lt;/&gt;</span> <span class="st">&quot;523452345234&quot;</span>
+<span class="ot">&gt;</span>    renderDag dag tmpf
+<span class="ot">&gt;</span>    system <span class="fu">$</span> <span class="st">&quot;dot -Tsvg &quot;</span> <span class="fu">++</span> tmpf <span class="fu">++</span> <span class="st">&quot; -o &quot;</span> <span class="fu">++</span> toS fn <span class="fu">++</span> <span class="st">&quot;.svg&quot;</span>
+<span class="ot">&gt;</span>    return ()</code></pre></div>
+<hr />
+]]></summary>
+</entry>
+<entry>
+    <title>2017-01-16-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2017-01-16-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2017-01-16-Weekly-links.html</id>
+    <published>2017-01-16T00:00:00Z</published>
+    <updated>2017-01-16T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2017-01-16</h1>
+<!-- <aside>Posted on 2017-01-16</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://knsv.github.io/mermaid/#mermaid" >mermaid - Generation of diagrams and flowcharts from text in a similar manner as markdown.</a>
+    </dt>
+    <dd></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://downloads.haskell.org/%7Eghc/master/users-guide/glasgow_exts.html#ghc-flag--XTypeApplications" >9.1. Language options — Glasgow Haskell Compiler &lt;release&gt; Users Guide</a>
+    </dt>
+    <dd>For example, we can have pair :: forall a. a -&gt; forall b. b -&gt; (a, b) and then say pair @Bool True @Char which would have type Char -&gt; (Bool, Char).</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/cies/htoml" >cies/htoml: TOML file format parser in Haskell</a>
+    </dt>
+    <dd>A TOML parser library in Haskell.<br><br>TOML is the obvious, minimal configuration language by Tom Preston-Werner. It is an alternative to the XML, YAML and INI formats mainly for the purpose of configuration files. Many will find that XML and YAML are too heavy for the purpose of configuration files prupose while INI is underspecified. TOML is to configuration files, like what Markdown is for rich-text.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/kcsongor/register-machine-type" >kcsongor/register-machine-type: Universal Register Machine implemented at the type-level of Haskell</a>
+    </dt>
+    <dd>Initialises R1 to 5, then raises 2 to the power of the value of R1, leaving the result (32) in R0. Uses R2 as a scratch register, thus the machine is initialised with 3 registers.<br><br>pow2 :: (&#39;Halted a (r &#39;: rs) ~<br>            Run<br>              &#39;[<br>              -- Instr              | label index<br>              -- set R1 to 5<br>                Inc (R 1) (L 1)             -- 0<br>              , Inc (R 1) (L 2)             -- 1<br>              , Inc (R 1) (L 3)             -- 2<br>              , Inc (R 1) (L 4)             -- 3<br>              , Inc (R 1) (L 5)             -- 4<br>              -- set R0 to 1<br>              , Inc (R 0) (L 6)             -- 5<br>              -- R0 = 2^R1<br>              , Dec (R 1) (L 7) (L 12)      -- 6<br>              -- R2 = R0<br>              , Dec (R 0) (L 8) (L 9)       -- 7<br>              , Inc (R 2) (L 7)             -- 8<br>              -- R0 = 2*R2<br>              , Dec (R 2) (L 10) (L 6)      -- 9<br>              , Inc (R 0) (L 11)            -- 10<br>              , Inc (R 0) (L 9)             -- 11<br><br>              , Halt                        -- 12<br>              ]) =&gt; Proxy r<br>pow2 = Proxy</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/mikeizbicki/subhask/blob/master/examples/example0001-polynomials.lhs" >subhask/example0001-polynomials.lhs at master ·よ mikeizbicki/subhask</a>
+    </dt>
+    <dd>&gt;   let f :: Ring x =&gt; x -&gt; x<br>&gt;       f x = x*x*x + x + 3<br>&gt;<br>&gt;   let a = 3 :: Integer<br>&gt;<br>&gt;   putStrLn $ &quot;f a = &quot; + show (f a)<br><br>Now, we&#39;ll create a polynomial from our ordinary function.<br><br>&gt;   let g :: Polynomial Integer<br>&gt;       g = provePolynomial f<br>&gt;<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g $ a = &quot; + show ( g $ a )<br><br>Polynomials support operations that other functions in Hask do not support.<br>For example, we can show the value of a polynomial:<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g     = &quot; + show g<br>&gt;   putStrLn $ &quot;g*g+g = &quot; + show (g*g + g)</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>2017-01-02-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2017-01-02-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2017-01-02-Weekly-links.html</id>
+    <published>2017-01-02T00:00:00Z</published>
+    <updated>2017-01-02T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2017-01-02</h1>
+<!-- <aside>Posted on 2017-01-02</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/mikeizbicki/subhask/blob/master/examples/example0001-polynomials.lhs" >subhask/example0001-polynomials.lhs at master · mikeizbicki/subhask</a>
+    </dt>
+    <dd>&gt;   let f :: Ring x =&gt; x -&gt; x<br>&gt;       f x = x*x*x + x + 3<br>&gt;<br>&gt;   let a = 3 :: Integer<br>&gt;<br>&gt;   putStrLn $ &quot;f a = &quot; + show (f a)<br><br>Now, we&#39;ll create a polynomial from our ordinary function.<br><br>&gt;   let g :: Polynomial Integer<br>&gt;       g = provePolynomial f<br>&gt;<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g $ a = &quot; + show ( g $ a )<br><br>Polynomials support operations that other functions in Hask do not support.<br>For example, we can show the value of a polynomial:<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g     = &quot; + show g<br>&gt;   putStrLn $ &quot;g*g+g = &quot; + show (g*g + g)</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.fpcomplete.com/haskell-syllabus" >A Haskell Study Syllabus :: FP Complete</a>
+    </dt>
+    <dd>A Haskell Study Syllabus<br>Learn professional-grade Haskell coding practices quickly and efficiently</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.fstar-lang.org/tutorial/tutorial.html#sec-stateful-access-control" >Verified programming in F*</a>
+    </dt>
+    <dd>A hyper-heap provides organizes the heap into many disjoint fragments, or regions. Each region is collectively addressed by a region identifier, and these identifiers are organized in a tree-shaped hierarchy. Each region is itself a map from typed references to values, just like our heaps from before. The picture below depicts the structure.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://wiki.haskell.org/Bracket_pattern" >Bracket pattern - HaskellWiki</a>
+    </dt>
+    <dd>When acquiring, using, and releasing various resources, it can be quite convenient to write a function to manage the acquisition and releasing, taking a function of the acquired value that specifies an action to be performed in between.ほ</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://notes.pinboard.in/u:nrolland/e8f4196a4ae627475f38" >restart server whenever a new file is created in the .stack-work bin folder</a>
+    </dt>
+    <dd>If you&#39;re on Linux, you can install inotify-tools, run stack build --file-watch in one terminal and<br><br>(<br>  declare -i p<br>  trap &#39;kill &quot;$p&quot;&#39; EXIT<br>  while true; do<br>    stack exec server arg1 arg2  &amp; ...</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>example post</title>
+    <link href="http://xquant.net/posts/2015-08-25-example.html" />
+    <id>http://xquant.net/posts/2015-08-25-example.html</id>
+    <published>2015-08-25T00:00:00Z</published>
+    <updated>2015-08-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<?Xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>xQuant - example post</title>
+        <link rel="stylesheet" type="text/css" href="../css/lhs.css" />
+        <link rel="stylesheet" type="text/css" href="../css/styling.css" />
+        <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/atom.xml" /> 
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <div id="main-div" class="row;column;padding:0px">
+            <div class="top-bar">
+              <div class="top-bar-left">
+                <ul class="menu" style="margin:25px" data-dropdown-menu>
+                    <li class="menu-text"><h3><a href="../">Home</a></li></h3>
+               </ul>
+              </div>
+            </div>
+            <div id="content" class="row column main" style="min-height:500px">
+             
+              <h1>example post</h1>
+             <div class="info">
+    Posted on August 25, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../tags/interesting.html">interesting</a>
+    
+</div>
+
+
+<h1 id="title">Title</h1>
+<p>blabla Mauris in lorem nisl. Maecenas tempus facilisis ante, eget viverra nisl tincidunt et. Donec turpis lectus, mattis ac malesuada a, accumsan eu libero. Morbi condimentum, tortor et tincidunt ullamcorper, sem quam pretium nulla, id convallis lectus libero nec turpis. Proin dapibus nisi id est sodales nec ultrices tortor pellentesque.</p>
+<p>Vivamus vel nisi ac lacus sollicitudin vulputate ac ut ligula. Nullam feugiat risus eget eros gravida in molestie sapien euismod. Nunc sed hendrerit orci. Nulla mollis consequat lorem ac blandit. Ut et turpis mauris. Nulla est odio, posuere id ullamcorper sit amet, tincidunt vel justo. Curabitur placerat tincidunt varius. Nulla vulputate, ipsum eu consectetur mollis, dui nibh aliquam neque, at ultricies leo ligula et arcu.</p>
+
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer"> </div>
+        </footer>
+        <!-- Third-party -->
+        <script src="../js/jquery.min.js" type="application/javascript"></script>
+        <script src="../js/what-input.min.js" type="application/javascript"></script>
+        <script src="../js/foundation.min.js" type="application/javascript"></script>
+        <script>
+         ]]></summary>
+</entry>
+<entry>
+    <title>2015-07-08-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2015-07-08-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2015-07-08-Weekly-links.html</id>
+    <published>2015-07-08T00:00:00Z</published>
+    <updated>2015-07-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2015-07-08</h1>
+<!-- <aside>Posted on 2015-07-08</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README.md" >the-art-of-command-line/README.md at master · jlevy/the-art-of-command-line</a>
+    </dt>
+    <dd>Fluency on the command line is a skill often neglected or considered arcane, but it improves your flexibility and productivity as an engineer in both obvious and subtle ways. This is a selection of notes and tips on using the command-line that I&#39;ve found useful when working on Linux.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition" >FizzBuzz - EnterpriseEdition</a>
+    </dt>
+    <dd>Enterprise software marks a special high-grade class of software that makes careful use of relevant software architecture design principles to build particularly customizable and extensible solutions to real problems. This project is an example of how the popular FizzBuzz game might be built were it subject to the high quality standards of enterprise software.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/Laverna/laverna" >Laverna/laverna · GitHub</a>
+    </dt>
+    <dd>Laverna is a JavaScript note taking application with Markdown editor and encryption support. Consider it like open source alternative to Evernote. https://laverna.cc/index.html</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://showterm.io/" >showterm</a>
+    </dt>
+    <dd></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/gfredericks/test.chuck#string-from-regex" >gfredericks/test.chuck</a>
+    </dt>
+    <dd>string-from-regex is a suspiciously robust generator that will generate strings matching a regular expression</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>2015-06-10-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2015-06-10-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2015-06-10-Weekly-links.html</id>
+    <published>2015-06-10T00:00:00Z</published>
+    <updated>2015-06-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2015-06-10</h1>
+<!-- <aside>Posted on 2015-06-10</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.haskellforall.com/2012/05/scrap-your-type-classes.html" >Haskell for all: Scrap your type classes</a>
+    </dt>
+    <dd>we as Haskell programmers have been conditioned to believe that it is correct and normal to have operators change behavior silently when passed different arguments, which completely subverts type-safety.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.cb1.com/~john/computing/emacs/beyond-tutorial.html" >GNUemacs: beyond the tutorial</a>
+    </dt>
+    <dd>The Emacs tutorial introduces a few tens of commands; this document introduces around a hundred more that I have found useful (in over 25 years of using Emacs).</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://unisonweb.org/2015-05-22/why-compile.html" >Unison: Why are we still &quot;compiling&quot; and &quot;building&quot; code?</a>
+    </dt>
+    <dd>Compilation, linking, the whole notion of “building” programs being a phase separate from the act of editing them is a relic from the punchcard era</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/Laverna/laverna" >Laverna/laverna · GitHub</a>
+    </dt>
+    <dd>Laverna is a JavaScript note taking application with Markdown editor and encryption support. Consider it like open source alternative to Evernote. https://laverna.cc/index.html</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://showterm.io/" >showterm</a>
+    </dt>
+    <dd></dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>2013-09-16-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2013-09-16-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2013-09-16-Weekly-links.html</id>
+    <published>2013-09-16T00:00:00Z</published>
+    <updated>2013-09-16T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2013-09-16</h1>
+<!-- <aside>Posted on 2013-09-16</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.cs.cornell.edu/courses/cs312/2008sp/" >Data Structures and Functional Programming CS312 Home</a>
+    </dt>
+    <dd>A course from Computer Science Department- Cornell University</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.cs.princeton.edu/courses/archive/spring10/cos433/mathcs.pdf" >Mathematics for Computer Science - Eric Lehman and Tom Leighton MIT</a>
+    </dt>
+    <dd>25 lessons. 1 a day keeps bug away.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://theinternetwishlist.com/" >The Internet Wishlist</a>
+    </dt>
+    <dd>The Internet Wishlist is a collection of ideas for apps and websites people are wishing for. Think of it like a suggestion box for the future of technology. Ideas range from web to mobile, realistic to imaginary, and helpful to humorous. In a world of me-too startups, we hope this project inspires entrepreneurs, developers and designers to innovate and build the products and features that people want. To contribute, post an idea on Twitter and include #theiwl in your tweet</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.vagrantup.com/" >Vagrant</a>
+    </dt>
+    <dd>Create and configure lightweight, reproducible, and portable development environments</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://www.computing.dundee.ac.uk/staff/katya/ML4PG/sppics.pdf" >Statistical Proof-Patterns in Coq/SSReflect</a>
+    </dt>
+    <dd>In this paper, we are making the rst steps towards automated detection of signi cant proof patterns in Coq/SSReflect</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+
+</feed>
