@@ -1,0 +1,110 @@
+<?Xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>xQuant - Directed Acyclic Graphs</title>
+        <link rel="stylesheet" type="text/css" href="../../css/lhs.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/styling.css" />
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <div id="main-div" class="row;column;padding:0px">
+            <div class="top-bar">
+              <div class="top-bar-left">
+                <ul class="menu" style="margin:25px" data-dropdown-menu>
+                    <li class="menu-text"><h3><a href="../../">Home</a></li></h3>
+               </ul>
+              </div>
+            </div>
+            <div id="content" class="row column main" style="min-height:500px">
+             
+              <h1>Directed Acyclic Graphs</h1>
+             <div class="info">
+    Posted on February  3, 2017
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+<p>(just imports ignore that)</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Protolude</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Examples.Fold</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">AG</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.AG</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.Render</span>
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.FilePath</span>  ((&lt;/&gt;))
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Directory</span> (getTemporaryDirectory)
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Process</span>   (system)
+<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.IO.Unsafe</span> (unsafePerformIO )</code></pre></div>
+<h5 id="section"></h5>
+<hr />
+<h2 id="representing-graphs">Representing graphs</h2>
+<p>There are a few ways to represent a graph:</p>
+<ul>
+<li>as a list of Nodes and a list of edges</li>
+<li>as a list of neighbors</li>
+</ul>
+<p>each representation is optimized for a runtime behaviour (cf Kormen) but it’s useful to abstract representation to express operations. A convenient way to abstract over those representations is shown in <a href="https://scholar.google.fr/scholar?cluster=6598618604128829558&amp;hl=en&amp;as_sdt=0,5&amp;sciodt=0,5">Fun with type function</a></p>
+<p>But what if we could abuse haskell somehow to represent graph not with some external description but with haskell itself ?</p>
+<hr />
+<h2 id="breaking-referential-transparency">Breaking referential transparency</h2>
+<p>We want to write graph that way</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph1 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
+<span class="ot">&gt;</span> graph1 <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) a) b
+<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>)(iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
+<span class="ot">&gt;</span>                  b <span class="fu">=</span> a</code></pre></div>
+<p>instead of some variation of</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="co">-- graph1' = mkDag (Node (Node (Leaf 2) (Ref 0)) (Ref 0)) [(0, Node (Node (Leaf 2) (Leaf 2)) (Leaf 2))]</span></code></pre></div>
+<p>But normally, in Haskell there should be no way to distinguish graph1 from</p>
+<p>from</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph2 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
+<span class="ot">&gt;</span> graph2 <span class="fu">=</span>  iNode (iNode (iLeaf <span class="dv">2</span>) a) b
+<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
+<span class="ot">&gt;</span>                  b <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</code></pre></div>
+<p>But we can actually abuse haskell by going to <code>IO</code> and relying on some implementation of GHC to observe the sharing using <a href="https://scholar.google.fr/scholar?cluster=13707349448701947240&amp;hl=en&amp;as_sdt=0,5&amp;sciodt=0,5">Type-safe observable sharing in Haskell</a> a technique implemented and extended in <a href="http://hackage.haskell.org/package/data-reify">data-reify</a></p>
+<p>With this we can produce two different output for two values which <em>should have been</em> be undistinguishable.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">graph1</th>
+<th align="center">graph2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><img src="static/graph1.svg" /></td>
+<td align="center"><img src="static/graph2.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>basically the second graph is maximal sharing of subnodes. because we only ever use names like a and b once, they are irrelevant. whereas in the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph. to make sure they are equal, the equivalent relation a = b gets its own private copy which is not shared with other subgraphs.</p>
+<p>using this we can directly represent graphs with haskell which is convienent and more visual than labeling nodes. indeed compare the code, visual, with the following ‘normal’ representation of first and second example.</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; main ::</span> <span class="dt">IO</span> ()
+<span class="ot">&gt;</span> main <span class="fu">=</span> <span class="kw">do</span> putStrLn (<span class="st">&quot;building assets&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)
+<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph1) <span class="st">&quot;./static/graph1&quot;</span>
+<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph2) <span class="st">&quot;./static/graph2&quot;</span>
+<span class="ot">&gt;</span>           writeFile  <span class="st">&quot;./static/graph1.txt&quot;</span>  (show <span class="fu">.</span> unsafePerformIO <span class="fu">$</span> reifyDag graph1) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; renderDag2 ::</span>  (<span class="dt">ShowConstr</span> f, <span class="dt">Traversable</span> f) <span class="ot">=&gt;</span>  <span class="dt">Dag</span> f <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
+<span class="ot">&gt;</span> renderDag2 dag fn <span class="fu">=</span> <span class="kw">do</span>
+<span class="ot">&gt;</span>    tmpd <span class="ot">&lt;-</span> getTemporaryDirectory
+<span class="ot">&gt;</span>    <span class="kw">let</span> tmpf <span class="fu">=</span> tmpd <span class="fu">&lt;/&gt;</span> <span class="st">&quot;523452345234&quot;</span>
+<span class="ot">&gt;</span>    renderDag dag tmpf
+<span class="ot">&gt;</span>    system <span class="fu">$</span> <span class="st">&quot;dot -Tsvg &quot;</span> <span class="fu">++</span> tmpf <span class="fu">++</span> <span class="st">&quot; -o &quot;</span> <span class="fu">++</span> toS fn <span class="fu">++</span> <span class="st">&quot;.svg&quot;</span>
+<span class="ot">&gt;</span>    return ()</code></pre></div>
+<hr />
+
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer"> </div>
+        </footer>
+        <!-- Third-party -->
+        <script src="../../js/jquery.min.js" type="application/javascript"></script>
+        <script src="../../js/what-input.min.js" type="application/javascript"></script>
+        <script src="../../js/foundation.min.js" type="application/javascript"></script>
+        <script>
+         

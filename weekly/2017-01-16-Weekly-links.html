@@ -1,0 +1,40 @@
+<h1>Weekly links for 2017-01-16</h1>
+<!-- <aside>Posted on 2017-01-16</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://knsv.github.io/mermaid/#mermaid" >mermaid - Generation of diagrams and flowcharts from text in a similar manner as markdown.</a>
+    </dt>
+    <dd></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://downloads.haskell.org/%7Eghc/master/users-guide/glasgow_exts.html#ghc-flag--XTypeApplications" >9.1. Language options — Glasgow Haskell Compiler &lt;release&gt; Users Guide</a>
+    </dt>
+    <dd>For example, we can have pair :: forall a. a -&gt; forall b. b -&gt; (a, b) and then say pair @Bool True @Char which would have type Char -&gt; (Bool, Char).</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/cies/htoml" >cies/htoml: TOML file format parser in Haskell</a>
+    </dt>
+    <dd>A TOML parser library in Haskell.<br><br>TOML is the obvious, minimal configuration language by Tom Preston-Werner. It is an alternative to the XML, YAML and INI formats mainly for the purpose of configuration files. Many will find that XML and YAML are too heavy for the purpose of configuration files prupose while INI is underspecified. TOML is to configuration files, like what Markdown is for rich-text.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/kcsongor/register-machine-type" >kcsongor/register-machine-type: Universal Register Machine implemented at the type-level of Haskell</a>
+    </dt>
+    <dd>Initialises R1 to 5, then raises 2 to the power of the value of R1, leaving the result (32) in R0. Uses R2 as a scratch register, thus the machine is initialised with 3 registers.<br><br>pow2 :: (&#39;Halted a (r &#39;: rs) ~<br>            Run<br>              &#39;[<br>              -- Instr              | label index<br>              -- set R1 to 5<br>                Inc (R 1) (L 1)             -- 0<br>              , Inc (R 1) (L 2)             -- 1<br>              , Inc (R 1) (L 3)             -- 2<br>              , Inc (R 1) (L 4)             -- 3<br>              , Inc (R 1) (L 5)             -- 4<br>              -- set R0 to 1<br>              , Inc (R 0) (L 6)             -- 5<br>              -- R0 = 2^R1<br>              , Dec (R 1) (L 7) (L 12)      -- 6<br>              -- R2 = R0<br>              , Dec (R 0) (L 8) (L 9)       -- 7<br>              , Inc (R 2) (L 7)             -- 8<br>              -- R0 = 2*R2<br>              , Dec (R 2) (L 10) (L 6)      -- 9<br>              , Inc (R 0) (L 11)            -- 10<br>              , Inc (R 0) (L 9)             -- 11<br><br>              , Halt                        -- 12<br>              ]) =&gt; Proxy r<br>pow2 = Proxy</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/mikeizbicki/subhask/blob/master/examples/example0001-polynomials.lhs" >subhask/example0001-polynomials.lhs at master ·よ mikeizbicki/subhask</a>
+    </dt>
+    <dd>&gt;   let f :: Ring x =&gt; x -&gt; x<br>&gt;       f x = x*x*x + x + 3<br>&gt;<br>&gt;   let a = 3 :: Integer<br>&gt;<br>&gt;   putStrLn $ &quot;f a = &quot; + show (f a)<br><br>Now, we&#39;ll create a polynomial from our ordinary function.<br><br>&gt;   let g :: Polynomial Integer<br>&gt;       g = provePolynomial f<br>&gt;<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g $ a = &quot; + show ( g $ a )<br><br>Polynomials support operations that other functions in Hask do not support.<br>For example, we can show the value of a polynomial:<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g     = &quot; + show g<br>&gt;   putStrLn $ &quot;g*g+g = &quot; + show (g*g + g)</dd>
+    </div>
+    
+</article>

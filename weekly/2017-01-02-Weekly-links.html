@@ -1,0 +1,40 @@
+<h1>Weekly links for 2017-01-02</h1>
+<!-- <aside>Posted on 2017-01-02</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/mikeizbicki/subhask/blob/master/examples/example0001-polynomials.lhs" >subhask/example0001-polynomials.lhs at master · mikeizbicki/subhask</a>
+    </dt>
+    <dd>&gt;   let f :: Ring x =&gt; x -&gt; x<br>&gt;       f x = x*x*x + x + 3<br>&gt;<br>&gt;   let a = 3 :: Integer<br>&gt;<br>&gt;   putStrLn $ &quot;f a = &quot; + show (f a)<br><br>Now, we&#39;ll create a polynomial from our ordinary function.<br><br>&gt;   let g :: Polynomial Integer<br>&gt;       g = provePolynomial f<br>&gt;<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g $ a = &quot; + show ( g $ a )<br><br>Polynomials support operations that other functions in Hask do not support.<br>For example, we can show the value of a polynomial:<br>&gt;   putStrLn &quot;&quot;<br>&gt;   putStrLn $ &quot;g     = &quot; + show g<br>&gt;   putStrLn $ &quot;g*g+g = &quot; + show (g*g + g)</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.fpcomplete.com/haskell-syllabus" >A Haskell Study Syllabus :: FP Complete</a>
+    </dt>
+    <dd>A Haskell Study Syllabus<br>Learn professional-grade Haskell coding practices quickly and efficiently</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.fstar-lang.org/tutorial/tutorial.html#sec-stateful-access-control" >Verified programming in F*</a>
+    </dt>
+    <dd>A hyper-heap provides organizes the heap into many disjoint fragments, or regions. Each region is collectively addressed by a region identifier, and these identifiers are organized in a tree-shaped hierarchy. Each region is itself a map from typed references to values, just like our heaps from before. The picture below depicts the structure.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://wiki.haskell.org/Bracket_pattern" >Bracket pattern - HaskellWiki</a>
+    </dt>
+    <dd>When acquiring, using, and releasing various resources, it can be quite convenient to write a function to manage the acquisition and releasing, taking a function of the acquired value that specifies an action to be performed in between.ほ</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://notes.pinboard.in/u:nrolland/e8f4196a4ae627475f38" >restart server whenever a new file is created in the .stack-work bin folder</a>
+    </dt>
+    <dd>If you&#39;re on Linux, you can install inotify-tools, run stack build --file-watch in one terminal and<br><br>(<br>  declare -i p<br>  trap &#39;kill &quot;$p&quot;&#39; EXIT<br>  while true; do<br>    stack exec server arg1 arg2  &amp; ...</dd>
+    </div>
+    
+</article>
