@@ -82,6 +82,8 @@
 </table>
 <p>basically the second graph is maximal sharing of subnodes. because we only ever use names like a and b once, they are irrelevant. whereas in the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph. to make sure they are equal, the equivalent relation a = b gets its own private copy which is not shared with other subgraphs.</p>
 <p>using this we can directly represent graphs with haskell which is convienent and more visual than labeling nodes. indeed compare the code, visual, with the following ‘normal’ representation of first and second example.</p>
+<p>TBC</p>
+<h2 id="junk">junk</h2>
 <div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; main ::</span> <span class="dt">IO</span> ()
 <span class="ot">&gt;</span> main <span class="fu">=</span> <span class="kw">do</span> putStrLn (<span class="st">&quot;building assets&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)
 <span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph1) <span class="st">&quot;./static/graph1&quot;</span>
