@@ -8,8 +8,40 @@
         <name>Nicolas Rolland</name>
         <email></email>
     </author>
-    <updated>2017-03-23T00:00:00Z</updated>
+    <updated>2017-03-27T00:00:00Z</updated>
     <entry>
+    <title>let's draw stuff</title>
+    <link href="http://xquant.net/notes/cats1and2/readme.html" />
+    <id>http://xquant.net/notes/cats1and2/readme.html</id>
+    <published>2017-03-27T00:00:00Z</published>
+    <updated>2017-03-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 27, 2017
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; example1 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span>
+<span class="ot">&gt;</span> example1 <span class="fu">=</span> square <span class="dv">1</span> <span class="fu">#</span> fc red
+<span class="ot">&gt;</span>                    <span class="fu">#</span> lw veryThick
+<span class="ot">&gt;</span>                    <span class="fu">#</span> lc black
+<span class="ot">&gt;</span>                    <span class="fu">#</span> dashingG [<span class="fl">0.2</span>,<span class="fl">0.05</span>] <span class="dv">0</span></code></pre></div>
+<p>Diagram from above : <img src="static/example1.svg" /></p>
+<p>Or from the library :</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> out11 <span class="fu">=</span><span class="ot"> example11 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></code></pre></div>
+<div class="figure">
+<img src="static/out11.svg" />
+
+</div>
+<p>which means we can go deep with some project, using standard tools, and then provide a good summary of the artefact it can produce</p>
+
+]]></summary>
+</entry>
+<entry>
     <title>2017-03-23-Weekly-links</title>
     <link href="http://xquant.net/weekly/2017-03-23-Weekly-links.html" />
     <id>http://xquant.net/weekly/2017-03-23-Weekly-links.html</id>
@@ -72,16 +104,7 @@
 </div>
 
 
-<p>(just imports ignore that)</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Protolude</span>
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Examples.Fold</span>
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">AG</span>
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.AG</span>
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Dag.Render</span>
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.FilePath</span>  ((&lt;/&gt;))
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Directory</span> (getTemporaryDirectory)
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.Process</span>   (system)
-<span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">System.IO.Unsafe</span> (unsafePerformIO )</code></pre></div>
+
 <h5 id="section"></h5>
 <hr />
 <h2 id="representing-graphs">Representing graphs</h2>
@@ -126,20 +149,7 @@
 <p>basically the second graph is maximal sharing of subnodes. because we only ever use names like a and b once, they are irrelevant. whereas in the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph. to make sure they are equal, the equivalent relation a = b gets its own private copy which is not shared with other subgraphs.</p>
 <p>using this we can directly represent graphs with haskell which is convienent and more visual than labeling nodes. indeed compare the code, visual, with the following ‘normal’ representation of first and second example.</p>
 <p>TBC</p>
-<h2 id="junk">junk</h2>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; main ::</span> <span class="dt">IO</span> ()
-<span class="ot">&gt;</span> main <span class="fu">=</span> <span class="kw">do</span> putStrLn (<span class="st">&quot;building assets&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)
-<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph1) <span class="st">&quot;./static/graph1&quot;</span>
-<span class="ot">&gt;</span>           renderDag2 (unsafePerformIO <span class="fu">$</span> reifyDag graph2) <span class="st">&quot;./static/graph2&quot;</span>
-<span class="ot">&gt;</span>           writeFile  <span class="st">&quot;./static/graph1.txt&quot;</span>  (show <span class="fu">.</span> unsafePerformIO <span class="fu">$</span> reifyDag graph1) </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; renderDag2 ::</span>  (<span class="dt">ShowConstr</span> f, <span class="dt">Traversable</span> f) <span class="ot">=&gt;</span>  <span class="dt">Dag</span> f <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-<span class="ot">&gt;</span> renderDag2 dag fn <span class="fu">=</span> <span class="kw">do</span>
-<span class="ot">&gt;</span>    tmpd <span class="ot">&lt;-</span> getTemporaryDirectory
-<span class="ot">&gt;</span>    <span class="kw">let</span> tmpf <span class="fu">=</span> tmpd <span class="fu">&lt;/&gt;</span> <span class="st">&quot;523452345234&quot;</span>
-<span class="ot">&gt;</span>    renderDag dag tmpf
-<span class="ot">&gt;</span>    system <span class="fu">$</span> <span class="st">&quot;dot -Tsvg &quot;</span> <span class="fu">++</span> tmpf <span class="fu">++</span> <span class="st">&quot; -o &quot;</span> <span class="fu">++</span> toS fn <span class="fu">++</span> <span class="st">&quot;.svg&quot;</span>
-<span class="ot">&gt;</span>    return ()</code></pre></div>
-<hr />
+
 ]]></summary>
 </entry>
 <entry>
