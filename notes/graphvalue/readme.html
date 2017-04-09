@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../../css/lhs.css" />
         <link rel="stylesheet" type="text/css" href="../../css/styling.css" />
         <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/atom.xml" /> 
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
     </head>
     <body>
@@ -76,6 +76,11 @@
 <p>basically the second graph is maximal sharing of subnodes. because we only ever use names like a and b once, they are irrelevant. whereas in the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph. to make sure they are equal, the equivalent relation a = b gets its own private copy which is not shared with other subgraphs.</p>
 <p>using this we can directly represent graphs with haskell which is convienent and more visual than labeling nodes. indeed compare the code, visual, with the following ‘normal’ representation of first and second example.</p>
 <p>TBC</p>
+<ul>
+<li>traversals (control)</li>
+<li>names (polymorphism)</li>
+<li>regions (applicative batching, compdata)</li>
+</ul>
 
 
             </div>
