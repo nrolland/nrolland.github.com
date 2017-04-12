@@ -36,7 +36,8 @@
 <h1 id="raw">Raw</h1>
 <p>First do everything in a single file can be a good strategy for fast results. But abstracting away can also <em>drive</em> the design, which means it pays off for itself directly upfront.</p>
 <h1 id="modules-and-abstraction">Modules and abstraction</h1>
-<p>Separates the service provided from the implementation, in particular the data representation, chosen. The representation choice influence the execution, not the service provided.</p>
+<p>Separates the service provided from the implementation, in particular the data <em>representation</em>, chosen.</p>
+<p>Representation choice adresses the <em>algorithmic</em> concerns. It influence the execution, not the service provided.</p>
 <p>For instance this logger shields the intermal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">#!/usr/bin/env stack</span>
 <span class="co">-- stack script --resolver lts-8.8</span>
