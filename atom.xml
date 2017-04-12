@@ -27,7 +27,7 @@
 
 <p>This is a series of strategies and code from <a href="http://www.cs.ox.ac.uk/ralf.hinze/publications/With.pdf">fun with phantom type</a> The paper spans a few aspects, this is a first part.</p>
 <h1 id="raw">Raw</h1>
-<p>First do everything in a single file can be a good strategy for fast results. But abstracting away can also serve as a design guide.</p>
+<p>First do everything in a single file can be a good strategy for fast results. But abstracting away can also <em>drive</em> the design, which means it pays off for itself directly upfront.</p>
 <h1 id="modules-and-abstraction">Modules and abstraction</h1>
 <p>Separates the service provided from the implementation, in particular the data representation, chosen. The representation choice influence the execution, not the service provided.</p>
 <p>For instance this logger shields the intermal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
