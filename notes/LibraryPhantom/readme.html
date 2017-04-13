@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>xQuant - Library design</title>
+        <title>xQuant - Design - part 1 - controlling export with modules and types</title>
         <link rel="stylesheet" type="text/css" href="../../css/lhs.css" />
         <link rel="stylesheet" type="text/css" href="../../css/styling.css" />
         <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/atom.xml" /> 
@@ -21,7 +21,7 @@
             </div>
             <div id="content" class="row column main" style="min-height:500px">
              
-              <h1>Library design</h1>
+              <h1>Design - part 1 - controlling export with modules and types</h1>
              <div class="info">
     Posted on April  9, 2017
     
@@ -38,7 +38,7 @@
 <h1 id="modules-and-abstraction">Modules and abstraction</h1>
 <p>Separates the service provided from the implementation, in particular the data <em>representation</em>, chosen.</p>
 <p>Representation choice adresses the <em>algorithmic</em> concerns. It influence the execution, not the service provided.</p>
-<p>For instance this logger shields the intermal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
+<p>For instance this logger shields the internal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">#!/usr/bin/env stack</span>
 <span class="co">-- stack script --resolver lts-8.8</span>
 
@@ -116,6 +116,7 @@ main <span class="fu">=</span> test</code></pre></div>
 <h1 id="modules-pattern-in-haskell">Modules pattern in haskell</h1>
 <p>One can add a file whose sole purpose is to perform abstraction : This file control what gets exported out, but has no code. Internal directory contains all the code and contian no export control, everything is public as far as it is concerned.</p>
 <p>In <a href="https://github.com/turingjump/bookkeeper">bookeeper</a>, the file <a href="https://github.com/turingjump/bookkeeper/blob/master/src/Bookkeeper.hs">bookkeeper.hs</a> does exactly that.</p>
+<p>More advanced strategies will be available with <a href="http://plv.mpi-sws.org/backpack/">backpack</a> soon</p>
 <h1 id="phantom-type">Phantom type</h1>
 <p>illustrating ideas from <a href="http://www.cs.ox.ac.uk/ralf.hinze/publications/With.pdf">fun with phantom type</a> the commented code is from <a href="https://gist.github.com/linusyang/4057470cf96b88d13bd8">here</a></p>
 <p>The name “phantom types” is motivated by the fact that no actual data is ever attached to those types. Types are usually seen as a property of some data.</p>

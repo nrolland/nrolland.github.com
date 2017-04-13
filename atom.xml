@@ -8,9 +8,133 @@
         <name>Nicolas Rolland</name>
         <email></email>
     </author>
-    <updated>2017-04-09T00:00:00Z</updated>
+    <updated>2017-04-12T00:00:00Z</updated>
     <entry>
-    <title>Library design</title>
+    <title>Design - part 2 - Putting types to work</title>
+    <link href="http://xquant.net/notes/TypeRep/readme.html" />
+    <id>http://xquant.net/notes/TypeRep/readme.html</id>
+    <published>2017-04-12T00:00:00Z</published>
+    <updated>2017-04-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on April 12, 2017
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+
+<p>Where we venture into using types as drivers, not just as verifiers.</p>
+<p>illustrating ideas from <a href="http://www.cs.ox.ac.uk/ralf.hinze/publications/With.pdf">fun with phantom type</a> the commented code is from <a href="https://gist.github.com/linusyang/4057470cf96b88d13bd8">here</a></p>
+<h1 id="warmup---interpreter">Warmup - Interpreter</h1>
+<p>If we represent a language with untyped <code>Exp</code> data type, when consuming a represented program, we have to add type coercions to convince the type system : we check the value of type <code>Exp</code> received <em>really</em> contains the expected data inside, and we assert that to the compiler in some way to do something with it.</p>
+<p>If we use GADT, some extra type information is packed with the data constructor/destructor. as we pattern math on the value, the type become more precise as the index gets fixed. we uncover type information as we uncover data information.</p>
+<p>This makes evaluation straightforward :</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Term1</span> a <span class="kw">where</span>
+  <span class="dt">Zero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span>
+  <span class="dt">Succ</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span>
+  <span class="dt">Pred</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span>
+  <span class="dt">IsZero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span>  <span class="ot">-&gt;</span>  <span class="dt">Term1</span> <span class="dt">Bool</span>
+  <span class="dt">If</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a
+
+<span class="ot">eval ::</span> forall a<span class="fu">.</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> a
+eval (<span class="dt">Zero</span> <span class="co">{- a is bound to Int from here-}</span>)  <span class="fu">=</span> <span class="dv">0</span> <span class="co">-- so 0 :: Int</span>
+eval (<span class="dt">Succ</span> n<span class="co">{- a is bound to Int from here-}</span>) <span class="fu">=</span> eval n <span class="co">{-:: Int -}</span> <span class="fu">+</span> <span class="dv">1</span> <span class="co">-- type correct</span>
+eval (<span class="dt">Pred</span> n)                                 <span class="fu">=</span> eval n <span class="fu">-</span> <span class="dv">1</span>
+eval (<span class="dt">IsZero</span> n)                               <span class="fu">=</span> eval n <span class="fu">==</span> <span class="dv">0</span>
+eval (<span class="dt">If</span> e1 e2 e3) <span class="fu">=</span> <span class="kw">if</span> eval e1 <span class="kw">then</span> eval e2 <span class="kw">else</span> eval e3</code></pre></div>
+<p>There can not be a function <code>map :: (a -&gt; b) -&gt; Term1 a -&gt; Term1 b</code></p>
+<p>The type index in term does not mean there is a value of that type in it to apply <code>a -&gt; b</code> to. It is called a “phantom type”, other name for an type index seen as a “pure index” <code>a</code> for the overall type <code>Term a</code>, not necessarily linked to a data. The type level has a life on its own. It more accurately reflect <em>static</em> information. the type of some variable, is, in a static language, part of the available information statically, but only a subset of it.</p>
+<h1 id="generic-function">Generic Function</h1>
+<h2 id="the-problem">The problem</h2>
+<p>We want to compress data. We would like the same procedure to works for many types of data, provided its type can be described as a combination of basic types. This description could have been a type level description through with type classes, but here we have a value describing a type <code>a</code>. that value, named representation of a type will be of type <code>Type a</code>.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Type</span> a <span class="kw">where</span>
+  <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Int</span>
+  <span class="dt">RChar</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Char</span>
+  <span class="dt">RList</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> [a]
+  <span class="dt">RPair</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a, b)
+  <span class="dt">RDyn</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Dynamic</span>
+  <span class="dt">RFun</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a <span class="ot">-&gt;</span> b)
+  <span class="dt">RPerson</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Person</span>
+
+<span class="ot">rString ::</span> <span class="dt">Type</span> <span class="dt">String</span>
+rString <span class="fu">=</span> <span class="dt">RList</span> <span class="dt">RChar</span></code></pre></div>
+<p>Our goal is to parameterize a function <code>compress</code> with the representation of the type of the value given. Different values yield different types for the resulting curried function</p>
+<p>With all this we have access to the following magically safe operations :</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> _ <span class="fu">=</span> compress <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+<span class="ot">&gt;</span> _ <span class="fu">=</span> compress (<span class="dt">RPair</span> <span class="dt">RInt</span> <span class="dt">RChar</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>) <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</code></pre></div>
+<p>(Having the compiler to find a representation for any types is the subject of <a href="https://www.seas.upenn.edu/~sweirich/papers/wadlerfest2016.pdf">a reflection on types</a> see also <a href="https://www.cis.upenn.edu/~sweirich/talks/compose16.pdf">slides</a> in ghc 8.2)</p>
+<p>This is achieved in a similar way that the <code>eval</code> function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Bit</span> <span class="fu">=</span> <span class="dt">Int</span>
+
+<span class="ot">toBinary ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+toBinary <span class="dv">0</span> <span class="fu">=</span> []
+toBinary x <span class="fu">=</span> (x <span class="ot">`mod`</span> <span class="dv">2</span>) <span class="fu">:</span> (toBinary <span class="fu">$</span> x <span class="ot">`div`</span> <span class="dv">2</span>)
+
+<span class="ot">toNumber&#39; ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
+toNumber&#39; [] _       <span class="fu">=</span> <span class="dv">0</span>
+toNumber&#39; (b <span class="fu">:</span> bs) t <span class="fu">=</span> b <span class="fu">*</span> t <span class="fu">+</span> toNumber&#39; bs (t <span class="fu">*</span> <span class="dv">2</span>)
+
+<span class="ot">toNumber ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span>
+toNumber <span class="fu">=</span> flip toNumber&#39; <span class="dv">1</span>
+
+<span class="ot">padding ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+padding p x <span class="fu">=</span> <span class="kw">let</span> b <span class="fu">=</span> toBinary x
+                  len <span class="fu">=</span> length b
+              <span class="kw">in</span> <span class="kw">if</span> p <span class="fu">&lt;=</span> len <span class="kw">then</span> b
+                 <span class="kw">else</span> b <span class="fu">++</span> take (p <span class="fu">-</span> len) (repeat <span class="dv">0</span>)
+
+<span class="ot">compressInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+compressInt <span class="fu">=</span> padding <span class="dv">32</span>
+
+<span class="ot">compressChar ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+compressChar x <span class="fu">=</span> padding <span class="dv">7</span> <span class="fu">$</span> ord x
+
+<span class="ot">compress ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
+compress <span class="dt">RInt</span> x               <span class="fu">=</span> compressInt x
+compress <span class="dt">RChar</span> c              <span class="fu">=</span> compressChar c
+compress (<span class="dt">RList</span> _) []         <span class="fu">=</span> <span class="dv">0</span><span class="fu">:</span>[]
+compress (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs)  <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> compress ra x <span class="fu">++</span> compress (<span class="dt">RList</span> ra) xs
+compress (<span class="dt">RPair</span> ra rb) (x, y) <span class="fu">=</span> compress ra x <span class="fu">++</span> compress rb y
+compress <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x)      <span class="fu">=</span> compressRep (<span class="dt">Rep</span> ra) <span class="fu">++</span> compress ra x
+</code></pre></div>
+<p>The <em>correct</em> way to see <code>compress</code> is as a <em>family</em> of functions, indexed by a value representing a type. We could index directly with a type, and get rid of the representation. This then requires type classes. Type class allow to talk about, say, <em>compressable</em> types and require that as an implicit constraint. The compiler would do for you the job of selecting the correct function from this famility with no representation being passed around. Another difference is that this selection would wire the correct function at static time and not require an interpretation at run time resulting in faster code.</p>
+<h2 id="equality-comparison-..">Equality, comparison, ..</h2>
+<p>To see that this is a general concept, we can provide generically other operations which are naturally thought of as <em>generic</em> : if we can compare the parts, we should be able to compare structures made of the parts.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">eq ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+eq <span class="dt">RInt</span> x y <span class="fu">=</span> x <span class="fu">==</span> y
+eq <span class="dt">RChar</span> x y <span class="fu">=</span> x <span class="fu">==</span> y
+eq (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">True</span>
+eq (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">|</span> eq ra x y <span class="fu">=</span> eq (<span class="dt">RList</span> ra) xs ys
+                                <span class="fu">|</span> otherwise <span class="fu">=</span> <span class="dt">False</span>
+eq (<span class="dt">RList</span> _) _ _ <span class="fu">=</span> <span class="dt">False</span>
+eq (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> eq ra x x&#39; <span class="fu">&amp;&amp;</span> eq rb y y&#39;
+eq <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span>
+                                 <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="dt">False</span>
+                                 <span class="dt">Just</span> f  <span class="ot">-&gt;</span> eq rb (f x) y
+
+compare<span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Ordering</span>
+compare <span class="dt">RInt</span> x y <span class="fu">=</span> DO.compare x y
+compare <span class="dt">RChar</span> x y <span class="fu">=</span> DO.compare x y
+compare (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">EQ</span>
+compare (<span class="dt">RList</span> _) [] (_ <span class="fu">:</span> _) <span class="fu">=</span> <span class="dt">LT</span>
+compare (<span class="dt">RList</span> _) (_ <span class="fu">:</span> _) [] <span class="fu">=</span> <span class="dt">GT</span>
+compare (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">=</span> <span class="kw">if</span> result <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> compare (<span class="dt">RList</span> ra) xs ys
+                                       <span class="kw">else</span> result
+  <span class="kw">where</span> result <span class="fu">=</span> compare ra x y
+compare (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> <span class="kw">if</span> first <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> compare rb y y&#39; <span class="kw">else</span> first
+  <span class="kw">where</span> first <span class="fu">=</span> compare ra x x&#39;
+compare <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span>
+                                      <span class="dt">Nothing</span> <span class="ot">-&gt;</span> error <span class="st">&quot;cannot compare&quot;</span>
+                                      <span class="dt">Just</span> f  <span class="ot">-&gt;</span> compare rb (f x) y</code></pre></div>
+<h1 id="the-open-world">The open world</h1>
+<p>TBC</p>
+
+]]></summary>
+</entry>
+<entry>
+    <title>Design - part 1 - controlling export with modules and types</title>
     <link href="http://xquant.net/notes/LibraryPhantom/readme.html" />
     <id>http://xquant.net/notes/LibraryPhantom/readme.html</id>
     <published>2017-04-09T00:00:00Z</published>
@@ -31,7 +155,7 @@
 <h1 id="modules-and-abstraction">Modules and abstraction</h1>
 <p>Separates the service provided from the implementation, in particular the data <em>representation</em>, chosen.</p>
 <p>Representation choice adresses the <em>algorithmic</em> concerns. It influence the execution, not the service provided.</p>
-<p>For instance this logger shields the intermal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
+<p>For instance this logger shields the internal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">#!/usr/bin/env stack</span>
 <span class="co">-- stack script --resolver lts-8.8</span>
 
@@ -109,6 +233,7 @@ main <span class="fu">=</span> test</code></pre></div>
 <h1 id="modules-pattern-in-haskell">Modules pattern in haskell</h1>
 <p>One can add a file whose sole purpose is to perform abstraction : This file control what gets exported out, but has no code. Internal directory contains all the code and contian no export control, everything is public as far as it is concerned.</p>
 <p>In <a href="https://github.com/turingjump/bookkeeper">bookeeper</a>, the file <a href="https://github.com/turingjump/bookkeeper/blob/master/src/Bookkeeper.hs">bookkeeper.hs</a> does exactly that.</p>
+<p>More advanced strategies will be available with <a href="http://plv.mpi-sws.org/backpack/">backpack</a> soon</p>
 <h1 id="phantom-type">Phantom type</h1>
 <p>illustrating ideas from <a href="http://www.cs.ox.ac.uk/ralf.hinze/publications/With.pdf">fun with phantom type</a> the commented code is from <a href="https://gist.github.com/linusyang/4057470cf96b88d13bd8">here</a></p>
 <p>The name “phantom types” is motivated by the fact that no actual data is ever attached to those types. Types are usually seen as a property of some data.</p>
