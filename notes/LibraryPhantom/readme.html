@@ -124,7 +124,12 @@ main <span class="fu">=</span> test</code></pre></div>
 <p>Example from the <a href="https://wiki.haskell.org/Phantom_type">haskell wiki</a></p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- you have no *data* constructor, you can not create value of that type</span>
 <span class="co">-- but you can still *talk* about that type, whose values might be handed to you</span>
-<span class="kw">module</span> <span class="dt">MyAPI</span>(<span class="dt">FormData</span>) <span class="kw">where</span>
+<span class="kw">module</span> <span class="dt">MyAPI</span>(<span class="dt">FormData</span>, <span class="co">--type constructor</span>
+             formData, <span class="co">-- smart constructor WE decide at what index values are created</span>
+             validate, <span class="co">-- normal API</span>
+             useData,
+             lifSmallChange,
+            ) <span class="kw">where</span>
 
 <span class="kw">import           </span><span class="dt">Protolude</span>
 
@@ -167,6 +172,34 @@ liftSmallChange <span class="fu">=</span> undefined <span class="co">-- logic wh
 <span class="ot">liftBigChange ::</span> (<span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>) <span class="ot">-&gt;</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span>
 liftBigChange <span class="fu">=</span> undefined <span class="co">-- logic which can touch anything</span></code></pre></div>
 <p>with this, we separate validation from action, and prevent you from tampering after it’s validated, while still allowing you maximum freedom in how you operate. we keep control, you keep freedom</p>
+<h1 id="middleware-pattern">Middleware pattern</h1>
+<p>one direct example of this is the middleware pattern</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Middleware</span>(<span class="dt">EndForYou</span>, <span class="co">--type constructor</span>
+                  serve
+            ) <span class="kw">where</span>
+
+<span class="kw">import           </span><span class="dt">Protolude</span>
+
+<span class="kw">data</span> <span class="dt">EndForYou</span> <span class="kw">where</span>
+   <span class="dt">TheEndCtor</span><span class="ot"> ::</span> <span class="dt">EndForYou</span>
+
+
+app0 <span class="fu">=</span><span class="ot"> undefined ::</span> response
+app1 <span class="fu">=</span><span class="ot"> undefined ::</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
+app2 <span class="fu">=</span><span class="ot"> undefined ::</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
+
+
+<span class="kw">type</span> <span class="dt">Application</span> input response m <span class="fu">=</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
+
+<span class="ot">serve ::</span> <span class="dt">Application</span> input output m <span class="ot">-&gt;</span> input <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
+serve yourServer input <span class="fu">=</span> (yourServer input) process
+  <span class="kw">where</span> process response <span class="fu">=</span> undefined <span class="co">-- actually sends the response</span>
+
+
+<span class="co">-- cote client il y aura</span>
+<span class="ot">receive ::</span> response <span class="ot">-&gt;</span> next
+receive <span class="fu">=</span> undefined
+</code></pre></div>
 <h1 id="types-at-work">Types at Work</h1>
 <p>Types are nice, but in haskell they are not just decoration and checking. They are PART of the code, they DECIDE what to do. “Type is data”</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Sanitise</span> a <span class="kw">where</span>
