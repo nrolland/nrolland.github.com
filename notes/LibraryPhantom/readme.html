@@ -174,8 +174,8 @@ liftBigChange <span class="fu">=</span> undefined <span class="co">-- logic whic
 <p>with this, we separate validation from action, and prevent you from tampering after it’s validated, while still allowing you maximum freedom in how you operate. we keep control, you keep freedom</p>
 <h1 id="middleware-pattern">Middleware pattern</h1>
 <p>one direct example of this is the middleware pattern</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Middleware</span>(<span class="dt">EndForYou</span>, <span class="co">--type constructor</span>
-                  serve
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Middleware</span>(<span class="dt">EndForYou</span>, <span class="co">-- type constructor</span>
+                  serve      <span class="co">-- run your application</span>
             ) <span class="kw">where</span>
 
 <span class="kw">import           </span><span class="dt">Protolude</span>

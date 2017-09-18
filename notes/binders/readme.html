@@ -1,0 +1,58 @@
+<?Xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>xQuant - Binders -</title>
+        <link rel="stylesheet" type="text/css" href="../../css/lhs.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/styling.css" />
+        <link rel="alternate" type="application/rss+xml" title="xQuant.net Atom feed" href="http://xquant.net/atom.xml" /> 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <div id="main-div" class="row;column;padding:0px">
+            <div class="top-bar">
+              <div class="top-bar-left">
+                <ul class="menu" style="margin:25px" data-dropdown-menu>
+                    <li class="menu-text"><h3><a href="../../">Home</a></li></h3>
+               </ul>
+              </div>
+            </div>
+            <div id="content" class="row column main" style="min-height:500px">
+             
+              <h1>Binders -</h1>
+             <div class="info">
+    Posted on April 29, 2017
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+
+<p><a href="https://travis-ci.org/nrolland/binders"><img src="https://travis-ci.org/nrolland/binders.png" alt="Build Status" /></a></p>
+<h2 id="binders">binders</h2>
+<h2 id="usage">usage</h2>
+<p>To build &amp; run:</p>
+<pre><code>stack install &amp;&amp; readme</code></pre>
+<p>To build, run &amp; render:</p>
+<pre><code>stack build --copy-bins --exec &quot;readme&quot; --exec &quot;pandoc -f markdown+lhs -i readme.lhs -t html -o index.html --filter pandoc-include  --filter pandoc-include-code --mathjax&quot; --exec &quot;pandoc -f markdown+lhs -i readme.lhs -t markdown -o readme.md --filter pandoc-include --filter pandoc-include-code --mathjax -s&quot; --exec &quot;echo Yah, it succeeded &quot; --file-watch</code></pre>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">import </span><span class="dt">Protolude</span>
+<span class="ot">&gt;</span> 
+<span class="ot">&gt; main ::</span> <span class="dt">IO</span> ()
+<span class="ot">&gt;</span> main <span class="fu">=</span> putStrLn (<span class="st">&quot;ok&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</code></pre></div>
+
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer"> </div>
+        </footer>
+        <!-- Third-party -->
+        <script src="../../js/jquery.min.js" type="application/javascript"></script>
+        <script src="../../js/what-input.min.js" type="application/javascript"></script>
+        <script src="../../js/foundation.min.js" type="application/javascript"></script>
+        <script>
+         

@@ -135,6 +135,8 @@ compare (<span class="dt">RPair</span> ra rb) (x, y) (x', y') <span class="fu">=
 compare <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span>
                                       <span class="dt">Nothing</span> <span class="ot">-&gt;</span> error <span class="st">&quot;cannot compare&quot;</span>
                                       <span class="dt">Just</span> f  <span class="ot">-&gt;</span> compare rb (f x) y</code></pre></div>
+<h1 id="boosting-compress">Boosting compress</h1>
+<p>compress has type <code>Type a -&gt; TCompress a</code> where <code>TCompress a = a -&gt; [Bit]</code> This type function works Compare need a value (the representation)</p>
 <h1 id="the-open-world">The open world</h1>
 <p>TBC</p>
 
