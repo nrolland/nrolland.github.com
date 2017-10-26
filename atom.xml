@@ -8,8 +8,35 @@
         <name>Nicolas Rolland</name>
         <email></email>
     </author>
-    <updated>2017-09-18T00:00:00Z</updated>
+    <updated>2017-10-26T00:00:00Z</updated>
     <entry>
+    <title>2017-10-26-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2017-10-26-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2017-10-26-Weekly-links.html</id>
+    <published>2017-10-26T00:00:00Z</published>
+    <updated>2017-10-26T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2017-10-26</h1>
+<!-- <aside>Posted on 2017-10-26</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://plzoo.andrej.com/" >The Programming Languages Zoo</a>
+    </dt>
+    <dd>The Programming Languages Zoo is a collection of miniature programming languages which demonstrates various concepts and techniques used in programming language design and implementation. It is a good starting point for those who would like to implement their own programming language, or just learn how it is done.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/psibi/dhall-mode" >psibi/dhall-mode</a>
+    </dt>
+    <dd>Emacs Major mode for working with Dhall configuration language</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
     <title>2017-09-18-Weekly-links</title>
     <link href="http://xquant.net/weekly/2017-09-18-Weekly-links.html" />
     <id>http://xquant.net/weekly/2017-09-18-Weekly-links.html</id>
@@ -633,54 +660,6 @@ _ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></code>
      <a href="https://notes.pinboard.in/u:nrolland/e8f4196a4ae627475f38" >restart server whenever a new file is created in the .stack-work bin folder</a>
     </dt>
     <dd>If you&#39;re on Linux, you can install inotify-tools, run stack build --file-watch in one terminal and<br><br>(<br>  declare -i p<br>  trap &#39;kill &quot;$p&quot;&#39; EXIT<br>  while true; do<br>    stack exec server arg1 arg2  &amp; ...</dd>
-    </div>
-    
-</article>
-]]></summary>
-</entry>
-<entry>
-    <title>2015-07-08-Weekly-links</title>
-    <link href="http://xquant.net/weekly/2015-07-08-Weekly-links.html" />
-    <id>http://xquant.net/weekly/2015-07-08-Weekly-links.html</id>
-    <published>2015-07-08T00:00:00Z</published>
-    <updated>2015-07-08T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Weekly links for 2015-07-08</h1>
-<!-- <aside>Posted on 2015-07-08</aside> -->
-<article>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README.md" >the-art-of-command-line/README.md at master · jlevy/the-art-of-command-line</a>
-    </dt>
-    <dd>Fluency on the command line is a skill often neglected or considered arcane, but it improves your flexibility and productivity as an engineer in both obvious and subtle ways. This is a selection of notes and tips on using the command-line that I&#39;ve found useful when working on Linux.</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition" >FizzBuzz - EnterpriseEdition</a>
-    </dt>
-    <dd>Enterprise software marks a special high-grade class of software that makes careful use of relevant software architecture design principles to build particularly customizable and extensible solutions to real problems. This project is an example of how the popular FizzBuzz game might be built were it subject to the high quality standards of enterprise software.</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/Laverna/laverna" >Laverna/laverna · GitHub</a>
-    </dt>
-    <dd>Laverna is a JavaScript note taking application with Markdown editor and encryption support. Consider it like open source alternative to Evernote. https://laverna.cc/index.html</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="http://showterm.io/" >showterm</a>
-    </dt>
-    <dd></dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/gfredericks/test.chuck#string-from-regex" >gfredericks/test.chuck</a>
-    </dt>
-    <dd>string-from-regex is a suspiciously robust generator that will generate strings matching a regular expression</dd>
     </div>
     
 </article>
