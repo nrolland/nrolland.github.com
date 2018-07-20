@@ -8,8 +8,153 @@
         <name>Nicolas Rolland</name>
         <email></email>
     </author>
-    <updated>2018-05-31T00:00:00Z</updated>
+    <updated>2018-07-20T00:00:00Z</updated>
     <entry>
+    <title>2018-07-20-Weekly-links</title>
+    <link href="http://xquant.net/weekly/2018-07-20-Weekly-links.html" />
+    <id>http://xquant.net/weekly/2018-07-20-Weekly-links.html</id>
+    <published>2018-07-20T00:00:00Z</published>
+    <updated>2018-07-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Weekly links for 2018-07-20</h1>
+<!-- <aside>Posted on 2018-07-20</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.youtube.com/watch?v=Urff1ce--wU&amp;list=PLgKuh-lKre13er04z8os0MxwPPiY5VspR&amp;index=29" >A Compositional Quantum Programming Language - YouTube</a>
+    </dt>
+    <dd>Quipper is a high-level functional programming language for quantum computing</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://varianto25.com/news" >Varianto:25</a>
+    </dt>
+    <dd>git:deck is a unique playing cards deck, where each individual card contains a useful Git command and a brief description explaining it.<br></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://web.hypothes.is/" >Hypothesis – The Internet, peer reviewed.</a>
+    </dt>
+    <dd>Annotate the web, with anyone, anywhere.<br>We’re a nonprofit on a mission to bring an open conversation over the whole web. Use Hypothesis right now to hold discussions, read socially, organize your research, and take personal notes</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://liberapay.com/" >Liberapay</a>
+    </dt>
+    <dd>Liberapay is a recurrent donations platform.<br><br>We help you fund the creators and projects you appreciate.<br></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://www.muvi.com/blogs/stop-youtubing-videos-free.html" >Stop YouTubing your Videos for Free!!! - Muvi</a>
+    </dt>
+    <dd>You’re spending in sending traffic to YouTube, not Your Service<br>Your entire marketing campaign is based on driving your potential viewrs to YouTube.com/YourBrand. When you market your YouTube channel, you actually send FREE traffic to YouTube. Your viewers will go to YouTube first and then search for your content/channel, which means YouTube getting free marketing on your expense! Are you sure you want to promote someone else’s brand for Free?</dd>
+    </div>
+    
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Notes - typerole</title>
+    <link href="http://xquant.net/notes/typerole/readme.html" />
+    <id>http://xquant.net/notes/typerole/readme.html</id>
+    <published>2018-06-03T00:00:00Z</published>
+    <updated>2018-06-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on June  3, 2018
+    
+</div>
+<div class="info">
+    
+</div>
+
+
+<p>from <a href="http://www.seas.upenn.edu/~sweirich/papers/popl163af-weirich.pdf">Generative Type Abstraction and Type-level Computation - weirich vytiniotis spj zdancewic</a></p>
+<h1 id="motivation-personelle">Motivation personelle</h1>
+<p>Comment raffiner une theorie en gardant en interne le fait que deux operations doivent etre egales, et en forcant les clients a travailler sans cette egalite. Cette question revient frequemment : on remplace une egalite (qui est une idee platonicienne, existant de toute eternite) par un isomorphisme (qui est une fonction, qui a un nom, qui peut etre passse en argument).</p>
+<p>On en voit une autre illustration dans les types de Haskell, ou attribuer des noms differents a des structures identiques force les clients a distinguer et a referencer explicitement des isos pour passer d’un type a un autre.</p>
+<p>Nous regardons donc comment c’est traite dans le papier mentionne</p>
+<h1 id="introduction">Introduction</h1>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">newtype</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">MkAge</span> <span class="dt">Int</span>
+<span class="ot">&gt;</span> 
+<span class="ot">&gt;</span> <span class="kw">data</span> <span class="dt">K</span> a <span class="kw">where</span>
+<span class="ot">&gt;</span>   <span class="dt">KAge</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Age</span>
+<span class="ot">&gt;</span>   <span class="dt">KInt</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Int</span>
+<span class="ot">&gt;</span> 
+<span class="ot">&gt; cvt ::</span> <span class="ot">∀</span> c<span class="fu">.</span> c <span class="dt">Int</span> <span class="ot">→</span> c <span class="dt">Age</span>
+<span class="ot">&gt;</span> cvt x <span class="fu">=</span> undefined <span class="co">-- identite : an Age is an Int</span></code></pre></div>
+<p>remarque interessante sur les modules dans ML, ou DANS un module, on Age et Int sont <em>vraiment</em> synonymes.</p>
+<h2 id="trouble-in-paradise">trouble in paradise</h2>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; kint ::</span> <span class="dt">K</span> <span class="dt">Age</span>
+<span class="ot">&gt;</span> kint <span class="fu">=</span> cvt <span class="dt">KInt</span> <span class="co">-- the representation is the same</span>
+<span class="ot">&gt;</span> 
+<span class="ot">&gt; get ::</span> <span class="dt">K</span> <span class="dt">Age</span> <span class="ot">→</span> <span class="dt">Bool</span> <span class="co">-- only defined at K Age</span>
+<span class="ot">&gt;</span> get <span class="dt">KAge</span> <span class="fu">=</span> <span class="dt">True</span>     <span class="co">-- so this pattern match is exhaustive</span></code></pre></div>
+<p>yet this will fail :</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> vf <span class="fu">=</span> get kint</code></pre></div>
+<p>(flash news : le domaine d’une fonction fait partie de sa definition. fonction identite agit uniformement, mais l’identite en A n’est pas l’identite en B. si les noms ont de l’importance, ca ne passe pas sans preuve que A = B, preuve detenue uniquement <em>en interne</em> par la personne ayant cree le newtype.)</p>
+<h2 id="more-trouble">more trouble</h2>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">type</span> family <span class="dt">F</span><span class="ot"> a ::</span> <span class="fu">*</span>
+<span class="ot">&gt;</span> <span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">Char</span>
+<span class="ot">&gt;</span> <span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Int</span> <span class="fu">=</span> <span class="dt">Bool</span></code></pre></div>
+<p>Permet de deduire :</p>
+<ul>
+<li>Bool ~ F Int</li>
+<li>F Int ~ F Age</li>
+<li>F Age ~ Char</li>
+<li>=&gt; Bool ~ Char (!?)</li>
+</ul>
+<p>“What went wrong? Maybe it should be illegal for a type function to behave differently on two coercible types, such as Age and Int? But in fact Haskell programmers often use newtypes precisely so that they can give a different type-class instance (for comparison, say) for Age than for the underlying Int. Type functions are no different;”</p>
+<p>On se sert des types synomymes pour introduire des NOMS. ces noms ne doivent pas etre identifies pour les CLIENTS de ces noms. Les type functions, type classes sont clients, il faut leur cacher l’equation en notre possession (Age = Int).</p>
+<h2 id="yet-more-trouble">yet more trouble</h2>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">data</span> <span class="dt">TF</span> a <span class="fu">=</span> <span class="dt">MkTF</span> (<span class="dt">F</span> a)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; to ::</span> <span class="dt">Bool</span><span class="ot">→</span> <span class="dt">TF</span> <span class="dt">Int</span>
+<span class="ot">&gt;</span> to b <span class="fu">=</span> <span class="dt">MkTF</span> b
+<span class="ot">&gt;</span> 
+<span class="ot">&gt; from ::</span> <span class="dt">TF</span> <span class="dt">Age</span><span class="ot">→</span> <span class="dt">Char</span>
+<span class="ot">&gt;</span> from (<span class="dt">MkTF</span> c) <span class="fu">=</span> c</code></pre></div>
+<p>this will fail</p>
+<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> vf2 <span class="fu">=</span> from <span class="fu">.</span> cvt <span class="fu">.</span> to</code></pre></div>
+<p>cvt utilise une preuve qui doit rester privee. a l’exterieur, les differences de noms doivent creer des differences</p>
+<p>“This problem is important .. because the same issues will arise in any type system that combines type-level dispatch and coercion lifting.”</p>
+<p>Coercion lifting : if for two types φ and ψ we have φ ∼ ψ (for example, if they are the abstract and concrete types of a newtype declaration), then T φ ∼ T ψ for any type constructor T .</p>
+<p>qui n’est valable que d’un point de vue INTERNE ou les noms n’ont pas d’importance</p>
+<h1 id="fc2">FC2</h1>
+<p>• On peut voir Age et Int comme deux noms differents =&gt; “we can view Age and IntCode as two different codes that both map to the type Int”</p>
+<p>• “the important distinction between codes and types is that they have different definitions of equality. In the encoding above, the codes Age and IntCode are different codes, but their interpretations are equal types” differentes definition de l’egalite, surtout preuves privees VS preuves publique. JE peux decider de creer deux noms que moi seul peut identifier. TU es force de penser qu’ils sont distincts. ce qui se passe avec les types abstraits et les valeurs, se passe aussi pour les fonctions de types et le systeme logique.</p>
+<p>• “Age and Int are distinct when viewed at role code but equal when viewed at role type. Code equality is used to reason about the meaning of type-indexed functions and is finer-grained than type equality, which is used to determine which type coercions are safe”</p>
+<p>“role type” : role dieu de la phase compilation, qui ne voit que l’utilisation finale : c’est un Int ou c’est un Bool ? Les autres subtilites sont detruites. Je peux devenir un dieu local et forcer mes clients a faire une distinction que moi seul peut lever, mais je reste soumis a mon dieu (qui identifie les types).</p>
+<p>on a une hierarchie de dieu, et une relation d’ordre.</p>
+<h2 id="description-de-fc2">Description de FC2</h2>
+<p>FC2 is ex- pressive enough to capture indexed type functions, newtype and newtype deriving,GADTs,existentialandnesteddatatypes, and much more.</p>
+<p>First, FC2 provides polymorphic datatypes,</p>
+<p>Second, FC2 includes first-class proofs of type equality that witness safe coercions introduced during compilation</p>
+<h2 id="syntax-directed-typechecking">Syntax directed typechecking</h2>
+<p>Programs in FC2 can abstract over coercions reflecting a particular type equal- ity (written Λc : φ1 ∼ φ2.e), pass a coercion as an argument to such a function (written e γ), and use a coercion to cast a term from one type to another (written e ◃ γ). These explicit coercions, written γ, make typechecking FC2 programs syntax-directed.</p>
+<p><strong>The syntax of an FC2 term encodes its typing derivation</strong></p>
+<p>Why is this important?</p>
+<p>• The idea is that the compiler’s front end performs perhaps-complex type inference on the source program, and records the proofs generated by inference directly in the syntax of the FC2 intermediate language.</p>
+<p>• The optimiser transforms FC2 terms, perhaps radically.</p>
+<p>At any point one can check the consistency of the resulting FC2 program using a simple, fast, syntax- directed typechecker; this consistency check has proven to be an extremely powerful aid to getting the compiler right. It is just as easy to find the type of an arbitrary FC2 term, an ability that is used extensively inside GHC.</p>
+<p>Ma syntaxe reflete parfaitement la construction des proprietes logiques dont je veux parler, et toute l’information pour retrouver/verifier un propriete est dans mon terme, avec toutes les etapes intermediaires</p>
+<h2 id="fc2-types-and-kinds">FC2 types and kinds</h2>
+<p>Types in FC2 are classified by pairs κ of the form η/R, where :</p>
+<p>• the kind η ensures (as usual) that types are well-formed structurally</p>
+<p>• the role R that determines the precision at which they can be analyzed.</p>
+<p>Codes (which distinguish Age and Int) have role C, whereas types (which identify them) have role T.</p>
+<p>Par exemple :</p>
+<p>The distinction between codes and types allows us to give infor- mative kinds to type constructors:</p>
+<p>• The Maybe type (Section 2.1) has kind ⋆/T → ⋆, indicating that Maybe treats its argument parametrically (les proprietes logiques de Maybe s’expriment via le dieu compilation, et s’imposent a tous)</p>
+<p>• The types K, F, and TF (Section 2.2) all use type indexing and therefore have kind ⋆/C → ⋆. (les proprietes de logiques de )</p>
+<p>These kinds in turn support the key insight of this paper: <strong>it is only safe to lift coercions through functions with parametric kinds</strong></p>
+<p>So Maybe Age ∼ Maybe Int holds but TF Age ̸∼ TF Int.</p>
+<p>Parce que Maybe se refere au dieu compilation qui s’impose aux autres dieux locaux, qui ne sont que des intercesseurs. Tandis que les TF sont des clients de Dieux non precises, potentiellement autres que celui de la compilation</p>
+]]></summary>
+</entry>
+<entry>
     <title>2018-05-31-Weekly-links</title>
     <link href="http://xquant.net/weekly/2018-05-31-Weekly-links.html" />
     <id>http://xquant.net/weekly/2018-05-31-Weekly-links.html</id>
@@ -547,54 +692,6 @@ _ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></code>
 </div>
 <p>which means we can go deep with some project, using standard tools, and then provide a good summary of the artefact it can produce</p>
 
-]]></summary>
-</entry>
-<entry>
-    <title>2017-03-23-Weekly-links</title>
-    <link href="http://xquant.net/weekly/2017-03-23-Weekly-links.html" />
-    <id>http://xquant.net/weekly/2017-03-23-Weekly-links.html</id>
-    <published>2017-03-23T00:00:00Z</published>
-    <updated>2017-03-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Weekly links for 2017-03-23</h1>
-<!-- <aside>Posted on 2017-03-23</aside> -->
-<article>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://gist.github.com/RockyRoad29/bd4ca6fdb41196a71662986f809e2b1c" >Emacs loaded packages exploration tools</a>
-    </dt>
-    <dd>Exploring your loaded emacs libraries (spacemacs)<br></dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://quantomatic.github.io/" >Quantomatic :: Home</a>
-    </dt>
-    <dd>Quantomatic is a diagrammatic proof assistant, meaning it provides machine-support for reasoning with diagrammatic languages</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="http://research.microsoft.com/en-us/um/people/daan/madoko/doc/reference.html#sec-installation-and-usage" >Madoko Reference</a>
-    </dt>
-    <dd>Madoko is a fast javascript Markdown processor written in Koka It started out as a demo program for the new, strongly typed, Koka language and the name comes from “Markdown in Koka”.<br></dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="http://hackage.haskell.org/package/brick" >brick: A declarative terminal user interface library</a>
-    </dt>
-    <dd>Write terminal applications painlessly with brick! You write an event handler and a drawing function and the library does the rest.<br></dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://kseo.github.io/posts/2017-01-28-build-your-haskell-project-continuously.html" >Kwang&#39;s Haskell Blog - Build your Haskell project continuously</a>
-    </dt>
-    <dd>Build your Haskell project continuously<br></dd>
-    </div>
-    
-</article>
 ]]></summary>
 </entry>
 <entry>
