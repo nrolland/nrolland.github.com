@@ -168,34 +168,35 @@
 </div>
 
 
+
 <p>from <a href="http://www.seas.upenn.edu/~sweirich/papers/popl163af-weirich.pdf">Generative Type Abstraction and Type-level Computation - weirich vytiniotis spj zdancewic</a></p>
 <h1 id="motivation-personelle">Motivation personelle</h1>
 <p>Comment raffiner une theorie en gardant en interne le fait que deux operations doivent etre egales, et en forcant les clients a travailler sans cette egalite. Cette question revient frequemment : on remplace une egalite (qui est une idee platonicienne, existant de toute eternite) par un isomorphisme (qui est une fonction, qui a un nom, qui peut etre passse en argument).</p>
 <p>On en voit une autre illustration dans les types de Haskell, ou attribuer des noms differents a des structures identiques force les clients a distinguer et a referencer explicitement des isos pour passer d’un type a un autre.</p>
 <p>Nous regardons donc comment c’est traite dans le papier mentionne</p>
 <h1 id="introduction">Introduction</h1>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">newtype</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">MkAge</span> <span class="dt">Int</span>
-<span class="ot">&gt;</span> 
-<span class="ot">&gt;</span> <span class="kw">data</span> <span class="dt">K</span> a <span class="kw">where</span>
-<span class="ot">&gt;</span>   <span class="dt">KAge</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Age</span>
-<span class="ot">&gt;</span>   <span class="dt">KInt</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Int</span>
-<span class="ot">&gt;</span> 
-<span class="ot">&gt; cvt ::</span> <span class="ot">∀</span> c<span class="fu">.</span> c <span class="dt">Int</span> <span class="ot">→</span> c <span class="dt">Age</span>
-<span class="ot">&gt;</span> cvt x <span class="fu">=</span> undefined <span class="co">-- identite : an Age is an Int</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">newtype</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">MkAge</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">data</span> <span class="dt">K</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">KAge</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Age</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">KInt</span><span class="ot"> ::</span> <span class="dt">K</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ot">cvt ::</span> <span class="ot">∀</span> c<span class="fu">.</span> c <span class="dt">Int</span> <span class="ot">→</span> c <span class="dt">Age</span></a>
+<a class="sourceLine" id="cb1-8" title="8">cvt x <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- identite : an Age is an Int</span></a></code></pre></div>
 <p>remarque interessante sur les modules dans ML, ou DANS un module, on Age et Int sont <em>vraiment</em> synonymes.</p>
 <h2 id="trouble-in-paradise">trouble in paradise</h2>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; kint ::</span> <span class="dt">K</span> <span class="dt">Age</span>
-<span class="ot">&gt;</span> kint <span class="fu">=</span> cvt <span class="dt">KInt</span> <span class="co">-- the representation is the same</span>
-<span class="ot">&gt;</span> 
-<span class="ot">&gt; get ::</span> <span class="dt">K</span> <span class="dt">Age</span> <span class="ot">→</span> <span class="dt">Bool</span> <span class="co">-- only defined at K Age</span>
-<span class="ot">&gt;</span> get <span class="dt">KAge</span> <span class="fu">=</span> <span class="dt">True</span>     <span class="co">-- so this pattern match is exhaustive</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">kint ::</span> <span class="dt">K</span> <span class="dt">Age</span></a>
+<a class="sourceLine" id="cb2-2" title="2">kint <span class="fu">=</span> cvt <span class="dt">KInt</span> <span class="co">-- the representation is the same</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="ot">get ::</span> <span class="dt">K</span> <span class="dt">Age</span> <span class="ot">→</span> <span class="dt">Bool</span> <span class="co">-- only defined at K Age</span></a>
+<a class="sourceLine" id="cb2-5" title="5">get <span class="dt">KAge</span> <span class="fu">=</span> <span class="dt">True</span>     <span class="co">-- so this pattern match is exhaustive</span></a></code></pre></div>
 <p>yet this will fail :</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> vf <span class="fu">=</span> get kint</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1">vf <span class="fu">=</span> get kint</a></code></pre></div>
 <p>(flash news : le domaine d’une fonction fait partie de sa definition. fonction identite agit uniformement, mais l’identite en A n’est pas l’identite en B. si les noms ont de l’importance, ca ne passe pas sans preuve que A = B, preuve detenue uniquement <em>en interne</em> par la personne ayant cree le newtype.)</p>
 <h2 id="more-trouble">more trouble</h2>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">type</span> family <span class="dt">F</span><span class="ot"> a ::</span> <span class="fu">*</span>
-<span class="ot">&gt;</span> <span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">Char</span>
-<span class="ot">&gt;</span> <span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Int</span> <span class="fu">=</span> <span class="dt">Bool</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">type</span> <span class="kw">family</span> <span class="dt">F</span><span class="ot"> a ::</span> <span class="fu">*</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Age</span> <span class="fu">=</span> <span class="dt">Char</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">type</span> <span class="kw">instance</span> <span class="dt">F</span> <span class="dt">Int</span> <span class="fu">=</span> <span class="dt">Bool</span></a></code></pre></div>
 <p>Permet de deduire :</p>
 <ul>
 <li>Bool ~ F Int</li>
@@ -206,14 +207,14 @@
 <p>“What went wrong? Maybe it should be illegal for a type function to behave differently on two coercible types, such as Age and Int? But in fact Haskell programmers often use newtypes precisely so that they can give a different type-class instance (for comparison, say) for Age than for the underlying Int. Type functions are no different;”</p>
 <p>On se sert des types synomymes pour introduire des NOMS. ces noms ne doivent pas etre identifies pour les CLIENTS de ces noms. Les type functions, type classes sont clients, il faut leur cacher l’equation en notre possession (Age = Int).</p>
 <h2 id="yet-more-trouble">yet more trouble</h2>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="kw">data</span> <span class="dt">TF</span> a <span class="fu">=</span> <span class="dt">MkTF</span> (<span class="dt">F</span> a)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; to ::</span> <span class="dt">Bool</span><span class="ot">→</span> <span class="dt">TF</span> <span class="dt">Int</span>
-<span class="ot">&gt;</span> to b <span class="fu">=</span> <span class="dt">MkTF</span> b
-<span class="ot">&gt;</span> 
-<span class="ot">&gt; from ::</span> <span class="dt">TF</span> <span class="dt">Age</span><span class="ot">→</span> <span class="dt">Char</span>
-<span class="ot">&gt;</span> from (<span class="dt">MkTF</span> c) <span class="fu">=</span> c</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">data</span> <span class="dt">TF</span> a <span class="fu">=</span> <span class="dt">MkTF</span> (<span class="dt">F</span> a)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">to ::</span> <span class="dt">Bool</span><span class="ot">→</span> <span class="dt">TF</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb6-2" title="2">to b <span class="fu">=</span> <span class="dt">MkTF</span> b</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ot">from ::</span> <span class="dt">TF</span> <span class="dt">Age</span><span class="ot">→</span> <span class="dt">Char</span></a>
+<a class="sourceLine" id="cb6-5" title="5">from (<span class="dt">MkTF</span> c) <span class="fu">=</span> c</a></code></pre></div>
 <p>this will fail</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> vf2 <span class="fu">=</span> from <span class="fu">.</span> cvt <span class="fu">.</span> to</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1">vf2 <span class="fu">=</span> from <span class="fu">.</span> cvt <span class="fu">.</span> to</a></code></pre></div>
 <p>cvt utilise une preuve qui doit rester privee. a l’exterieur, les differences de noms doivent creer des differences</p>
 <p>“This problem is important .. because the same issues will arise in any type system that combines type-level dispatch and coercion lifting.”</p>
 <p>Coercion lifting : if for two types φ and ψ we have φ ∼ ψ (for example, if they are the abstract and concrete types of a newtype declaration), then T φ ∼ T ψ for any type constructor T .</p>
@@ -368,103 +369,103 @@
 <p>If we represent a language with untyped <code>Exp</code> data type, when consuming a represented program, we have to add type coercions to convince the type system : we check the value of type <code>Exp</code> received <em>really</em> contains the expected data inside, and we assert that to the compiler in some way to do something with it.</p>
 <p>If we use GADT, some extra type information is packed with the data constructor/destructor. as we pattern math on the value, the type become more precise as the index gets fixed. we uncover type information as we uncover data information.</p>
 <p>This makes evaluation straightforward :</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Term1</span> a <span class="kw">where</span>
-  <span class="dt">Zero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span>
-  <span class="dt">Succ</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span>
-  <span class="dt">Pred</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span>
-  <span class="dt">IsZero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span>  <span class="ot">-&gt;</span>  <span class="dt">Term1</span> <span class="dt">Bool</span>
-  <span class="dt">If</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a
-
-<span class="ot">eval ::</span> forall a<span class="fu">.</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> a
-eval (<span class="dt">Zero</span> <span class="co">{- a is bound to Int from here-}</span>)  <span class="fu">=</span> <span class="dv">0</span> <span class="co">-- so 0 :: Int</span>
-eval (<span class="dt">Succ</span> n<span class="co">{- a is bound to Int from here-}</span>) <span class="fu">=</span> eval n <span class="co">{-:: Int -}</span> <span class="fu">+</span> <span class="dv">1</span> <span class="co">-- type correct</span>
-eval (<span class="dt">Pred</span> n)                                 <span class="fu">=</span> eval n <span class="fu">-</span> <span class="dv">1</span>
-eval (<span class="dt">IsZero</span> n)                               <span class="fu">=</span> eval n <span class="fu">==</span> <span class="dv">0</span>
-eval (<span class="dt">If</span> e1 e2 e3) <span class="fu">=</span> <span class="kw">if</span> eval e1 <span class="kw">then</span> eval e2 <span class="kw">else</span> eval e3</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">data</span> <span class="dt">Term1</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">Zero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">Succ</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">Pred</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">IsZero</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Int</span>  <span class="ot">-&gt;</span>  <span class="dt">Term1</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">If</span><span class="ot"> ::</span> <span class="dt">Term1</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> <span class="dt">Term1</span> a</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="ot">eval ::</span> <span class="kw">forall</span> a<span class="fu">.</span> <span class="dt">Term1</span> a <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb1-9" title="9">eval (<span class="dt">Zero</span> <span class="co">{- a is bound to Int from here-}</span>)  <span class="fu">=</span> <span class="dv">0</span> <span class="co">-- so 0 :: Int</span></a>
+<a class="sourceLine" id="cb1-10" title="10">eval (<span class="dt">Succ</span> n<span class="co">{- a is bound to Int from here-}</span>) <span class="fu">=</span> eval n <span class="co">{-:: Int -}</span> <span class="fu">+</span> <span class="dv">1</span> <span class="co">-- type correct</span></a>
+<a class="sourceLine" id="cb1-11" title="11">eval (<span class="dt">Pred</span> n)                                 <span class="fu">=</span> eval n <span class="fu">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-12" title="12">eval (<span class="dt">IsZero</span> n)                               <span class="fu">=</span> eval n <span class="fu">==</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-13" title="13">eval (<span class="dt">If</span> e1 e2 e3) <span class="fu">=</span> <span class="kw">if</span> eval e1 <span class="kw">then</span> eval e2 <span class="kw">else</span> eval e3</a></code></pre></div>
 <p>There can not be a function <code>map :: (a -&gt; b) -&gt; Term1 a -&gt; Term1 b</code></p>
 <p>The type index in term does not mean there is a value of that type in it to apply <code>a -&gt; b</code> to. It is called a “phantom type”, other name for an type index seen as a “pure index” <code>a</code> for the overall type <code>Term a</code>, not necessarily linked to a data. The type level has a life on its own. It more accurately reflect <em>static</em> information. the type of some variable, is, in a static language, part of the available information statically, but only a subset of it.</p>
 <h1 id="generic-function">Generic Function</h1>
 <h2 id="the-problem">The problem</h2>
 <p>We want to compress data. We would like the same procedure to works for many types of data, provided its type can be described as a combination of basic types. This description could have been a type level description through with type classes, but here we have a value describing a type <code>a</code>. that value, named representation of a type will be of type <code>Type a</code>.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Type</span> a <span class="kw">where</span>
-  <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Int</span>
-  <span class="dt">RChar</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Char</span>
-  <span class="dt">RList</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> [a]
-  <span class="dt">RPair</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a, b)
-  <span class="dt">RDyn</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Dynamic</span>
-  <span class="dt">RFun</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a <span class="ot">-&gt;</span> b)
-  <span class="dt">RPerson</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Person</span>
-
-<span class="ot">rString ::</span> <span class="dt">Type</span> <span class="dt">String</span>
-rString <span class="fu">=</span> <span class="dt">RList</span> <span class="dt">RChar</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">data</span> <span class="dt">Type</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">RChar</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Char</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">RList</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> [a]</a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">RPair</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a, b)</a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="dt">RDyn</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Dynamic</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="dt">RFun</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> b <span class="ot">-&gt;</span> <span class="dt">Type</span> (a <span class="ot">-&gt;</span> b)</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="dt">RPerson</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dt">Person</span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="ot">rString ::</span> <span class="dt">Type</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb2-11" title="11">rString <span class="fu">=</span> <span class="dt">RList</span> <span class="dt">RChar</span></a></code></pre></div>
 <p>Our goal is to parameterize a function <code>compress</code> with the representation of the type of the value given. Different values yield different types for the resulting curried function</p>
 <p>With all this we have access to the following magically safe operations :</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> _ <span class="fu">=</span> compress <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-<span class="ot">&gt;</span> _ <span class="fu">=</span> compress (<span class="dt">RPair</span> <span class="dt">RInt</span> <span class="dt">RChar</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>) <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1">_ <span class="fu">=</span> compress <span class="dt">RInt</span><span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb3-2" title="2">_ <span class="fu">=</span> compress (<span class="dt">RPair</span> <span class="dt">RInt</span> <span class="dt">RChar</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>) <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a></code></pre></div>
 <p>(Having the compiler to find a representation for any types is the subject of <a href="https://www.seas.upenn.edu/~sweirich/papers/wadlerfest2016.pdf">a reflection on types</a> see also <a href="https://www.cis.upenn.edu/~sweirich/talks/compose16.pdf">slides</a> in ghc 8.2)</p>
 <p>This is achieved in a similar way that the <code>eval</code> function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Bit</span> <span class="fu">=</span> <span class="dt">Int</span>
-
-<span class="ot">toBinary ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-toBinary <span class="dv">0</span> <span class="fu">=</span> []
-toBinary x <span class="fu">=</span> (x <span class="ot">`mod`</span> <span class="dv">2</span>) <span class="fu">:</span> (toBinary <span class="fu">$</span> x <span class="ot">`div`</span> <span class="dv">2</span>)
-
-<span class="ot">toNumber&#39; ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-toNumber&#39; [] _       <span class="fu">=</span> <span class="dv">0</span>
-toNumber&#39; (b <span class="fu">:</span> bs) t <span class="fu">=</span> b <span class="fu">*</span> t <span class="fu">+</span> toNumber&#39; bs (t <span class="fu">*</span> <span class="dv">2</span>)
-
-<span class="ot">toNumber ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span>
-toNumber <span class="fu">=</span> flip toNumber&#39; <span class="dv">1</span>
-
-<span class="ot">padding ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-padding p x <span class="fu">=</span> <span class="kw">let</span> b <span class="fu">=</span> toBinary x
-                  len <span class="fu">=</span> length b
-              <span class="kw">in</span> <span class="kw">if</span> p <span class="fu">&lt;=</span> len <span class="kw">then</span> b
-                 <span class="kw">else</span> b <span class="fu">++</span> take (p <span class="fu">-</span> len) (repeat <span class="dv">0</span>)
-
-<span class="ot">compressInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-compressInt <span class="fu">=</span> padding <span class="dv">32</span>
-
-<span class="ot">compressChar ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-compressChar x <span class="fu">=</span> padding <span class="dv">7</span> <span class="fu">$</span> ord x
-
-<span class="ot">compress ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]
-compress <span class="dt">RInt</span> x               <span class="fu">=</span> compressInt x
-compress <span class="dt">RChar</span> c              <span class="fu">=</span> compressChar c
-compress (<span class="dt">RList</span> _) []         <span class="fu">=</span> <span class="dv">0</span><span class="fu">:</span>[]
-compress (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs)  <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> compress ra x <span class="fu">++</span> compress (<span class="dt">RList</span> ra) xs
-compress (<span class="dt">RPair</span> ra rb) (x, y) <span class="fu">=</span> compress ra x <span class="fu">++</span> compress rb y
-compress <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x)      <span class="fu">=</span> compressRep (<span class="dt">Rep</span> ra) <span class="fu">++</span> compress ra x
-</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">type</span> <span class="dt">Bit</span> <span class="fu">=</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ot">toBinary ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb4-4" title="4">toBinary <span class="dv">0</span> <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb4-5" title="5">toBinary x <span class="fu">=</span> (x <span class="ot">`mod`</span> <span class="dv">2</span>) <span class="fu">:</span> (toBinary <span class="fu">$</span> x <span class="ot">`div`</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="ot">toNumber&#39; ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-8" title="8">toNumber&#39; [] _       <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb4-9" title="9">toNumber&#39; (b <span class="fu">:</span> bs) t <span class="fu">=</span> b <span class="fu">*</span> t <span class="fu">+</span> toNumber&#39; bs (t <span class="fu">*</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="ot">toNumber ::</span> [<span class="dt">Bit</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-12" title="12">toNumber <span class="fu">=</span> <span class="fu">flip</span> toNumber&#39; <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="ot">padding ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb4-15" title="15">padding p x <span class="fu">=</span> <span class="kw">let</span> b <span class="fu">=</span> toBinary x</a>
+<a class="sourceLine" id="cb4-16" title="16">                  len <span class="fu">=</span> <span class="fu">length</span> b</a>
+<a class="sourceLine" id="cb4-17" title="17">              <span class="kw">in</span> <span class="kw">if</span> p <span class="fu">&lt;=</span> len <span class="kw">then</span> b</a>
+<a class="sourceLine" id="cb4-18" title="18">                 <span class="kw">else</span> b <span class="fu">++</span> <span class="fu">take</span> (p <span class="fu">-</span> len) (<span class="fu">repeat</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb4-19" title="19"></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="ot">compressInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb4-21" title="21">compressInt <span class="fu">=</span> padding <span class="dv">32</span></a>
+<a class="sourceLine" id="cb4-22" title="22"></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="ot">compressChar ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb4-24" title="24">compressChar x <span class="fu">=</span> padding <span class="dv">7</span> <span class="fu">$</span> <span class="fu">ord</span> x</a>
+<a class="sourceLine" id="cb4-25" title="25"></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="ot">compress ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> [<span class="dt">Bit</span>]</a>
+<a class="sourceLine" id="cb4-27" title="27">compress <span class="dt">RInt</span> x               <span class="fu">=</span> compressInt x</a>
+<a class="sourceLine" id="cb4-28" title="28">compress <span class="dt">RChar</span> c              <span class="fu">=</span> compressChar c</a>
+<a class="sourceLine" id="cb4-29" title="29">compress (<span class="dt">RList</span> _) []         <span class="fu">=</span> <span class="dv">0</span><span class="fu">:</span>[]</a>
+<a class="sourceLine" id="cb4-30" title="30">compress (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs)  <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> compress ra x <span class="fu">++</span> compress (<span class="dt">RList</span> ra) xs</a>
+<a class="sourceLine" id="cb4-31" title="31">compress (<span class="dt">RPair</span> ra rb) (x, y) <span class="fu">=</span> compress ra x <span class="fu">++</span> compress rb y</a>
+<a class="sourceLine" id="cb4-32" title="32">compress <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x)      <span class="fu">=</span> compressRep (<span class="dt">Rep</span> ra) <span class="fu">++</span> compress ra x</a>
+<a class="sourceLine" id="cb4-33" title="33"></a></code></pre></div>
 <p>The <em>correct</em> way to see <code>compress</code> is as a <em>family</em> of functions, indexed by a value representing a type. We could index directly with a type, and get rid of the representation. This then requires type classes. Type class allow to talk about, say, <em>compressable</em> types and require that as an implicit constraint. The compiler would do for you the job of selecting the correct function from this famility with no representation being passed around. Another difference is that this selection would wire the correct function at static time and not require an interpretation at run time resulting in faster code.</p>
 <h2 id="equality-comparison-..">Equality, comparison, ..</h2>
 <p>To see that this is a general concept, we can provide generically other operations which are naturally thought of as <em>generic</em> : if we can compare the parts, we should be able to compare structures made of the parts.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">eq ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-eq <span class="dt">RInt</span> x y <span class="fu">=</span> x <span class="fu">==</span> y
-eq <span class="dt">RChar</span> x y <span class="fu">=</span> x <span class="fu">==</span> y
-eq (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">True</span>
-eq (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">|</span> eq ra x y <span class="fu">=</span> eq (<span class="dt">RList</span> ra) xs ys
-                                <span class="fu">|</span> otherwise <span class="fu">=</span> <span class="dt">False</span>
-eq (<span class="dt">RList</span> _) _ _ <span class="fu">=</span> <span class="dt">False</span>
-eq (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> eq ra x x&#39; <span class="fu">&amp;&amp;</span> eq rb y y&#39;
-eq <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span>
-                                 <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="dt">False</span>
-                                 <span class="dt">Just</span> f  <span class="ot">-&gt;</span> eq rb (f x) y
-
-compare<span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Ordering</span>
-compare <span class="dt">RInt</span> x y <span class="fu">=</span> DO.compare x y
-compare <span class="dt">RChar</span> x y <span class="fu">=</span> DO.compare x y
-compare (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">EQ</span>
-compare (<span class="dt">RList</span> _) [] (_ <span class="fu">:</span> _) <span class="fu">=</span> <span class="dt">LT</span>
-compare (<span class="dt">RList</span> _) (_ <span class="fu">:</span> _) [] <span class="fu">=</span> <span class="dt">GT</span>
-compare (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">=</span> <span class="kw">if</span> result <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> compare (<span class="dt">RList</span> ra) xs ys
-                                       <span class="kw">else</span> result
-  <span class="kw">where</span> result <span class="fu">=</span> compare ra x y
-compare (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> <span class="kw">if</span> first <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> compare rb y y&#39; <span class="kw">else</span> first
-  <span class="kw">where</span> first <span class="fu">=</span> compare ra x x&#39;
-compare <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span>
-                                      <span class="dt">Nothing</span> <span class="ot">-&gt;</span> error <span class="st">&quot;cannot compare&quot;</span>
-                                      <span class="dt">Just</span> f  <span class="ot">-&gt;</span> compare rb (f x) y</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">eq ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb5-2" title="2">eq <span class="dt">RInt</span> x y <span class="fu">=</span> x <span class="fu">==</span> y</a>
+<a class="sourceLine" id="cb5-3" title="3">eq <span class="dt">RChar</span> x y <span class="fu">=</span> x <span class="fu">==</span> y</a>
+<a class="sourceLine" id="cb5-4" title="4">eq (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb5-5" title="5">eq (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">|</span> eq ra x y <span class="fu">=</span> eq (<span class="dt">RList</span> ra) xs ys</a>
+<a class="sourceLine" id="cb5-6" title="6">                                <span class="fu">|</span> <span class="fu">otherwise</span> <span class="fu">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb5-7" title="7">eq (<span class="dt">RList</span> _) _ _ <span class="fu">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb5-8" title="8">eq (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> eq ra x x&#39; <span class="fu">&amp;&amp;</span> eq rb y y&#39;</a>
+<a class="sourceLine" id="cb5-9" title="9">eq <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span></a>
+<a class="sourceLine" id="cb5-10" title="10">                                 <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb5-11" title="11">                                 <span class="dt">Just</span> f  <span class="ot">-&gt;</span> eq rb (f x) y</a>
+<a class="sourceLine" id="cb5-12" title="12"></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="fu">compare</span><span class="ot"> ::</span> <span class="dt">Type</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Ordering</span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="fu">compare</span> <span class="dt">RInt</span> x y <span class="fu">=</span> DO.compare x y</a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="fu">compare</span> <span class="dt">RChar</span> x y <span class="fu">=</span> DO.compare x y</a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="fu">compare</span> (<span class="dt">RList</span> _) [] [] <span class="fu">=</span> <span class="dt">EQ</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="fu">compare</span> (<span class="dt">RList</span> _) [] (_ <span class="fu">:</span> _) <span class="fu">=</span> <span class="dt">LT</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="fu">compare</span> (<span class="dt">RList</span> _) (_ <span class="fu">:</span> _) [] <span class="fu">=</span> <span class="dt">GT</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="fu">compare</span> (<span class="dt">RList</span> ra) (x <span class="fu">:</span> xs) (y <span class="fu">:</span> ys) <span class="fu">=</span> <span class="kw">if</span> result <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> <span class="fu">compare</span> (<span class="dt">RList</span> ra) xs ys</a>
+<a class="sourceLine" id="cb5-20" title="20">                                       <span class="kw">else</span> result</a>
+<a class="sourceLine" id="cb5-21" title="21">  <span class="kw">where</span> result <span class="fu">=</span> <span class="fu">compare</span> ra x y</a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="fu">compare</span> (<span class="dt">RPair</span> ra rb) (x, y) (x&#39;, y&#39;) <span class="fu">=</span> <span class="kw">if</span> first <span class="fu">==</span> <span class="dt">EQ</span> <span class="kw">then</span> <span class="fu">compare</span> rb y y&#39; <span class="kw">else</span> first</a>
+<a class="sourceLine" id="cb5-23" title="23">  <span class="kw">where</span> first <span class="fu">=</span> <span class="fu">compare</span> ra x x&#39;</a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="fu">compare</span> <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span class="dt">Dyn</span> rb y) <span class="fu">=</span> <span class="kw">case</span> teq ra rb <span class="kw">of</span></a>
+<a class="sourceLine" id="cb5-25" title="25">                                      <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">error</span> <span class="st">&quot;cannot compare&quot;</span></a>
+<a class="sourceLine" id="cb5-26" title="26">                                      <span class="dt">Just</span> f  <span class="ot">-&gt;</span> <span class="fu">compare</span> rb (f x) y</a></code></pre></div>
 <h1 id="boosting-compress">Boosting compress</h1>
 <p>compress has type <code>Type a -&gt; TCompress a</code> where <code>TCompress a = a -&gt; [Bit]</code> This type function works Compare need a value (the representation)</p>
 <h1 id="the-open-world">The open world</h1>
@@ -495,80 +496,80 @@ compare <span class="dt">RDyn</span> (<span class="dt">Dyn</span> ra x) (<span c
 <p>Separates the service provided from the implementation, in particular the data <em>representation</em>, chosen.</p>
 <p>Representation choice adresses the <em>algorithmic</em> concerns. It influence the execution, not the service provided.</p>
 <p>For instance this logger shields the internal representation from its user. It only exports the type constructor <code>Logger</code> - no data constructor - and the accompanying functions.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">#!/usr/bin/env stack</span>
-<span class="co">-- stack script --resolver lts-8.8</span>
-
-
-<span class="ot">{-# LANGUAGE GADTs #-}</span>
-<span class="co">-- nous faisons une librarie et gardons opaques les types</span>
-<span class="co">-- son implementation est asynchone mais son interface est synchrone</span>
-<span class="co">-- on utilise dans un programme/thread normal et l&#39;utilisateur n&#39;a pas</span>
-<span class="co">-- a se soucier de la maniere dont c&#39;est implemente</span>
-<span class="co">-- dans son utilisation, il sera impacte par notre implementation</span>
-<span class="co">-- Par exemple il pourra devoir attendre s&#39;il veut poster un message et que nous ne</span>
-<span class="co">-- l&#39;avons pas encore traite.</span>
-
-
-<span class="kw">module</span> <span class="dt">Logger</span> (<span class="dt">Logger</span>,
-               initLogger,
-               logMessage,
-               logStop)
-    <span class="kw">where</span>
-
-<span class="kw">import           </span><span class="dt">Control.Concurrent</span>
-
-<span class="co">-- en *interne*, un logger est une variable partagee</span>
-<span class="co">-- dans laquelle on peut ecrire / lire des commandes</span>
-<span class="kw">data</span> <span class="dt">Logger</span> <span class="kw">where</span>
-  <span class="dt">Logger</span><span class="ot"> ::</span> <span class="dt">MVar</span> <span class="dt">LoggerCommand</span> <span class="ot">-&gt;</span> <span class="dt">Logger</span>
-
-<span class="kw">data</span> <span class="dt">LoggerCommand</span> <span class="kw">where</span>
-   <span class="dt">Message</span><span class="ot"> ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">LoggerCommand</span>
-   <span class="dt">Stop</span><span class="ot"> ::</span> <span class="dt">MVar</span> () <span class="ot">-&gt;</span> <span class="dt">LoggerCommand</span>
-
-<span class="ot">initLogger ::</span> <span class="dt">IO</span> <span class="dt">Logger</span>
-initLogger <span class="fu">=</span> <span class="kw">do</span>
-   v <span class="ot">&lt;-</span> newEmptyMVar  <span class="co">-- et implemente selon semantique interne</span>
-   <span class="kw">let</span> l <span class="fu">=</span> <span class="dt">Logger</span> v
-   forkIO <span class="fu">$</span> spin l   <span class="co">-- qui est un external thread</span>
-   return l
-
-
-<span class="co">-- fonction interne</span>
-spin l<span class="fu">@</span>(<span class="dt">Logger</span> sv) <span class="fu">=</span> <span class="kw">do</span> putStrLn <span class="st">&quot;Started logger&quot;</span>
-                        loop
-  <span class="kw">where</span> loop <span class="fu">=</span> <span class="kw">do</span>
-          cmd <span class="ot">&lt;-</span> takeMVar sv  <span class="co">-- on ecoute en bloquant</span>
-          <span class="kw">case</span> cmd <span class="kw">of</span>
-            <span class="dt">Message</span> msg <span class="ot">-&gt;</span> <span class="kw">do</span>
-             putStrLn msg
-             loop
-            <span class="dt">Stop</span> stopv <span class="ot">-&gt;</span> <span class="kw">do</span>
-             putStrLn <span class="st">&quot;Stopped logger&quot;</span>
-             putMVar stopv ()
-             return ()
-
-<span class="ot">logMessage ::</span> <span class="dt">Logger</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-logMessage (<span class="dt">Logger</span> sv) msg <span class="fu">=</span> putMVar sv (<span class="dt">Message</span> msg)
-
-<span class="ot">logStop ::</span> <span class="dt">Logger</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-logStop (<span class="dt">Logger</span> sv) <span class="fu">=</span> <span class="kw">do</span>
-     stopv <span class="ot">&lt;-</span> newEmptyMVar
-     putMVar sv (<span class="dt">Stop</span> stopv)
-     _ <span class="ot">&lt;-</span> takeMVar stopv
-     return ()
-
-
-<span class="ot">test ::</span> <span class="dt">IO</span> ()
-test <span class="fu">=</span> <span class="kw">do</span>
-  l <span class="ot">&lt;-</span> initLogger
-  logMessage l <span class="st">&quot;hello&quot;</span>
-  logMessage l <span class="st">&quot;Goodbye&quot;</span>
-  logStop l
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> test</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">#!/usr/bin/env stack</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">-- stack script --resolver lts-8.8</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">-- nous faisons une librarie et gardons opaques les types</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">-- son implementation est asynchone mais son interface est synchrone</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">-- on utilise dans un programme/thread normal et l&#39;utilisateur n&#39;a pas</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">-- a se soucier de la maniere dont c&#39;est implemente</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">-- dans son utilisation, il sera impacte par notre implementation</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">-- Par exemple il pourra devoir attendre s&#39;il veut poster un message et que nous ne</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">-- l&#39;avons pas encore traite.</span></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="kw">module</span> <span class="dt">Logger</span> (<span class="dt">Logger</span>,</a>
+<a class="sourceLine" id="cb1-16" title="16">               initLogger,</a>
+<a class="sourceLine" id="cb1-17" title="17">               logMessage,</a>
+<a class="sourceLine" id="cb1-18" title="18">               logStop)</a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-20" title="20"></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="kw">import</span>           <span class="dt">Control.Concurrent</span></a>
+<a class="sourceLine" id="cb1-22" title="22"></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">-- en *interne*, un logger est une variable partagee</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">-- dans laquelle on peut ecrire / lire des commandes</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="kw">data</span> <span class="dt">Logger</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-26" title="26">  <span class="dt">Logger</span><span class="ot"> ::</span> <span class="dt">MVar</span> <span class="dt">LoggerCommand</span> <span class="ot">-&gt;</span> <span class="dt">Logger</span></a>
+<a class="sourceLine" id="cb1-27" title="27"></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="kw">data</span> <span class="dt">LoggerCommand</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-29" title="29">   <span class="dt">Message</span><span class="ot"> ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">LoggerCommand</span></a>
+<a class="sourceLine" id="cb1-30" title="30">   <span class="dt">Stop</span><span class="ot"> ::</span> <span class="dt">MVar</span> () <span class="ot">-&gt;</span> <span class="dt">LoggerCommand</span></a>
+<a class="sourceLine" id="cb1-31" title="31"></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="ot">initLogger ::</span> <span class="dt">IO</span> <span class="dt">Logger</span></a>
+<a class="sourceLine" id="cb1-33" title="33">initLogger <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-34" title="34">   v <span class="ot">&lt;-</span> newEmptyMVar  <span class="co">-- et implemente selon semantique interne</span></a>
+<a class="sourceLine" id="cb1-35" title="35">   <span class="kw">let</span> l <span class="fu">=</span> <span class="dt">Logger</span> v</a>
+<a class="sourceLine" id="cb1-36" title="36">   forkIO <span class="fu">$</span> spin l   <span class="co">-- qui est un external thread</span></a>
+<a class="sourceLine" id="cb1-37" title="37">   <span class="fu">return</span> l</a>
+<a class="sourceLine" id="cb1-38" title="38"></a>
+<a class="sourceLine" id="cb1-39" title="39"></a>
+<a class="sourceLine" id="cb1-40" title="40"><span class="co">-- fonction interne</span></a>
+<a class="sourceLine" id="cb1-41" title="41">spin l<span class="fu">@</span>(<span class="dt">Logger</span> sv) <span class="fu">=</span> <span class="kw">do</span> <span class="fu">putStrLn</span> <span class="st">&quot;Started logger&quot;</span></a>
+<a class="sourceLine" id="cb1-42" title="42">                        loop</a>
+<a class="sourceLine" id="cb1-43" title="43">  <span class="kw">where</span> loop <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-44" title="44">          cmd <span class="ot">&lt;-</span> takeMVar sv  <span class="co">-- on ecoute en bloquant</span></a>
+<a class="sourceLine" id="cb1-45" title="45">          <span class="kw">case</span> cmd <span class="kw">of</span></a>
+<a class="sourceLine" id="cb1-46" title="46">            <span class="dt">Message</span> msg <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-47" title="47">             <span class="fu">putStrLn</span> msg</a>
+<a class="sourceLine" id="cb1-48" title="48">             loop</a>
+<a class="sourceLine" id="cb1-49" title="49">            <span class="dt">Stop</span> stopv <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-50" title="50">             <span class="fu">putStrLn</span> <span class="st">&quot;Stopped logger&quot;</span></a>
+<a class="sourceLine" id="cb1-51" title="51">             putMVar stopv ()</a>
+<a class="sourceLine" id="cb1-52" title="52">             <span class="fu">return</span> ()</a>
+<a class="sourceLine" id="cb1-53" title="53"></a>
+<a class="sourceLine" id="cb1-54" title="54"><span class="ot">logMessage ::</span> <span class="dt">Logger</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-55" title="55">logMessage (<span class="dt">Logger</span> sv) msg <span class="fu">=</span> putMVar sv (<span class="dt">Message</span> msg)</a>
+<a class="sourceLine" id="cb1-56" title="56"></a>
+<a class="sourceLine" id="cb1-57" title="57"><span class="ot">logStop ::</span> <span class="dt">Logger</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-58" title="58">logStop (<span class="dt">Logger</span> sv) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-59" title="59">     stopv <span class="ot">&lt;-</span> newEmptyMVar</a>
+<a class="sourceLine" id="cb1-60" title="60">     putMVar sv (<span class="dt">Stop</span> stopv)</a>
+<a class="sourceLine" id="cb1-61" title="61">     _ <span class="ot">&lt;-</span> takeMVar stopv</a>
+<a class="sourceLine" id="cb1-62" title="62">     <span class="fu">return</span> ()</a>
+<a class="sourceLine" id="cb1-63" title="63"></a>
+<a class="sourceLine" id="cb1-64" title="64"></a>
+<a class="sourceLine" id="cb1-65" title="65"><span class="ot">test ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-66" title="66">test <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-67" title="67">  l <span class="ot">&lt;-</span> initLogger</a>
+<a class="sourceLine" id="cb1-68" title="68">  logMessage l <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb1-69" title="69">  logMessage l <span class="st">&quot;Goodbye&quot;</span></a>
+<a class="sourceLine" id="cb1-70" title="70">  logStop l</a>
+<a class="sourceLine" id="cb1-71" title="71"></a>
+<a class="sourceLine" id="cb1-72" title="72"></a>
+<a class="sourceLine" id="cb1-73" title="73"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-74" title="74">main <span class="fu">=</span> test</a></code></pre></div>
 <h1 id="modules-pattern-in-haskell">Modules pattern in haskell</h1>
 <p>One can add a file whose sole purpose is to perform abstraction : This file control what gets exported out, but has no code. Internal directory contains all the code and contian no export control, everything is public as far as it is concerned.</p>
 <p>In <a href="https://github.com/turingjump/bookkeeper">bookeeper</a>, the file <a href="https://github.com/turingjump/bookkeeper/blob/master/src/Bookkeeper.hs">bookkeeper.hs</a> does exactly that.</p>
@@ -578,107 +579,107 @@ main <span class="fu">=</span> test</code></pre></div>
 <p>The name “phantom types” is motivated by the fact that no actual data is ever attached to those types. Types are usually seen as a property of some data.</p>
 <p>But when looking at what we can do with types this is a wrong idea : Types stand for static knowledge of any kind.</p>
 <p>Example from the <a href="https://wiki.haskell.org/Phantom_type">haskell wiki</a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- you have no *data* constructor, you can not create value of that type</span>
-<span class="co">-- but you can still *talk* about that type, whose values might be handed to you</span>
-<span class="kw">module</span> <span class="dt">MyAPI</span>(<span class="dt">FormData</span>, <span class="co">--type constructor</span>
-             formData, <span class="co">-- smart constructor WE decide at what index values are created</span>
-             validate, <span class="co">-- normal API</span>
-             useData,
-             lifSmallChange,
-            ) <span class="kw">where</span>
-
-<span class="kw">import           </span><span class="dt">Protolude</span>
-
-<span class="co">-- FormData is a type constructor of kind :: * -&gt; *</span>
-<span class="co">-- Given any type a of kind *, FormData a is of kind *</span>
-<span class="kw">data</span> <span class="dt">FormData</span> a  <span class="kw">where</span>
-  <span class="co">-- invoking the data constructor FormData with some text</span>
-  <span class="co">-- creates a value of type FormData a where the CALLER chooses what a</span>
-   <span class="dt">FormData</span><span class="ot"> ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">FormData</span> a
-
-<span class="co">-- withouth data constructor, impossible for clients to</span>
-<span class="co">--  - inspect what&#39;s inside a value v :: FormaData Text</span>
-<span class="co">--  - build a value v :: FormData i where THEY choose i</span>
-<span class="ot">changeType ::</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> b
-changeType (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="dt">FormData</span> str
-
-
-<span class="kw">data</span> <span class="dt">Validated</span>
-<span class="kw">data</span> <span class="dt">Unvalidated</span>
-
-<span class="co">-- but WE can CHOOSE whichever type</span>
-<span class="ot">formData ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span> <span class="co">-- WE decide that if you call this, the data is Unvalidated</span>
-formData str <span class="fu">=</span> <span class="dt">FormData</span> str
-
-<span class="co">-- we decide you can only ask use to consume validated data</span>
-<span class="ot">useData ::</span> <span class="dt">FormData</span> <span class="dt">Validated</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-useData (<span class="dt">FormData</span> str) <span class="fu">=</span> undefined <span class="co">-- logic here</span>
-
-<span class="co">-- that means we FORCE YOU to call this function at *some* point before</span>
-<span class="ot">validate ::</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> (<span class="dt">FormData</span> <span class="dt">Validated</span>)
-validate (<span class="dt">FormData</span> str) <span class="fu">=</span> undefined <span class="co">-- logic here</span>
-
-
-<span class="co">-- benign operation</span>
-<span class="ot">liftSmallChange ::</span> (<span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>) <span class="ot">-&gt;</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> a
-liftSmallChange <span class="fu">=</span> undefined <span class="co">-- logic which only touch small stuff</span>
-
-
-<span class="co">-- big operation - you have to revalidate !</span>
-<span class="ot">liftBigChange ::</span> (<span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>) <span class="ot">-&gt;</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span>
-liftBigChange <span class="fu">=</span> undefined <span class="co">-- logic which can touch anything</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="co">-- you have no *data* constructor, you can not create value of that type</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">-- but you can still *talk* about that type, whose values might be handed to you</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">module</span> <span class="dt">MyAPI</span>(<span class="dt">FormData</span>, <span class="co">--type constructor</span></a>
+<a class="sourceLine" id="cb2-4" title="4">             formData, <span class="co">-- smart constructor WE decide at what index values are created</span></a>
+<a class="sourceLine" id="cb2-5" title="5">             validate, <span class="co">-- normal API</span></a>
+<a class="sourceLine" id="cb2-6" title="6">             useData,</a>
+<a class="sourceLine" id="cb2-7" title="7">             lifSmallChange,</a>
+<a class="sourceLine" id="cb2-8" title="8">            ) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="kw">import</span>           <span class="dt">Protolude</span></a>
+<a class="sourceLine" id="cb2-11" title="11"></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">-- FormData is a type constructor of kind :: * -&gt; *</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">-- Given any type a of kind *, FormData a is of kind *</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="kw">data</span> <span class="dt">FormData</span> a  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="co">-- invoking the data constructor FormData with some text</span></a>
+<a class="sourceLine" id="cb2-16" title="16">  <span class="co">-- creates a value of type FormData a where the CALLER chooses what a</span></a>
+<a class="sourceLine" id="cb2-17" title="17">   <span class="dt">FormData</span><span class="ot"> ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">FormData</span> a</a>
+<a class="sourceLine" id="cb2-18" title="18"></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">-- withouth data constructor, impossible for clients to</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">--  - inspect what&#39;s inside a value v :: FormaData Text</span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">--  - build a value v :: FormData i where THEY choose i</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="ot">changeType ::</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> b</a>
+<a class="sourceLine" id="cb2-23" title="23">changeType (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="dt">FormData</span> str</a>
+<a class="sourceLine" id="cb2-24" title="24"></a>
+<a class="sourceLine" id="cb2-25" title="25"></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="kw">data</span> <span class="dt">Validated</span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="kw">data</span> <span class="dt">Unvalidated</span></a>
+<a class="sourceLine" id="cb2-28" title="28"></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="co">-- but WE can CHOOSE whichever type</span></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="ot">formData ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span> <span class="co">-- WE decide that if you call this, the data is Unvalidated</span></a>
+<a class="sourceLine" id="cb2-31" title="31">formData str <span class="fu">=</span> <span class="dt">FormData</span> str</a>
+<a class="sourceLine" id="cb2-32" title="32"></a>
+<a class="sourceLine" id="cb2-33" title="33"><span class="co">-- we decide you can only ask use to consume validated data</span></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="ot">useData ::</span> <span class="dt">FormData</span> <span class="dt">Validated</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-35" title="35">useData (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- logic here</span></a>
+<a class="sourceLine" id="cb2-36" title="36"></a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="co">-- that means we FORCE YOU to call this function at *some* point before</span></a>
+<a class="sourceLine" id="cb2-38" title="38"><span class="ot">validate ::</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> (<span class="dt">FormData</span> <span class="dt">Validated</span>)</a>
+<a class="sourceLine" id="cb2-39" title="39">validate (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- logic here</span></a>
+<a class="sourceLine" id="cb2-40" title="40"></a>
+<a class="sourceLine" id="cb2-41" title="41"></a>
+<a class="sourceLine" id="cb2-42" title="42"><span class="co">-- benign operation</span></a>
+<a class="sourceLine" id="cb2-43" title="43"><span class="ot">liftSmallChange ::</span> (<span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>) <span class="ot">-&gt;</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> a</a>
+<a class="sourceLine" id="cb2-44" title="44">liftSmallChange <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- logic which only touch small stuff</span></a>
+<a class="sourceLine" id="cb2-45" title="45"></a>
+<a class="sourceLine" id="cb2-46" title="46"></a>
+<a class="sourceLine" id="cb2-47" title="47"><span class="co">-- big operation - you have to revalidate !</span></a>
+<a class="sourceLine" id="cb2-48" title="48"><span class="ot">liftBigChange ::</span> (<span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>) <span class="ot">-&gt;</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span></a>
+<a class="sourceLine" id="cb2-49" title="49">liftBigChange <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- logic which can touch anything</span></a></code></pre></div>
 <p>with this, we separate validation from action, and prevent you from tampering after it’s validated, while still allowing you maximum freedom in how you operate. we keep control, you keep freedom</p>
 <h1 id="middleware-pattern">Middleware pattern</h1>
 <p>one direct example of this is the middleware pattern</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Middleware</span>(<span class="dt">EndForYou</span>, <span class="co">-- type constructor</span>
-                  serve      <span class="co">-- run your application</span>
-            ) <span class="kw">where</span>
-
-<span class="kw">import           </span><span class="dt">Protolude</span>
-
-<span class="kw">data</span> <span class="dt">EndForYou</span> <span class="kw">where</span>
-   <span class="dt">TheEndCtor</span><span class="ot"> ::</span> <span class="dt">EndForYou</span>
-
-
-app0 <span class="fu">=</span><span class="ot"> undefined ::</span> response
-app1 <span class="fu">=</span><span class="ot"> undefined ::</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
-app2 <span class="fu">=</span><span class="ot"> undefined ::</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
-
-
-<span class="kw">type</span> <span class="dt">Application</span> input response m <span class="fu">=</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
-
-<span class="ot">serve ::</span> <span class="dt">Application</span> input output m <span class="ot">-&gt;</span> input <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>
-serve yourServer input <span class="fu">=</span> (yourServer input) process
-  <span class="kw">where</span> process response <span class="fu">=</span> undefined <span class="co">-- actually sends the response</span>
-
-
-<span class="co">-- cote client il y aura</span>
-<span class="ot">receive ::</span> response <span class="ot">-&gt;</span> next
-receive <span class="fu">=</span> undefined
-</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">module</span> <span class="dt">Middleware</span>(<span class="dt">EndForYou</span>, <span class="co">-- type constructor</span></a>
+<a class="sourceLine" id="cb3-2" title="2">                  serve      <span class="co">-- run your application</span></a>
+<a class="sourceLine" id="cb3-3" title="3">            ) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">import</span>           <span class="dt">Protolude</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="kw">data</span> <span class="dt">EndForYou</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-8" title="8">   <span class="dt">TheEndCtor</span><span class="ot"> ::</span> <span class="dt">EndForYou</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11">app0 <span class="fu">=</span><span class="ot"> undefined ::</span> response</a>
+<a class="sourceLine" id="cb3-12" title="12">app1 <span class="fu">=</span><span class="ot"> undefined ::</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span></a>
+<a class="sourceLine" id="cb3-13" title="13">app2 <span class="fu">=</span><span class="ot"> undefined ::</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span></a>
+<a class="sourceLine" id="cb3-14" title="14"></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="kw">type</span> <span class="dt">Application</span> input response m <span class="fu">=</span> input <span class="ot">-&gt;</span> (response <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span>) <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span></a>
+<a class="sourceLine" id="cb3-17" title="17"></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="ot">serve ::</span> <span class="dt">Application</span> input output m <span class="ot">-&gt;</span> input <span class="ot">-&gt;</span> m <span class="dt">EndForYou</span></a>
+<a class="sourceLine" id="cb3-19" title="19">serve yourServer input <span class="fu">=</span> (yourServer input) process</a>
+<a class="sourceLine" id="cb3-20" title="20">  <span class="kw">where</span> process response <span class="fu">=</span> <span class="fu">undefined</span> <span class="co">-- actually sends the response</span></a>
+<a class="sourceLine" id="cb3-21" title="21"></a>
+<a class="sourceLine" id="cb3-22" title="22"></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">-- cote client il y aura</span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="ot">receive ::</span> response <span class="ot">-&gt;</span> next</a>
+<a class="sourceLine" id="cb3-25" title="25">receive <span class="fu">=</span> <span class="fu">undefined</span></a>
+<a class="sourceLine" id="cb3-26" title="26"></a></code></pre></div>
 <h1 id="types-at-work">Types at Work</h1>
 <p>Types are nice, but in haskell they are not just decoration and checking. They are PART of the code, they DECIDE what to do. “Type is data”</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Sanitise</span> a <span class="kw">where</span>
-<span class="ot">  sanitise ::</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Validated</span>
-
-<span class="co">-- do nothing to data that is already validated</span>
-<span class="kw">instance</span> <span class="dt">Sanitise</span> <span class="dt">Validated</span> <span class="kw">where</span>
-  sanitise <span class="fu">=</span> identity
-
-<span class="co">-- sanitise untrusted data</span>
-<span class="kw">instance</span> <span class="dt">Sanitise</span> <span class="dt">Unvalidated</span> <span class="kw">where</span>
-  sanitise (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="dt">FormData</span> (filter isAlpha str) <span class="kw">where</span> filter <span class="fu">=</span> undefined
-                                                                isAlpha <span class="fu">=</span> undefined
-
-
-a <span class="fu">=</span> <span class="dt">FormData</span> <span class="st">&quot;Hello&quot;</span>
-
-<span class="co">-- the type chooses what will be done !</span>
-_ <span class="fu">=</span> sanitise (<span class="ot">a ::</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span>)
-_ <span class="fu">=</span> sanitise (<span class="ot">a ::</span> <span class="dt">FormData</span> <span class="dt">Validated</span>)
-
-<span class="co">-- if it can&#39;t, it&#39;s an error, just like a syntax error</span>
-_ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">class</span> <span class="dt">Sanitise</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ot">  sanitise ::</span> <span class="dt">FormData</span> a <span class="ot">-&gt;</span> <span class="dt">FormData</span> <span class="dt">Validated</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">-- do nothing to data that is already validated</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw">instance</span> <span class="dt">Sanitise</span> <span class="dt">Validated</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  sanitise <span class="fu">=</span> identity</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">-- sanitise untrusted data</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">instance</span> <span class="dt">Sanitise</span> <span class="dt">Unvalidated</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  sanitise (<span class="dt">FormData</span> str) <span class="fu">=</span> <span class="dt">FormData</span> (<span class="fu">filter</span> <span class="fu">isAlpha</span> str) <span class="kw">where</span> <span class="fu">filter</span> <span class="fu">=</span> <span class="fu">undefined</span></a>
+<a class="sourceLine" id="cb4-11" title="11">                                                                <span class="fu">isAlpha</span> <span class="fu">=</span> <span class="fu">undefined</span></a>
+<a class="sourceLine" id="cb4-12" title="12"></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14">a <span class="fu">=</span> <span class="dt">FormData</span> <span class="st">&quot;Hello&quot;</span></a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">-- the type chooses what will be done !</span></a>
+<a class="sourceLine" id="cb4-17" title="17">_ <span class="fu">=</span> sanitise (<span class="ot">a ::</span> <span class="dt">FormData</span> <span class="dt">Unvalidated</span>)</a>
+<a class="sourceLine" id="cb4-18" title="18">_ <span class="fu">=</span> sanitise (<span class="ot">a ::</span> <span class="dt">FormData</span> <span class="dt">Validated</span>)</a>
+<a class="sourceLine" id="cb4-19" title="19"></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">-- if it can&#39;t, it&#39;s an error, just like a syntax error</span></a>
+<a class="sourceLine" id="cb4-21" title="21">_ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></a></code></pre></div>
 
 ]]></summary>
 </entry>
@@ -699,18 +700,15 @@ _ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></code>
 
 
 <p>Just a test post to see if things work</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; example1 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span>
-<span class="ot">&gt;</span> example1 <span class="fu">=</span> square <span class="dv">1</span> <span class="fu">#</span> fc red
-<span class="ot">&gt;</span>                    <span class="fu">#</span> lw veryThick
-<span class="ot">&gt;</span>                    <span class="fu">#</span> lc black
-<span class="ot">&gt;</span>                    <span class="fu">#</span> dashingG [<span class="fl">0.2</span>,<span class="fl">0.05</span>] <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">example1 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></a>
+<a class="sourceLine" id="cb1-2" title="2">example1 <span class="fu">=</span> square <span class="dv">1</span> <span class="fu">#</span> fc red</a>
+<a class="sourceLine" id="cb1-3" title="3">                   <span class="fu">#</span> lw veryThick</a>
+<a class="sourceLine" id="cb1-4" title="4">                   <span class="fu">#</span> lc black</a>
+<a class="sourceLine" id="cb1-5" title="5">                   <span class="fu">#</span> dashingG [<span class="fl">0.2</span>,<span class="fl">0.05</span>] <span class="dv">0</span></a></code></pre></div>
 <p>Diagram from above : <img src="static/example1.svg" /></p>
 <p>Or from some library :</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> out11 <span class="fu">=</span><span class="ot"> example11 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></code></pre></div>
-<div class="figure">
-<img src="static/out11.svg" />
-
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1">out11 <span class="fu">=</span><span class="ot"> example11 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></a></code></pre></div>
+<p><img src="static/out11.svg" /></p>
 <p>which means we can go deep with some project, using standard tools, and then provide a good summary of the artefact it can produce</p>
 
 ]]></summary>
@@ -744,31 +742,31 @@ _ <span class="fu">=</span> sanitise a <span class="co">-- error !</span></code>
 <hr />
 <h2 id="breaking-referential-transparency">Breaking referential transparency</h2>
 <p>We want to write graph that way</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph1 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
-<span class="ot">&gt;</span> graph1 <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) a) b
-<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>)(iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
-<span class="ot">&gt;</span>                  b <span class="fu">=</span> a</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">graph1 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span></a>
+<a class="sourceLine" id="cb1-2" title="2">graph1 <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) a) b</a>
+<a class="sourceLine" id="cb1-3" title="3">           <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>)(iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4">                 b <span class="fu">=</span> a</a></code></pre></div>
 <p>instead of some variation of</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> <span class="co">-- graph1&#39; = mkDag (Node (Node (Leaf 2) (Ref 0)) (Ref 0)) [(0, Node (Node (Leaf 2) (Leaf 2)) (Leaf 2))]</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="co">-- graph1&#39; = mkDag (Node (Node (Leaf 2) (Ref 0)) (Ref 0)) [(0, Node (Node (Leaf 2) (Leaf 2)) (Leaf 2))]</span></a></code></pre></div>
 <p>But normally, in Haskell there should be no way to distinguish graph1 from</p>
 <p>from</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; graph2 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span>
-<span class="ot">&gt;</span> graph2 <span class="fu">=</span>  iNode (iNode (iLeaf <span class="dv">2</span>) a) b
-<span class="ot">&gt;</span>            <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)
-<span class="ot">&gt;</span>                  b <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">graph2 ::</span> <span class="dt">Tree</span> <span class="dt">IntTreeF</span></a>
+<a class="sourceLine" id="cb3-2" title="2">graph2 <span class="fu">=</span>  iNode (iNode (iLeaf <span class="dv">2</span>) a) b</a>
+<a class="sourceLine" id="cb3-3" title="3">           <span class="kw">where</span> a <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4">                 b <span class="fu">=</span> iNode (iNode (iLeaf <span class="dv">2</span>) (iLeaf <span class="dv">2</span>)) (iLeaf <span class="dv">2</span>)</a></code></pre></div>
 <p>But we can actually abuse haskell by going to <code>IO</code> and relying on some implementation of GHC to observe the sharing using <a href="https://scholar.google.fr/scholar?cluster=13707349448701947240&amp;hl=en&amp;as_sdt=0,5&amp;sciodt=0,5">Type-safe observable sharing in Haskell</a> a technique implemented and extended in <a href="http://hackage.haskell.org/package/data-reify">data-reify</a></p>
 <p>With this we can produce two different output for two values which <em>should have been</em> be undistinguishable.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="center">graph1</th>
-<th align="center">graph2</th>
+<th style="text-align: center;">graph1</th>
+<th style="text-align: center;">graph2</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><img src="static/graph1.svg" /></td>
-<td align="center"><img src="static/graph2.svg" /></td>
+<td style="text-align: center;"><img src="static/graph1.svg" /></td>
+<td style="text-align: center;"><img src="static/graph2.svg" /></td>
 </tr>
 </tbody>
 </table>

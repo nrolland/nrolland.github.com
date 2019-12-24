@@ -33,18 +33,15 @@
 
 
 <p>Just a test post to see if things work</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt; example1 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span>
-<span class="ot">&gt;</span> example1 <span class="fu">=</span> square <span class="dv">1</span> <span class="fu">#</span> fc red
-<span class="ot">&gt;</span>                    <span class="fu">#</span> lw veryThick
-<span class="ot">&gt;</span>                    <span class="fu">#</span> lc black
-<span class="ot">&gt;</span>                    <span class="fu">#</span> dashingG [<span class="fl">0.2</span>,<span class="fl">0.05</span>] <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">example1 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></a>
+<a class="sourceLine" id="cb1-2" title="2">example1 <span class="fu">=</span> square <span class="dv">1</span> <span class="fu">#</span> fc red</a>
+<a class="sourceLine" id="cb1-3" title="3">                   <span class="fu">#</span> lw veryThick</a>
+<a class="sourceLine" id="cb1-4" title="4">                   <span class="fu">#</span> lc black</a>
+<a class="sourceLine" id="cb1-5" title="5">                   <span class="fu">#</span> dashingG [<span class="fl">0.2</span>,<span class="fl">0.05</span>] <span class="dv">0</span></a></code></pre></div>
 <p>Diagram from above : <img src="static/example1.svg" /></p>
 <p>Or from some library :</p>
-<div class="sourceCode"><pre class="sourceCode literate literatehaskell"><code class="sourceCode literatehaskell"><span class="ot">&gt;</span> out11 <span class="fu">=</span><span class="ot"> example11 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></code></pre></div>
-<div class="figure">
-<img src="static/out11.svg" />
-
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1">out11 <span class="fu">=</span><span class="ot"> example11 ::</span> <span class="dt">Diagram</span> <span class="dt">B</span></a></code></pre></div>
+<p><img src="static/out11.svg" /></p>
 <p>which means we can go deep with some project, using standard tools, and then provide a good summary of the artefact it can produce</p>
 
 
