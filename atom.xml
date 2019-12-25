@@ -763,7 +763,6 @@
 </div>
 
 
-
 <h5 id="section"></h5>
 <hr />
 <h2 id="representing-graphs">Representing graphs</h2>
@@ -813,7 +812,6 @@
 <li>names (polymorphism)</li>
 <li>regions (applicative batching, compdata)</li>
 </ul>
-
 ]]></summary>
 </entry>
 
