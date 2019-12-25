@@ -363,12 +363,11 @@ implementation of GHC to observe the sharing using <a href="https://scholar.goog
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><img src="static/graph1.svg" alt="graph1"></td>
-<td style="text-align:left"><img src="static/graph2.svg" alt="graph2"></td>
+<td style="text-align:left"><img src="https://raw.githubusercontent.com/nrolland/graphvalue/master/static/graph1.svg?sanitize=true" alt="graph1"></td>
+<td style="text-align:left"><img src="https://raw.githubusercontent.com/nrolland/graphvalue/master/static/graph2.svg?sanitize=true" alt="graph2"></td>
 </tr>
 </tbody>
-</table><pre><code>     graph1                   graph2
-</code></pre><hr><p><img src="static/graph1.svg" alt="graph1">   <img src="static/graph2.svg" alt="graph2"></p><p>basically the second graph is maximal sharing of subnodes. because we<br>
+</table><p>basically the second graph is maximal sharing of subnodes. because we<br>
 only ever use names like a and b once, they are irrelevant. whereas in<br>
 the first case, this bottom leaf 2 is not really <em>any</em> leaf 2, it is the<br>
 leaf which comes from <code>a</code> which should also be equal to <code>b</code> as a graph.<br>
