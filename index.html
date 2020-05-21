@@ -55,6 +55,50 @@
             <ul class="weekliesexpanded">
     
         <li>
+            <h1>Weekly links for 2020-05-21</h1>
+<!-- <aside>Posted on 2020-05-21</aside> -->
+<article>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/citizennet/purescript-ocelot">Ocelot</a>
+    </dt>
+    <dd>Ocelot is an opinionated component library for Halogen-based PureScript applications</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://degoes.net/articles/zio-environment">Beautiful, Simple, Testable Functional Effects for Scala – John A De Goes</a>
+    </dt>
+    <dd> For the first time, it feels like Scala has an idiomatic solution for testable functional effects. Something that’s fast, fully inferable, with a low barrier to entry.<br><br> let’s say we have a database call deeply embedded everywhere inside our program:<br><br>// Deeply nested code:<br>def myCode: Task[Unit] = …<br>  for {<br>    ...<br>    result &lt;- database.query(q)<br>    ...<br>  } yield ()<br>We would like to be able to test application logic without connecting to a real database, because that will slow our tests down and may fail for unrelated reasons.<br><br>In order to do this, we need merely refactor the database.query function to require a Database module. Then with simple introduction of a type synonym, we can leave the code unchanged:<br><br>type TaskDB[A] = ZIO[Database, Throwable, A]<br>...<br>def myCodeV2: TaskDB[Unit] = …<br>  for {<br>    ...<br>    result &lt;- database.query(q)<br>    ...<br>  } yield ()</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/jasonmorton/Cateno/blob/master/demo/ThreeQubitsFTS.ipynb">string diagram generation for monoidal categories</a>
+    </dt>
+    <dd>Cateno is a system for computational category theory and applications. It provides an interactive calculator for free morphism expressions and string diagram generation for monoidal categories. It also handles concrete categories, and can be used as a typed numerical linear algebra system.</dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="https://github.com/Gabriel439/slides/blob/master/nix-internals/slides.md">slides/slides.md at master · Gabriel439/slides</a>
+    </dt>
+    <dd>Nix: under the hood % Gabriel Gonzalez % December 7, 2017<br></dd>
+    </div>
+    
+    <div class="bookmark">
+    <dt class="bookmark_title">
+     <a href="http://videolectures.net/gpip06_bletchley_park/">Gaussian Processes in Practice Workshop</a>
+    </dt>
+    <dd> Bletchley Park 2006 - VideoLectures - VideoLectures.NET</dd>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li>
             <h1>Weekly links for 2019-12-27</h1>
 <!-- <aside>Posted on 2019-12-27</aside> -->
 <article>
@@ -479,50 +523,6 @@
      <a href="https://github.com/gchq/CyberChef">gchq/CyberChef: The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis</a>
     </dt>
     <dd>CyberChef is a simple, intuitive web app for carrying out all manner of &quot;cyber&quot; operations within a web browser. These operations include simple encoding like XOR or Base64, more complex encryption like AES, DES and Blowfish, creating binary and hexdumps, compression and decompression of data, calculating hashes and checksums, IPv6 and X.509 parsing, changing character encodings, and much more.</dd>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li>
-            <h1>Weekly links for 2018-11-29</h1>
-<!-- <aside>Posted on 2018-11-29</aside> -->
-<article>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/jonnay/org-babel-scheme/blob/master/org-babel-scheme.org">org-babel-scheme/org-babel-scheme.org at master · jonnay/org-babel-scheme</a>
-    </dt>
-    <dd>This is an example of both using org-babel to tangle output, and how to make a new org-babel mode for a new language. </dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/direnv/direnv/wiki/Nix">Nix · direnv/direnv Wiki</a>
-    </dt>
-    <dd>Direnv now supports nix as part of its stdlib.</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://direnv.net/">direnv - unclutter your .profile</a>
-    </dt>
-    <dd>direnv is an environment switcher for the shell. It knows how to hook into bash, zsh, tcsh, fish shell and elvish to load or unload environment variables depending on the current directory. This allows project-specific environment variables without cluttering the ~/.profile file.</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://reactjs.org/docs/hooks-intro.html">Introducing Hooks – React</a>
-    </dt>
-    <dd>Hooks are a new feature proposal that lets you use state and other React features without writing a class. They’re currently in React v16.7.0-alpha and being discussed in an open RFC.</dd>
-    </div>
-    
-    <div class="bookmark">
-    <dt class="bookmark_title">
-     <a href="https://github.com/ustwo/mastermind">ustwo/mastermind: Man in the middle testing</a>
-    </dt>
-    <dd>Mastermind is a CLI using mitmproxy that offers an easy way to mock a service (e.g. API, Website) defining rules per URL or URL patterns, defining rules to intercept HTTP(S) requests and mock its responses. By default it makes sure the OSX proxy settings are enabled only when the proxy is running.<br></dd>
     </div>
     
 </article>
